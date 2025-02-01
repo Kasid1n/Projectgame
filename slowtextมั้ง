@@ -1,0 +1,20 @@
+#include <chrono>
+#include <thread>
+#include <iostream>
+using namespace std;
+using namespace chrono;
+using namespace this_thread;
+
+struct slowly_printing_string { string data; long int delay; };
+
+ostream& operator<<(ostream& out, const slowly_printing_string& s) {
+    for (const auto& c : s.data) {
+        out << c << flush;        
+        sleep_for(milliseconds(s.delay));
+    }
+    return out;
+}
+
+int main() {
+    cout << slowly_printing_string{ "hallo world", 100 };
+}
