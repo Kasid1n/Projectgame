@@ -1,1 +1,25 @@
 
+#include <iostream>
+
+using namespace std;
+
+struct sta{
+    int hp, def, att, mag, spd;
+};
+
+void combat(stuct sta player){
+    cout <<player.hp;
+
+    while(player.hp<0){
+
+        
+    }
+
+
+}
+
+int main() {
+    sta player = {10, 11, 12, 13, 14};
+    combat(10);
+    return 0;
+}
