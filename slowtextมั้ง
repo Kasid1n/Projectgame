@@ -1,26 +1,57 @@
-#include <chrono>
-#include <thread>
 #include <iostream>
-using namespace std;
-using namespace chrono;
-using namespace this_thread;
+#include <thread>
+#include <conio.h>
 
-struct slowly_printing_string {string data; long int delay; };
+using namespace std; 
 
-ostream& operator<<(ostream& out, const slowly_printing_string& s) {
+bool skipText = false; 
+
+void print_slowly(const string& text, const int* linePositions, int lineCount, const int* delays, int delayCount) {
     int count = 0;
-    for (const auto& c : s.data) {
-        out << c << flush;        
-        sleep_for(milliseconds(s.delay));
-        count++;
+    int lineIndex = 0;
+    int currentLinePos = (lineCount > 0) ? linePositions[0] : 0;
+    int currentDelay = (delayCount > 0) ? delays[0] : 100;
 
-        if (count % 20 == 0) {
-            out << '\n';
+    for (const auto& c : text) {
+        if (_kbhit()) {
+            char key = _getch();
+            if (key == ' ') {
+                skipText = true;
+            }
+        }
+
+        cout << c << flush;
+        if (!skipText) {
+            this_thread::sleep_for(chrono::milliseconds(currentDelay));
+        }
+
+        count++;
+        if (lineIndex < lineCount && count >= currentLinePos) {
+            cout << '\n';
+            count = 0;
+            lineIndex++;
+
+            if (lineIndex < lineCount) {
+                currentLinePos = linePositions[lineIndex];
+            }
+            if (lineIndex < delayCount) {
+                currentDelay = delays[lineIndex];
+            }
         }
     }
-    return out;
+    skipText = false;
 }
 
 int main() {
-    cout << slowly_printing_string{ "hallo world! This is a test string to check line breaking.", 100 };
+    string text = "123456789 1234567890123456789 123456789012345";
+    
+    int linePositions[] = {10, 20, 15}; // กำหนดตำแหน่งขึ้นบรรทัดใหม่
+    int delays[] = {100, 50, 200}; // กำหนดความเร็วแต่ละบรรทัด (ms)
+
+    int lineCount = sizeof(linePositions) / sizeof(linePositions[0]);
+    int delayCount = sizeof(delays) / sizeof(delays[0]);
+
+    print_slowly(text, linePositions, lineCount, delays, delayCount);
+
+    return 0;
 }
