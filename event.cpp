@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include<ctime>
 using namespace std;
 
 void mon();
@@ -28,7 +29,7 @@ void event(int &i){
     i++;
   }
 
-  else if(i>=10){
+  else if(i>=10>30){
         if(r<=65){
           mon;
         }
@@ -49,21 +50,47 @@ void event(int &i){
         }
         i++;
   }
+  else if(i>=30){
+    if(r<=45){
+      mon;
+    }
+    else if(r>45 && r<=55){
+      shop;
+    }
+    else if(r>55 && r<=60){
+      box;
+    }
+    else if(r>60 && r<=65){
+      npc;
+    }
+    else if(r>65 && r<=80){
+      treasure;
+    }
+    else if(r>80 && r<=100){
+      boss;
+    }
+    i++;
+}
 
 }
 
 
 
 void box(){
-  int r = rand()%2;
-  if (r==0)
+  int r = rand()%4;
+  if (r<=2)
   {
     //get item
+    //get heal 1+rand()%10
+    
   }
 
-  if (r==1)
+  if (r==4)
   {
-    // -hp
+    // -hp 1+rand()%10
+    // lose item
   }
 
 }
+/* npc -talk,got iteam-heal ,lose iteam-hp minigame?
+*/
