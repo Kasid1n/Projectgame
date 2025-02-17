@@ -20,7 +20,9 @@ void doASCii(string x){
 }
 
 int main(){
+    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
     string filetxt="text.txt";
+    SetConsoleTextAttribute(h,4);
     doASCii(filetxt); 
     return 0;
 } 
