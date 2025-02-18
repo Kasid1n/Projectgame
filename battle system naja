@@ -1,32 +1,63 @@
 #include <iostream>
 #include <ctime>
+#include <string>
 
 using namespace std;
 
-struct sta {
-    int hp, def, att, mag, spd;
-};
 
-void combat(struct sta player,struct sta mon) {
-    int choice;
-    cout <<"Pick 1 or 2";
-    cin >> choice;// ยังไม่เสร็จ
+/**/
+class battle{
+public:
+    void attacker();
+    void combat(/*อยากให้รับมาแบบ คลาสของตัวละครและ มอน*/);
+};  
 
-    while (player.hp > 0) {
-        if (player.hp <= 0) {
-            cout << "defeated";
+void attacker(){
+    int move;
+    cout <<"You're The Attacker";
+    cout <<"Press 1.attack\nPress 2.weapon skill\n3.ultimate\n4.give up";
+    cin >> move;
+    switch(move){
+        case 1:
+            cout << "You chose to Attack!\n";
+        case 2:
+            cout << "You used a Weapon Skill!\n";
             break;
-        }
-        if (mon.hp <=0){
-            cout << "win";
+        case 3:
+            cout << "Ultimate Move Activated!\n";
             break;
-        }
+        case 4:
+            cout << "You gave up...\n";
+            break;
+        default:
+            cout << "Invalid choice. Try again.\n";
+            break;
     }
 }
 
-int main() {
-    sta player = {10, 3, 3, 5, 10};
-    sta mon = {10, 1, 2, 0, 5};
-    combat(player,mon);
-    return 0;
+/*นี่คือฟังก์ชันคอมแบท*/int main(){
+    srand(time(0));
+    int rcoin=rand()%2,coin=2;
+    string scoin;
+    do{
+        cout << "pick head or tail: ";
+        cin >> scoin;
+        if(scoin == "head") coin=0;
+        else if (scoin == "tail") coin=1;
+        else cout << "Error. Try Again\n";
+    }while(coin==2);
+
+    /////////////////////////////////////////////////////////////////////
+    
+    while(true){
+    int i=1;
+        cout << "Round: "<<i;
+            if(coin==rcoin){
+                /*hero*/attacker;
+                /*monster*/defender;
+            }
+        
+    
+    i++;
+    }
 }
