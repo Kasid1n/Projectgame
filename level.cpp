@@ -5,43 +5,78 @@
  levelup ---->> statup++ ---->>enemy++
  ***dead*** re ?? 
  -ดู class -
+ ---randdom name ..
 */ 
-#include <iostream>
+#include<iostream>
+#include<ctime>
+#include<vector>
+#include<cstdlib>
+#include<string>
 using namespace std ;
+class Player {
+private:
+    int level;
+    int xp;
+    int xptolevelup;
+    string name ;
 
-int level = 1 ;
-int xp = 0 ;
-int xptolevelup = 100 ;
+public:
+    Player(string Playername) {
+        name = Playername ;
+        level = 1;
+        xp = 0;
+        xptolevelup = 100 ;
 
- void addxp(int xpgained )
-    {
-        xp+=xpgained ;
         
-        while(xp>=xptolevelup){     /*stat++ in levelup*/
-            levelup() ;
+    }
+
+    void addxp(int xpgained) {
+        xp += xpgained;
+        while (xp >= xptolevelup) {   
+            levelup();
         }
     }
-  void showstatus()
-    {
-        cout<<"You're level is"<<" "<<level ;
-        cout<<"You're xp is"<<" "<<xp ;
 
-
+    
+    void showstatus() const {
+        cout << name<< " is level " << level << endl;
+        cout << name<<" xp is " << xp << endl;
     }
- void levelup ()
-    {
-         level++ ;
-         xp = xp-xptolevelup ;
-         xptolevelup += (25*level)+123 ;
-         cout<<"You reached level"<<level<<"!!!!" 
-         showstatus() ;
 
+private:
+    
+    void levelup() {
+        level++;
+        xp -= xptolevelup;
+        xptolevelup += (50 * level)+(rand()%99+1) ;
+        cout <<name<<" reached level " << level << "!!!!" << endl;
+        showstatus();
     }
- void dead()
-    {
-        level = 0 ;
-        xp = 0 ;
-        xptolevelup =100 ;
-        showstatus() ;
 
+public:
+    
+    void dead() {
+        level = 1;
+        xp = 0;
+        xptolevelup = 100;
+        showstatus();
     }
+};
+
+/*
+int main() {
+    string name ;
+    cout<<"Please enter your name :" ;
+    getline(cin,name) ;
+    Player player(name) ;
+    player.addxp(3000);   
+   
+
+    player.dead();       
+
+    return 0;
+}
+*/
+
+
+
