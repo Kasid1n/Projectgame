@@ -10,6 +10,7 @@ class battle{
 public:
     void attacker();
     void combat(/*อยากให้รับมาแบบ คลาสของตัวละครและ มอน*/);
+    void defender();
 };  
 
 void attacker(){
