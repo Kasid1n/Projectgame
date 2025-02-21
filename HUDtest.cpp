@@ -8,8 +8,9 @@ using namespace std;
 void sHUD();
 void cHUD();
 void nHUD();
-void doASCii(string);
-HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+void doASCii(string); //ASCii Art
+void doSlow(string); //Text Delay
+HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);//Text setting
 
 void doASCii(string x){
     string line="";
@@ -25,17 +26,35 @@ void doASCii(string x){
     cout<<"File failed to load";
     inFile.close();
 }
+void doSlow(const std::string &text, int delay) {
+    for (char c : text) {
+        cout << c << flush;
+        Sleep(delay);  // Delay in milliseconds
+    }
+    cout<<endl;
+}
+    
+
 void sHUD(){
     SetConsoleTextAttribute(h,4);//Text Color
     string filetxt="text.txt";//Game Title
     doASCii(filetxt);
 }
 
+string startstory= "Long Long time ago.";
+
 int main(){
-    system("start cmd /k \"mode con: cols=200 lines=60\""); //Pop-up terminal
     SetConsoleOutputCP(65001);// Set CMD to UTF-8
+    system("cls");//Clear Screen
     sHUD();
-    
-    
-    return 0;
+    cout<<"Press Spacebar to Start";
+    while (true) {
+        if (GetAsyncKeyState(VK_SPACE) & 0x8000) {  // Check if space bar is pressed
+            break;
+        }
+        Sleep(10);  // Reduce CPU usage
+    }
+
+    system("cls");
+    doSlow(startstory,100);
 } 
