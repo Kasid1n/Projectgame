@@ -55,6 +55,6 @@ int main(){
         Sleep(10);  // Reduce CPU usage
     }
 
-    system("cls");
-    doSlow(startstory,100);
+    system("cls"); 
+    doSlow(startstory,100); 
 } 
