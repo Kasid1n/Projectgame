@@ -65,6 +65,6 @@ int main(){
         Sleep(10);  // Reduce CPU usage
     }
     system("cls"); 
-    nHUD(); 
+    nHUD();   
 } 
 
