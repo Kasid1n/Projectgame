@@ -1,45 +1,27 @@
-#include <iostream>
-#include <windows.h>
-#include <string>
-
-void HUD();
-void combat();
-void combatHUD();
-void Moving();
-void monfight();
-void npc();
-void market();
-void startHud();
+#include<iostream>
+#include<fstream>
+#include<windows.h>
+#include <cstdlib>
+#include<ctime>
+#include<vector>
 
 
-int level = 0, xp =0,Hp =0, totalHp=0, xptolevel=0, maxhp=0;
-int monHp =0, monXp =0,monlvl=0;
+
+using namespace std;
+
+
 
 
 int main(){
-    
+    SetConsoleOutputCP(65001);// Set CMD to UTF-8
+    system("cls");//Clear Screen
+    sHUD();
+    while (true) {
+        if (GetAsyncKeyState(VK_SPACE) & 0x8000) {  // Check if space bar is pressed
+            break;
+        }
+        Sleep(10);  // Reduce CPU usage
+    }
+    system("cls"); 
 }
 
-void HUD(){
-
-}
-
-void combat(){
-
-}
-
-void combatHUD(){
-
-}
-
-void Moving(){
-
-}
-
-void monfight(){
-
-}
-
-void npc(){
-    
-}
