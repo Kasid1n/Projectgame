@@ -119,7 +119,7 @@ bool Battle::dead(){
 }
 
 
-
+//class คิดว่าเครละ แต่main (func battle)ยังไม่เสด
 int main() {
 
     srand(time(0));
