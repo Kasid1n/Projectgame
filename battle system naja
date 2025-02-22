@@ -1,13 +1,25 @@
-#include <iostream>
-#include <ctime>
-#include <string>
+#include<iostream>
+#include<ctime>
+#include<vector>
+#include<cstdlib>
+#include<string>
 
 using namespace std;
 
 class Battle {
+    bool Block_on,Dodge_on,Parry_on;
+
 public:
     void attacker();
     void defender();
+    void Newturn();
+    void Blocknaja();
+    void Dodgenaja();
+    void Parrynaja();
+    int beAttack();
+    int beWeapon();
+    int beUlti();
+    bool dead();
 };
 
 void Battle::attacker() {
@@ -63,7 +75,59 @@ void Battle::defender() {
 
 }
 
+void Battle::Newturn(){Block_on=false;Dodge_on=false;Parry_on=false;}
+void Battle::Blocknaja(){Block_on=true;}
+void Battle::Dodgenaja(){Dodge_on=true;}
+void Battle::Parrynaja(){Parry_on=true;}
+
+int Battle::beAttack(int edmg ){
+	int dmg,temp,randmg,per;
+
+    per=rand()%2;
+    randmg=(rand()%dmg)/100
+    if(per==0){edmg+=randmg;}
+    if(per==1){edmg-+randmg;}
+
+    temp=rand()%60+40;
+    if(Block_on=true;){
+        edmg=edmg-(edmg*(temp/100));
+    }
+    
+    if(edmg > defense){dmg = edmg-defense;}
+    return dmg;	
+}
+
+int Battle::beWeapon(int edmg){/*จะมีติดสถานะแต่ยังไม่ได้ทำ*/
+    int dmg,temp;
+    temp=rand()%50+1;
+    if(Dodge_on=true;){dmg=0;}
+    edmg=edmg+(edmg*(temp/100));
+    
+    
+    if(edmg > defense){dmg = edmg-defense;}
+    return dmg;	
+}
+
+int Battle::beUlti(int edmg){/*ยังไม่เสร็จนะจ๊ะ*/
+    int dmg,temp,randmg,per;
+    if(Parry_on=true){
+        beAttack(ศัตรู);
+        return dmg=0;
+    }
+    dmg=edmg*rand()%3+1;
+    return dmg;	
+}
+
+bool Battle::dead(){
+    if(hp<=0)return true;
+    else return false;
+}
+    
+
 int main() {
+
+    
+
     srand(time(0));
     int rcoin = rand() % 2, coin = 2;
     string scoin;
@@ -90,7 +154,7 @@ int main() {
             battle.defender();
             battle.attacker();
         }
-
+        if ()
         round++;
         cout << "------------------\n";
     }
