@@ -68,5 +68,5 @@ int main() {
     print_slowly(text, linePositions, lineCount, delays, delayCount);
 
     return 0;
-}
+} //skip ได้ถ้ากด Space bar
   
