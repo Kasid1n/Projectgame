@@ -45,7 +45,8 @@ void sHUD(){
 void nHUD(){
     SetConsoleTextAttribute(h,2);
     cout<<"=====================================================================================\n";
-    cout<<setw(10)<<"Player Name : HP 1/1"<<setw(10)<<"Gold : 500";
+    cout<<"Name HP : 1/1"<<setw(20)<<"Gold : 500\n";
+    cout<<"=====================================================================================\n";
 }
 
 void showmon(string x){
@@ -65,6 +66,7 @@ int main(){
         Sleep(10);  // Reduce CPU usage
     }
     system("cls"); 
+    showmon("ascii_folder/Skele1.txt");
     nHUD();   
 } 
 
