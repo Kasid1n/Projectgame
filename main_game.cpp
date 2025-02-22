@@ -8,7 +8,7 @@
 //Library
 
 #include"HUDtest.cpp"
-#include"battle system naja"
+#include"BattleSys.h"
 #include"Equipment.h"
 #include"event.cpp"
 #include"Shop.cpp"
