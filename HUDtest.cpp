@@ -2,6 +2,7 @@
 #include<fstream>
 #include<windows.h>
 #include <cstdlib>
+#include<iomanip>
 using namespace std;
 
 //Screen Output
@@ -42,10 +43,9 @@ void sHUD(){
 }
 
 void nHUD(){
-    SetConsoleTextAttribute(h,1);
-    
-    string filetxt="ascii_folder/nHUD.txt";
-    doASCii(filetxt);
+    SetConsoleTextAttribute(h,2);
+    cout<<"=====================================================================================\n";
+    cout<<setw(10)<<"Player Name : HP 1/1"<<setw(10)<<"Gold : 500";
 }
 
 void showmon(string x){
@@ -65,6 +65,6 @@ int main(){
         Sleep(10);  // Reduce CPU usage
     }
     system("cls"); 
-    showmon("ascii_folder/Skele1.txt");
+    nHUD(); 
 } 
 
