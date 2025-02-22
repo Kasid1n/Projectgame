@@ -53,7 +53,7 @@ private:
     string name;
     Stats stats;
 
-public:https://github.com/Kasid1n/Projectgame/tree/main
+public:
     Player(string playerName, int hpmax, int attack, int defense, int magic, int speed)
         : name(playerName), stats(hpmax, attack, defense, magic, speed) {
         level = 1;
@@ -109,11 +109,49 @@ public:
     }
 };
 
+class Monster {
+private:
+    string name;
+    Stats stats;
+
+public:
+    Monster(string monsterName, int hpmax, int attack, int defense, int magic, int speed)
+        : name(monsterName), stats(hpmax, attack, defense, magic, speed) {}
+
+    void showStatus() const {
+        cout << "Monster: " << name << endl;
+        stats.showStats();
+    }
+    static Monster randomMonster() {
+
+        int hpmax = rand() % 50 + 50;
+        int attack = rand() % 10 + 5;
+        int defense = rand() % 5 + 2;
+        int magic = rand() % 5;
+        int speed = rand() % 10 + 5;
+        string name;
+        if (attack >= 12) {
+            name = "้highhestattack";
+        } else if (attack >= 9) {
+            name = "hightattack";
+        } else if (attack >= 6) {
+            name = "midattack";
+        } else {
+            name = "somethingelse";
+        }
+
+        return Monster(name, hpmax, attack, defense, magic, speed);
+    }
+};
+
 int main() {
     srand(time(0));
     Player player("Hero", 100, 20, 10, 5, 15);
     player.showStatus();
-    player.addXp(120);
+    player.addXp(0);
     player.dead();
+    Monster randomMon = Monster::randomMonster();
+    randomMon.showStatus();
+
     return 0;
 }
