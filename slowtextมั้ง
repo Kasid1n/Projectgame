@@ -1,10 +1,24 @@
 #include <iostream>
 #include <thread>
 #include <conio.h>
+#include <ctime>
 
-using namespace std; 
+using namespace std;
 
-bool skipText = false; 
+bool skipText = false;
+
+void sleep_ms(int milliseconds) {
+    clock_t start_time = clock();
+    while ((clock() - start_time) * 1000 / CLOCKS_PER_SEC < milliseconds) {
+        if (_kbhit()) {
+            char key = _getch();
+            if (key == ' ') {
+                skipText = true;
+                return;
+            }
+        }
+    }
+}
 
 void print_slowly(const string& text, const int* linePositions, int lineCount, const int* delays, int delayCount) {
     int count = 0;
@@ -22,7 +36,7 @@ void print_slowly(const string& text, const int* linePositions, int lineCount, c
 
         cout << c << flush;
         if (!skipText) {
-            this_thread::sleep_for(chrono::milliseconds(currentDelay));
+            sleep_ms(currentDelay);
         }
 
         count++;
@@ -44,7 +58,7 @@ void print_slowly(const string& text, const int* linePositions, int lineCount, c
 
 int main() {
     string text = "123456789 1234567890123456789 123456789012345";
-    
+
     int linePositions[] = {10, 20, 15}; // กำหนดตำแหน่งขึ้นบรรทัดใหม่
     int delays[] = {100, 50, 200}; // กำหนดความเร็วแต่ละบรรทัด (ms)
 
@@ -55,3 +69,4 @@ int main() {
 
     return 0;
 }
+  
