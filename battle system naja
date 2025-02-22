@@ -13,7 +13,7 @@ public:
 void Battle::attacker() {
     int move;
     cout << "You're The Attacker\n";
-    cout << "Press 1. Attack\nPress 2. Weapon Skill\nPress 3. Ultimate\nPress 4. Give up\n";
+    cout << "Press 1. Attack\nPress 2.Weapon Skill\nPress 3. Ultimate\nPress 4.Leave \n";
     while(true){
         cin >> move;
         switch (move) {
@@ -21,13 +21,13 @@ void Battle::attacker() {
                 cout << "You chose to Attack!\n";
                 break;
             case 2:
-                cout << "You used a Weapon Skill!\n";
+                cout << "You used a Weapon SKill!\n";
                 break;
             case 3:
                 cout << "Ultimate Move Activated!\n";
                 break;
             case 4:
-                cout << "You gave up...\n";
+                cout << "You leave...\n";
                 break;
             default:
                 cout << "Invalid choice. Try again.\n";
@@ -37,8 +37,30 @@ void Battle::attacker() {
 }
 
 void Battle::defender() {
+    int move;
     cout << "You're The Defender\n";
-    cout << "Defending against the attack...\n";
+    cout << "Press 1.Block(against Attack)\nPress 2.Dodge(against Weapon SKill)\nPress 3.Parry(against ultimate)\nPress 4. Give up\n";
+    while(true){
+        cin >> move;
+        switch (move) {
+            case 1:
+                cout << "You Try to Block An Attack!\n";
+                break;
+            case 2:
+                cout << "You try to Dodge!\n";
+                break;
+            case 3:
+                cout << "You try to parry!\n";
+                break;
+            case 4:
+                cout << "You gave up...\n";
+                break;
+            default:
+                cout << "Invalid choice. Try again.\n";
+                continue;
+        }
+    }
+
 }
 
 int main() {
