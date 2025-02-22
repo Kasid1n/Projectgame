@@ -1,11 +1,18 @@
 #include<iostream>
 #include<fstream>
 #include<windows.h>
-#include <cstdlib>
+#include<cstdlib>
 #include<ctime>
 #include<vector>
+#include<string>
+//Library
 
-
+#include"HUDtest.cpp"
+#include"battle system naja"
+#include"Equipment.h"
+#include"event.cpp"
+#include"Shop.cpp"
+//Function
 
 using namespace std;
 
