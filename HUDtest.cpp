@@ -5,10 +5,9 @@
 using namespace std;
 
 //Screen Output
-void sHUD();
-void cHUD();
+void sHUD();//Title
 void nHUD();
-void showmon();
+void showmon(string); //entity show
 void doASCii(string); //ASCii Art
 void doSlow(string); //Text Delay
 HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);//Text setting
@@ -38,21 +37,34 @@ void doSlow(const string &text, int delay) {
 
 void sHUD(){
     SetConsoleTextAttribute(h,4);//Text Color
-    string filetxt="text.txt";//Game Title
+    string filetxt="ascii_folder/text.txt";//Game Title
     doASCii(filetxt);
 }
 
 void nHUD(){
     SetConsoleTextAttribute(h,1);
     
-    string filetxt="nHUD.txt";
+    string filetxt="ascii_folder/nHUD.txt";
     doASCii(filetxt);
 }
 
-void showmon(){
+void showmon(string x){
     SetConsoleTextAttribute(h,4);//Red
-    string filetxt="text.txt";
+    string filetxt=x;
     doASCii(filetxt);
 }
 
+int main(){
+    SetConsoleOutputCP(65001);// Set CMD to UTF-8
+    system("cls");//Clear Screen
+    sHUD();
+    while (true) {
+        if (GetAsyncKeyState(VK_SPACE) & 0x8000) {  // Check if space bar is pressed
+            break;
+        }
+        Sleep(10);  // Reduce CPU usage
+    }
+    system("cls"); 
+    showmon("ascii_folder/Skele1.txt");
+} 
 
