@@ -19,6 +19,13 @@ private:
     int xp;
     int xptolevelup;
     string name ;
+    int hp;
+    int hpmax;
+    int attack;
+    int defense; 
+    int magic;
+    int speed;
+
 
 public:
     Player(string Playername) {
