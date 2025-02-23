@@ -16,6 +16,8 @@ void doSlow(string); //Text Delay
 void doSlowF(string);
 HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);//Text setting
 
+string yname;//player name
+
 void doASCii(string x){
     string line="";
     ifstream inFile;
@@ -69,11 +71,14 @@ void sHUD(){
 
 void nHUD(){
     SetConsoleTextAttribute(h,7);//White
+    for(int i =0;i<24;i++){
+        cout<<endl;
+    }
     cout<<"=====================================================================================\n";
-    cout<<"Name"<<setw(20)<<"HP : 1/1"<<setw(20)<<"Gold : 500\n";
+    cout<<yname<<setw(15)<<"HP : 1/1"<<setw(15  )<<"Gold : 500\n";  
     cout<<"=====================================================================================\n";
     doSlow("You decide to",100);
-    cout<<"[1] Moving Forward"<<setw(15)<<"[2] Rest"<<setw(20)<<"[3] Check your equipment";
+    cout<<"[1] Moving Forward"<<setw(15)<<"[2] Rest"<<setw(30)<<"[3] Check your equipment";  
 }
  
 void batHUD(){
@@ -93,7 +98,7 @@ void blank(){
     for(int i =0;i<24;i++){
         cout<<endl;
     }
-}
+}  
 int main(){
     SetConsoleOutputCP(65001);// Set CMD to UTF-8
     system("cls");//Clear Screen
@@ -106,6 +111,8 @@ int main(){
     }
     system("cls"); 
     doSlowF("ascii_folder/Story1.txt",100);
+    cout<<"Your name is...";
+    cin>> yname;
     cout<<"Press Spacebar to continue.";  
     while (true) {
         if (GetAsyncKeyState(VK_SPACE) & 0x8000) {  // Check if space bar is pressed
@@ -117,4 +124,5 @@ int main(){
     blank();
     nHUD();   
 } 
+
 
