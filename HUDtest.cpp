@@ -35,6 +35,9 @@ void doASCii(string x){
 }
 void doSlow(const string &text, int delay) {
     for (char c : text) {
+        if (GetAsyncKeyState(VK_LCONTROL) & 0x8000) {  // Ctrl to Skip
+            continue; 
+        }
         cout << c << flush;
         Sleep(delay);  // Delay in milliseconds
     }
@@ -55,8 +58,7 @@ void doSlowF(const string &text, int delay){
                 }
                 cout << c << flush;
                 Sleep(delay);  // Delay in milliseconds
-            }
-            cout<<endl;
+            };
         }
     }
     else
@@ -78,18 +80,18 @@ void nHUD(){
     cout<<"=====================================================================================\n";
     cout<<yname<<setw(15)<<"HP : 1/1"<<setw(15)<<"Level : 1 "<<setw(15)<<"Gold : 500\n";  
     cout<<"=====================================================================================\n";
-    doSlow("You decide to :",100);
+    doSlow("You decide to :\n",100);
     cout<<"[1] Moving Forward"<<setw(15)<<"[2] Rest"<<setw(30)<<"[3] Check your equipment";
     int choice;
     cin>> choice;
+    int sc = rand()%50;//Different Scenery
     switch(choice){
-        case 1:
-        int wal = rand()%50;//Different Scenery
-        if(wal>=10){
+        case 1://Move
+        if(sc>=10){
         doASCii("ascii_folder/walls2.txt");
         cout<<"=====================================================================================\n";
         doSlow("You walk past the dark hallway...",100);
-        cout<<"Press Spacebar to continue.";
+        cout<<"\nPress Spacebar to continue.";
         while (true) {
             if (GetAsyncKeyState(VK_SPACE) & 0x8000) {  // Check if space bar is pressed
                 break;
@@ -103,8 +105,8 @@ void nHUD(){
         }
         else {doASCii("ascii_folder/walls1.txt");
         cout<<"=====================================================================================\n";
-        doSlow("You found a gate and open it...,",100);
-        cout<<"Press Spacebar to continue.";
+        doSlow("You found a gate and open it...",100);
+        cout<<"\nPress Spacebar to continue.";
         while (true) {
             if (GetAsyncKeyState(VK_SPACE) & 0x8000) {  // Check if space bar is pressed
                 break;
@@ -113,9 +115,20 @@ void nHUD(){
         }
         nHUD();
         }
-        case 2:
-        
-
+        break;
+        case 2://Rest
+        blank();
+        cout<<"=====================================================================================\n";
+        doSlow("You lay against the wall for a few minute...",100);
+        cout<<"\nPress Spacebar to continue.";
+        while (true) {
+            if (GetAsyncKeyState(VK_SPACE) & 0x8000) {  // Check if space bar is pressed
+                break;
+            }
+            Sleep(10);  // Reduce CPU usage
+        }
+        nHUD();
+        break;
     }  
 }
  
@@ -148,11 +161,11 @@ int main(){
         Sleep(10);  // Reduce CPU usage
     }
     system("cls");
-    cout<<"Your name is...";
+    doSlow("Your name is...");
     cin>> yname;
     system("cls");
-    doSlowF("ascii_folder/Story1.txt",100);
-    cout<<"Press Spacebar to continue.";  
+    doSlowF("ascii_folder/Story1.txt",100);//Intro
+    cout<<"\nPress Spacebar to continue.";  
     while (true) {
         if (GetAsyncKeyState(VK_SPACE) & 0x8000) {  // Check if space bar is pressed
             break;
