@@ -85,7 +85,7 @@ void nHUD(){
     switch(choice){
         case 1:
         int wal = rand()%50;//Different Scenery
-        if(wal<=10){
+        if(wal>=10){
         doASCii("ascii_folder/wall1.txt");
         cout<<"=====================================================================================\n";
         doSlow("You walk past the dark hallway...");
