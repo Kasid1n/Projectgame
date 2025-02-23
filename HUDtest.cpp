@@ -70,9 +70,9 @@ void sHUD(){
 void nHUD(){
     SetConsoleTextAttribute(h,7);//White
     cout<<"=====================================================================================\n";
-    cout<<"Name HP : 1/1"<<setw(20)<<"Gold : 500\n";
-    cout<<"=====================================================================================  \n";
-    doSlow("You decide to: \n",100);
+    cout<<"Name"<<setw(20)<<"HP : 1/1"<<setw(20)<<"Gold : 500\n";
+    cout<<"=====================================================================================\n";
+    doSlow("You decide to",100);
     cout<<"[1] Moving Forward"<<setw(15)<<"[2] Rest"<<setw(20)<<"[3] Check your equipment";
 }
  
