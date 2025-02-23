@@ -40,8 +40,7 @@ void doSlow(const string &text, int delay) {
         }
         cout << c << flush;
         Sleep(delay);  // Delay in milliseconds
-    }
-    cout<<endl;
+    };
 }
 void doSlowF(const string &text, int delay){
     string line="";
@@ -101,6 +100,7 @@ void nHUD(){
         //code event here
         
         //
+        blank();
         nHUD();
         }
         else {doASCii("ascii_folder/walls1.txt");
@@ -113,6 +113,7 @@ void nHUD(){
             }
             Sleep(10);  // Reduce CPU usage
         }
+        blank();
         nHUD();
         }
         break;
@@ -161,7 +162,7 @@ int main(){
         Sleep(10);  // Reduce CPU usage
     }
     system("cls");
-    doSlow("Your name is...");
+    doSlow("Your name is...",100);
     cin>> yname;
     system("cls");
     doSlowF("ascii_folder/Story1.txt",100);//Intro
