@@ -62,18 +62,18 @@ void doSlowF(const string &text, int delay){
 }
 
 void sHUD(){
-    SetConsoleTextAttribute(h,4);//Text Color Red
+    SetConsoleTextAttribute(h,15);//Text Color Red
     string filetxt="ascii_folder/text.txt";//Game Title
     doASCii(filetxt);
 }
 
 void nHUD(){
-    SetConsoleTextAttribute(h,2);
+    SetConsoleTextAttribute(h,7);//White
     cout<<"=====================================================================================\n";
     cout<<"Name HP : 1/1"<<setw(20)<<"Gold : 500\n";
-    cout<<"=====================================================================================\n\n";
+    cout<<"=====================================================================================  \n";
     doSlow("You decide to: \n",100);
-    cout<<"[1] Moving Forward"<<setw(15)<<"[2] Rest"<<setw(15)<<"[3] Check your equipment";
+    cout<<"[1] Moving Forward"<<setw(15)<<"[2] Rest"<<setw(20)<<"[3] Check your equipment";
 }
  
 void batHUD(){
@@ -105,7 +105,7 @@ int main(){
         Sleep(10);  // Reduce CPU usage
     }
     system("cls"); 
-    doSlowF("ascii_folder/Story1.txt",120);
+    doSlowF("ascii_folder/Story1.txt",100);
     cout<<"Press Spacebar to continue.";  
     while (true) {
         if (GetAsyncKeyState(VK_SPACE) & 0x8000) {  // Check if space bar is pressed
