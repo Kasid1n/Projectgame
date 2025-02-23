@@ -39,8 +39,11 @@ public:
 
     void addxp(int xpgained) {
         xp += xpgained;
-        while (xp >= xptolevelup) {   
+        while (xp >= xptolevelup && level < 100)  {   
             levelup();
+        } if (level == 100)
+        {
+            xp = xptolevelup ;
         }
     }
 
@@ -53,11 +56,12 @@ public:
 private:
     
     void levelup() {
+        if(level < 100) {
         level++;
         xp -= xptolevelup;
         xptolevelup += (50 * level)+(rand()%99+1) ;
         cout <<name<<" reached level " << level << "!!!!" << endl;
-        showstatus();
+        showstatus(); }
     }
 
 public:
@@ -76,7 +80,7 @@ int main() {
     cout<<"Please enter your name :" ;
     getline(cin,name) ;
     Player player(name) ;
-    player.addxp(3000);   
+    player.addxp(9000000000);   
    
 
     player.dead();       
