@@ -12,11 +12,10 @@ private:
     int attack;
     int defense;
     int magic;
-    int speed;
 
 public:
-    Stats(int hpmax, int attack, int defense, int magic, int speed)
-        : hpmax(hpmax), attack(attack), defense(defense), magic(magic), speed(speed) {
+    Stats(int hpmax, int attack, int defense, int magic)
+        : hpmax(hpmax), attack(attack), defense(defense), magic(magic) {
         hp = hpmax;
     }
 
@@ -29,18 +28,6 @@ public:
         cout << "Attack: " << attack << endl;
         cout << "Defense: " << defense << endl;
         cout << "Magic: " << magic << endl;
-        cout << "Speed: " << speed << endl;
-    }
-
-    void increaseStat(int choice) {
-        switch (choice) {
-            case 1: hpmax += 10; hp = hpmax; break;
-            case 2: attack += 2; break;
-            case 3: defense += 2; break;
-            case 4: magic += 2; break;
-            case 5: speed += 2; break;
-            default: cout << "Invalid choice!" << endl; break;
-        }
     }
 };
 
@@ -52,65 +39,30 @@ private:
     int statPoints;
     string name;
     Stats stats;
+    int gold;
 
 public:
-    Player(string playerName, int hpmax, int attack, int defense, int magic, int speed)
-        : name(playerName), stats(hpmax, attack, defense, magic, speed) {
+    Player(string playerName, int hpmax, int attack, int defense, int magic)
+        : name(playerName), stats(hpmax, attack, defense, magic), gold(0) {
         level = 1;
         xp = 0;
         xptolevelup = 100;
         statPoints = 0;
     }
 
-    void addXp(int xpGained) {
-        xp += xpGained;
-        while (xp >= xptolevelup && level < 100) {
-            levelUp();
-        } if ( level == 100) {
-            xp = xptolevelup ;
-        }
+    void setLevel(int newLevel) {
+        level = newLevel;
     }
 
     void showStatus() const {
         cout << name << " is level " << level << endl;
-        cout << name << " XP: " << xp << "/" << xptolevelup << endl;
-        cout << "Stat Points: " << statPoints << endl;
+        cout << "XP: " << xp << "/" << xptolevelup << endl;
+        cout << "Gold: " << gold << endl;
         stats.showStats();
     }
 
-private:
-    void levelUp() {
-         if(level < 100) 
-     {
-        level++;
-        xp -= xptolevelup;
-        xptolevelup += (50 * level) + (rand() % 99 + 1);
-        statPoints += 3;
-        cout << name << " reached level " << level << "!!!!" << endl;
-        distributeStatPoints();
-        showStatus(); 
-     }
-    }
-
-    void distributeStatPoints() {
-        while (statPoints > 0) {
-            cout << "You have " << statPoints << " stat points to allocate." << endl;
-            cout << "1. HP\n2. Attack\n3. Defense\n4. Magic\n5. Speed\nChoose a stat to increase: ";
-            int choice;
-            cin >> choice;
-            stats.increaseStat(choice);
-            statPoints--;
-        }
-    }
-
-public:
-    void dead() {
-        level = 1;
-        xp = 0;
-        xptolevelup = 100;
-        statPoints = 0;
-        stats.start();
-        showStatus();
+    int getLevel() const {
+        return level;
     }
 };
 
@@ -120,43 +72,117 @@ private:
     Stats stats;
 
 public:
-    Monster(string monsterName, int hpmax, int attack, int defense, int magic, int speed)
-        : name(monsterName), stats(hpmax, attack, defense, magic, speed) {}
+    Monster(string monsterName, int hpmax, int attack, int defense, int magic, int playerLevel)
+        : name(monsterName), stats(hpmax + playerLevel * 10, attack + playerLevel * 2, defense + playerLevel, magic + playerLevel / 2) {}
 
     void showStatus() const {
         cout << "Monster: " << name << endl;
         stats.showStats();
     }
-    static Monster randomMonster() {
+};
 
-        int hpmax = rand() % 50 + 50;
-        int attack = rand() % 10 + 5;
-        int defense = rand() % 5 + 2;
-        int magic = rand() % 5;
-        int speed = rand() % 10 + 5;
-        string name;
-        if (attack >= 12) {
-            name = "้highhestattack";
-        } else if (attack >= 9) {
-            name = "hightattack";
-        } else if (attack >= 6) {
-            name = "midattack";
-        } else {
-            name = "somethingelse";
-        }
+class BossMonster {
+private:
+    string name;
+    Stats stats;
 
-        return Monster(name, hpmax, attack, defense, magic, speed);
+public:
+    BossMonster(string bossName, int hpmax, int attack, int defense, int magic)
+        : name(bossName), stats(hpmax, attack, defense, magic) {}
+
+    void showStatus() const {
+        cout << "BOSS MONSTER: " << name << endl;
+        stats.showStats();
     }
+};
+
+class MonsterFactory {
+private:
+    struct MonsterData {
+        string name;
+        int hpmax, attack, defense, magic;
+        int minLevel, maxLevel;
+    };
+
+    static const vector<MonsterData> monsterTable;
+
+public:
+    static Monster createMonster(int level) {
+        vector<const MonsterData*> validMonsters;
+        for (const auto& data : monsterTable) {
+            if (level >= data.minLevel && level <= data.maxLevel) {
+                validMonsters.push_back(&data);
+            }
+        }
+        if (validMonsters.empty()) {
+            return Monster("unknow_mon", 1, 1, 1, 1, level);
+        }
+        int index = rand() % validMonsters.size();
+        const auto& data = *validMonsters[index];
+        return Monster(data.name, data.hpmax, data.attack, data.defense, data.magic, level);
+    }
+};
+
+const vector<MonsterFactory::MonsterData> MonsterFactory::monsterTable = {
+    {"Chest", 1, 1, 1, 1, 1, 1},
+    {"Harpy", 2, 2, 2, 2, 2, 1},
+    {"Hound", 3, 3, 3, 3, 3, 2},
+    {"Skeleton", 4, 4, 4, 4, 4, 2},
+    {"Spider", 5, 5, 5, 5, 5, 3},
+    {"Warrior-Skeleton", 6, 6, 6, 6, 6, 3}
+};
+
+class BossFactory {
+private:
+    struct BossData {
+        string name;
+        int hpmax, attack, defense, magic;
+    };
+
+    static const vector<BossData> bossTable;
+
+public:
+    static BossMonster createBoss(const string& bossName) {
+        for (const auto& boss : bossTable) {
+            if (boss.name == bossName) {
+                return BossMonster(boss.name, boss.hpmax, boss.attack, boss.defense, boss.magic);
+            }
+        }
+        return BossMonster("Unknown Boss", 0, 0, 0, 0);
+    }
+};
+
+const vector<BossFactory::BossData> BossFactory::bossTable = {
+    {"ApocalypseSouls", 111, 111, 111, 111},
+    {"Dragon", 222, 222, 222, 222},
+    {"addboss", 333, 333, 333, 333}
 };
 
 int main() {
     srand(time(0));
-    Player player("Hero", 100, 20, 10, 5, 15);
+    
+    Player player("Hero", 100, 20, 10, 5);
+    int chosenLevel;
+    cout << "Enter player level: ";
+    cin >> chosenLevel;
+    player.setLevel(chosenLevel);
     player.showStatus();
-    player.addXp(0);
-    player.dead();
-    Monster randomMon = Monster::randomMonster();
-    randomMon.showStatus();
 
+    cout << "(1) random monster (2) a boss";
+    int choice;
+    cin >> choice;
+    cin.ignore();
+
+    if (choice == 1) {
+        Monster randomMonster = MonsterFactory::createMonster(player.getLevel());
+        randomMonster.showStatus();
+    } else if (choice == 2) {
+        string chosenBoss;
+        cout << "Enter boss name: ";
+        getline(cin, chosenBoss);
+        BossMonster boss = BossFactory::createBoss(chosenBoss);
+        boss.showStatus();
+    }
+    
     return 0;
 }
