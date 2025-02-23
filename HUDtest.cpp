@@ -77,7 +77,7 @@ void nHUD(){
     cout<<"=====================================================================================\n";
     cout<<yname<<setw(15)<<"HP : 1/1"<<setw(15  )<<"Gold : 500\n";  
     cout<<"=====================================================================================\n";
-    doSlow("You decide to",100);
+    doSlow("You decide to :",100);
     cout<<"[1] Moving Forward"<<setw(15)<<"[2] Rest"<<setw(30)<<"[3] Check your equipment";  
 }
  
@@ -112,6 +112,7 @@ int main(){
     system("cls");
     cout<<"Your name is...";
     cin>> yname;
+    system("cls");
     doSlowF("ascii_folder/Story1.txt",100);
     cout<<"Press Spacebar to continue.";  
     while (true) {
