@@ -86,18 +86,36 @@ void nHUD(){
         case 1:
         int wal = rand()%50;//Different Scenery
         if(wal>=10){
-        doASCii("ascii_folder/wall1.txt");
+        doASCii("ascii_folder/walls2.txt");
         cout<<"=====================================================================================\n";
-        doSlow("You walk past the dark hallway...");
+        doSlow("You walk past the dark hallway...",100);
+        cout<<"Press Spacebar to continue.";
+        while (true) {
+            if (GetAsyncKeyState(VK_SPACE) & 0x8000) {  // Check if space bar is pressed
+                break;
+            }
+            Sleep(10);  // Reduce CPU usage
+        }
         //code event here
         
         //
         nHUD();
         }
-        else {doASCii("ascii_folder/wall2.txt");
+        else {doASCii("ascii_folder/walls1.txt");
         cout<<"=====================================================================================\n";
-        doSlow("You found a gate and open it...");
+        doSlow("You found a gate and open it...,",100);
+        cout<<"Press Spacebar to continue.";
+        while (true) {
+            if (GetAsyncKeyState(VK_SPACE) & 0x8000) {  // Check if space bar is pressed
+                break;
+            }
+            Sleep(10);  // Reduce CPU usage
         }
+        nHUD();
+        }
+        case 2:
+        
+
     }  
 }
  
