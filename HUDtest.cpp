@@ -8,6 +8,7 @@ using namespace std;
 //Screen Output
 void sHUD();//Title
 void nHUD();//Choice Hud
+void blank();//blank screnn
 void batHUD();//Battle Hud
 void showmon(string); //entity show
 void doASCii(string); //ASCii Art
@@ -70,8 +71,9 @@ void nHUD(){
     SetConsoleTextAttribute(h,2);
     cout<<"=====================================================================================\n";
     cout<<"Name HP : 1/1"<<setw(20)<<"Gold : 500\n";
-    cout<<"=====================================================================================\n";
-    cout<<"You";
+    cout<<"=====================================================================================\n\n";
+    doSlow("You decide to: \n",100);
+    cout<<"[1] Moving Forward"<<setw(15)<<"[2] Rest"<<setw(15)<<"[3] Check your equipment";
 }
  
 void batHUD(){
@@ -87,6 +89,11 @@ void showmon(string x){
     doASCii(filetxt);
 }
 
+void blank(){
+    for(int i =0;i<24;i++){
+        cout<<endl;
+    }
+}
 int main(){
     SetConsoleOutputCP(65001);// Set CMD to UTF-8
     system("cls");//Clear Screen
@@ -107,6 +114,7 @@ int main(){
         Sleep(10);  // Reduce CPU usage
     }  
     system("cls");
+    blank();
     nHUD();   
 } 
 
