@@ -64,8 +64,10 @@ public:
 
     void addXp(int xpGained) {
         xp += xpGained;
-        while (xp >= xptolevelup) {
+        while (xp >= xptolevelup && level < 100) {
             levelUp();
+        } if ( level == 100) {
+            xp = xptolevelup ;
         }
     }
 
@@ -78,13 +80,16 @@ public:
 
 private:
     void levelUp() {
+         if(level < 100) 
+     {
         level++;
         xp -= xptolevelup;
         xptolevelup += (50 * level) + (rand() % 99 + 1);
         statPoints += 3;
         cout << name << " reached level " << level << "!!!!" << endl;
         distributeStatPoints();
-        showStatus();
+        showStatus(); 
+     }
     }
 
     void distributeStatPoints() {
