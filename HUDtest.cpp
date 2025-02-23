@@ -7,7 +7,8 @@ using namespace std;
 
 //Screen Output
 void sHUD();//Title
-void nHUD();
+void nHUD();//Choice Hud
+void batHUD();//Battle Hud
 void showmon(string); //entity show
 void doASCii(string); //ASCii Art
 void doSlow(string); //Text Delay
@@ -70,9 +71,12 @@ void nHUD(){
     cout<<"=====================================================================================\n";
     cout<<"Name HP : 1/1"<<setw(20)<<"Gold : 500\n";
     cout<<"=====================================================================================\n";
+    cout<<"You";
 }
  
+void batHUD(){
 
+}
 void showmon(string x){
     SetConsoleTextAttribute(h,2);//Green
     cout<<"=====================================================================================\n";
@@ -103,7 +107,6 @@ int main(){
         Sleep(10);  // Reduce CPU usage
     }  
     system("cls");
-    showmon("ascii_folder/Skeleton.txt");
     nHUD();   
 } 
 
