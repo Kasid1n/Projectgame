@@ -75,10 +75,12 @@ void nHUD(){
         cout<<endl;
     }
     cout<<"=====================================================================================\n";
-    cout<<yname<<setw(15)<<"HP : 1/1"<<setw(15  )<<"Gold : 500\n";  
+    cout<<yname<<setw(15)<<"HP : 1/1"<<setw(15)<<"Level : "<<setw(15)<<"Gold : 500\n";  
     cout<<"=====================================================================================\n";
     doSlow("You decide to :",100);
-    cout<<"[1] Moving Forward"<<setw(15)<<"[2] Rest"<<setw(30)<<"[3] Check your equipment";  
+    cout<<"[1] Moving Forward"<<setw(15)<<"[2] Rest"<<setw(30)<<"[3] Check your equipment";
+    char choice;
+    cin>> choice;  
 }
  
 void batHUD(){
