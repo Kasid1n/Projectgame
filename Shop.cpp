@@ -1,78 +1,61 @@
-#include<iostream>
-#include<ctime>
-#include<vector>
-#include<cstdlib>
-#include<string>
-using namespace std;
+#include "shop.h"
 
-class NPC {
-    string npcname;
-    vector<string> sellItem;
-    vector<int> ItemPrice;
-
-public:
-    static string Randname() {
-        vector<string> npcName = {"A", "B", "C"};
-        return npcName[rand() % npcName.size()];
+NPC::NPC(string name) { //std::string name 
+    npcname = name;
+    if (npcname == "A") {
+        sellItem = {"Axe", "SuperAxe", "Sword"};
+        ItemPrice = {15, 25, 30};
+        ItemStats = {Equipment(0, 5, 0, 0), Equipment(0, 8, 0, 0), Equipment(0, 10, 0, 0, 0)};
     }
-
-    NPC() {
-        npcname = Randname();
-        sellItem = {"Attack Potion", "Magic Potion", "Defense Shield", "Speed"};
-        ItemPrice = {15, 15, 20, 20};  // ราคาอัพตามเลเวล
+    else if (npcname == "B") {
+        sellItem = {"Shield", "Better Shield"};
+        ItemPrice = {20, 30};
+        ItemStats = {Equipment(0, 0, 5, 0), Equipment(0, 0, 8, 0)};
     }
+    else if (npcname == "Secretmaster") {
+        vector<string> secretItems = {"Attack Potion", "Heal Potion", "Defense Potion"}; //chat std :: vector <std ::string>
+        int randIndex = rand() % 3;
+        sellItem.push_back(secretItems[randIndex]);
+        int price = rand() % 21 + 10;
+        ItemPrice.push_back(price);
 
-    void shop() {
-        cout << npcname << "'s shop" << endl;
-        for (int i = 0; i < sellItem.size(); i++) {
-            cout << i + 1 << " " << sellItem[i] << " " << ItemPrice[i] << endl;
+        if (secretItems[randIndex] == "Attack Potion") {
+            ItemStats.push_back(Equipment(0, 5, 0, 0));
+        } else if (secretItems[randIndex] == "Heal Potion") {
+            ItemStats.push_back(Equipment(10, 0, 0, 5));
+        } else {
+            ItemStats.push_back(Equipment(0, 0, 5, 0));
         }
     }
-
-    void sellItemToPlayer(int &playerGold, int &attack, int &magic, int &defense, int &speed) {
-        int choice;
-        while (true) {
-            shop();
-            cout << "You're Gold is " << playerGold << endl;
-            cout << "Enter the number of item or Press *0* to exit: ";
-            cin >> choice;
-            if (choice == 0) {
-                break;
-            }
-            else if (choice > 0 && choice <= sellItem.size()) {
-                int Index = choice - 1;
-                if (playerGold >= ItemPrice[Index]) {
-                    playerGold -= ItemPrice[Index];
-                    cout << "You bought " << sellItem[Index] << endl;
-                    cout << "Gold: " << playerGold << endl;
-
-                    if (Index == 0) {
-                        attack += 5;  
-                    } 
-                    else if (Index == 1) {
-                        magic += 5;  
-                    } 
-                    else if (Index == 2) {
-                        defense += 5;  
-                    } 
-                    else if (Index == 3) {
-                        speed += 5;  
-                    }
-                } else {
-                    cout << "You don't have enough gold!" << endl;
-                }
-            } 
-            else {
-                cout << "Invalid choice. Try again!" << endl;
-            }
-        }
-    }
-};
-/* test
-int main() {
-    NPC npc("L") ;
-    npc.shop() ;
- 
 }
- */
-   
+
+void NPC::shop() {
+    cout << npcname << "'s Shop\n";
+    for (size_t i = 0; i < sellItem.size(); i++) {
+        cout << i + 1 << ". " << sellItem[i] << " (Price: " << ItemPrice[i] << ")\n";
+    }
+}
+
+void NPC::sellItemToPlayer(Player &player) {
+    int choice;
+    while (true) {
+        shop();
+        cout << "Your Gold: " << player.getGold() << endl;
+        cout << "Enter item number (0 to exit): ";
+        cin >> choice;
+        if (choice == 0) break;
+
+        if (choice > 0 && choice <= sellItem.size()) {
+            int index = choice - 1;
+            if (player.getGold() >= ItemPrice[index]) {
+                player.updateGold(-ItemPrice[index]);
+                player.equipItem(ItemStats[index]);
+                cout << "You bought " << sellItem[index] << "!\n";
+            } else {
+                cout << "Not enough gold!\n";
+            }
+        } else {
+            cout << "Invalid choice!\n";
+        }
+    }
+}
