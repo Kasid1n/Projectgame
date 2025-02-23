@@ -109,10 +109,10 @@ int main(){
         }
         Sleep(10);  // Reduce CPU usage
     }
-    system("cls"); 
-    doSlowF("ascii_folder/Story1.txt",100);
+    system("cls");
     cout<<"Your name is...";
     cin>> yname;
+    doSlowF("ascii_folder/Story1.txt",100);
     cout<<"Press Spacebar to continue.";  
     while (true) {
         if (GetAsyncKeyState(VK_SPACE) & 0x8000) {  // Check if space bar is pressed
