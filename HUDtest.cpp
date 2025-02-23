@@ -1,8 +1,9 @@
 #include<iostream>
 #include<fstream>
 #include<windows.h>
-#include <cstdlib>
+#include<cstdlib>
 #include<iomanip>
+#include<ctime>
 using namespace std;
 
 //Screen Output
@@ -75,12 +76,29 @@ void nHUD(){
         cout<<endl;
     }
     cout<<"=====================================================================================\n";
-    cout<<yname<<setw(15)<<"HP : 1/1"<<setw(15)<<"Level : "<<setw(15)<<"Gold : 500\n";  
+    cout<<yname<<setw(15)<<"HP : 1/1"<<setw(15)<<"Level : 1 "<<setw(15)<<"Gold : 500\n";  
     cout<<"=====================================================================================\n";
     doSlow("You decide to :",100);
     cout<<"[1] Moving Forward"<<setw(15)<<"[2] Rest"<<setw(30)<<"[3] Check your equipment";
-    char choice;
-    cin>> choice;  
+    int choice;
+    cin>> choice;
+    switch(choice){
+        case 1:
+        int wal = rand()%50;//Different Scenery
+        if(wal<=10){
+        doASCii("ascii_folder/wall1.txt");
+        cout<<"=====================================================================================\n";
+        doSlow("You walk past the dark hallway...");
+        //code event here
+        
+        //
+        nHUD();
+        }
+        else {doASCii("ascii_folder/wall2.txt");
+        cout<<"=====================================================================================\n";
+        doSlow("You found a gate and open it...");
+        }
+    }  
 }
  
 void batHUD(){
@@ -125,7 +143,7 @@ int main(){
     }  
     system("cls");
     blank();
-    nHUD();   
+    nHUD();    
 } 
 
 
