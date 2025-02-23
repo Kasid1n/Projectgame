@@ -100,6 +100,7 @@ void nHUD(){
         //code event here
         
         //
+        system("cls");
         blank();
         nHUD();
         }
@@ -113,6 +114,7 @@ void nHUD(){
             }
             Sleep(10);  // Reduce CPU usage
         }
+        system("cls");
         blank();
         nHUD();
         }
@@ -131,6 +133,8 @@ void nHUD(){
             }
             Sleep(10);  // Reduce CPU usage
         }
+        system("cls");
+        blank();
         nHUD();
         break;
     }  

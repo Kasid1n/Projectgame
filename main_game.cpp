@@ -8,10 +8,11 @@
 //Library
 
 #include"HUDtest.cpp"
-#include"BattleSys.h"
+#include"PVP.h"
 #include"Equipment.h"
 #include"event.cpp"
 #include"Shop.cpp"
+#include"SMPL.cpp"
 //Function
 
 using namespace std; 
