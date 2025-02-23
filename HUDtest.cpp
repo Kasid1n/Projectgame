@@ -122,6 +122,9 @@ void nHUD(){
         cout<<"=====================================================================================\n";
         doSlow("You lay against the wall for a few minute...",100);
         cout<<"\nPress Spacebar to continue.";
+        //code event here
+
+        //
         while (true) {
             if (GetAsyncKeyState(VK_SPACE) & 0x8000) {  // Check if space bar is pressed
                 break;
