@@ -86,6 +86,7 @@ void nHUD(){
     int sc = rand()%50;//Different Scenery
     switch(choice){
         case 1://Move
+        system("cls");
         if(sc>=10){
         doASCii("ascii_folder/walls2.txt");
         cout<<"=====================================================================================\n";
@@ -120,6 +121,7 @@ void nHUD(){
         }
         break;
         case 2://Rest
+        system("cls");
         blank();
         cout<<"=====================================================================================\n";
         doSlow("You lay against the wall for a few minute...",100);
