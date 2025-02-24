@@ -13,7 +13,7 @@ public:
 class Monster {
 public:
     string name;
-    int hpmax, hp, attack, defense, magic};
+    int hpmax, hp, attack, defense, magic;};
 Player player = {"Hero", 100, 100, 20, 10, 15};
 Monster enemy = {"Ajarn Daeng", 500, 500, 15, 8, 12};
 
@@ -37,6 +37,7 @@ int DefenseChoice() {
 
 
 void battlesys(Player &A, Monster &B, int attack, int defense) {
+    cout <<endl;
     cout << A.name << " Hp: " << A.hp << endl;
     cout << B.name << " Hp: " << B.hp << endl;
     
@@ -49,6 +50,11 @@ void battlesys(Player &A, Monster &B, int attack, int defense) {
             dmg = A.attack;
             rdmg = rand() % 31 - 15;
             dmg += dmg * (rdmg / 100);
+
+            if(defense==attack){
+                temp = rand() % 30 + 1;
+                dmg -= dmg * ((50 + temp) / 100);
+            }
             break;
         case 2:
             cout << A.name << " uses skill!\n";
@@ -56,55 +62,52 @@ void battlesys(Player &A, Monster &B, int attack, int defense) {
             def = 0;
             temp = rand() % 3 + 1;
             if (temp == 1) dmg = 0;
+            
+            if(defense==attack){
+                temp = rand() % 4 + 1;
+                if (temp != 1) dmg = 0;
+            }
             break;
         case 3:
             cout << A.name << " uses ultimate!\n";
             dmg = (A.attack + A.magic) * 2;
+
+            if(defense==attack){
+                countered = true;
+            }
             break;
         case 4:
-            temp = rand() % 40 + 1;
-            hp = A.hpmax * ((30 + temp) / 100.0);
+            temp = rand() % 20 + 1;
+            hp = A.hpmax * ((20 + temp) / 100.0);
             A.hp += hp;
             if (A.hp > A.hpmax) A.hp = A.hpmax;
             cout << A.name << " heals +" << hp << " Hp\n";
             return;
     }
-
     switch (defense) {
-        case 1:
-            cout << B.name << " blocks!\n";
-            temp = rand() % 30 + 1;
-            dmg -= dmg * ((50 + temp) / 100);
-            break;
-        case 2:
-            cout << B.name << " dodges!\n";
-            temp = rand() % 4 + 1;
-            if (temp != 1) dmg = 0;
-            break;
-        case 3:
-            cout << B.name << " counters!\n";
-            countered = true;
-            break;
+        case 1:cout << B.name << " blocks!\n";break;
+        case 2:cout << B.name << " dodges!\n";break;
+        case 3:cout << B.name << " counters!\n";break;
         case 4:
             cout << B.name << " gave up!\n";
             dmg = 9999999;
             break;
     }
 
-    if (countered) {
+    if (countered==true) {
         A.hp -= dmg;
     } else {
         B.hp -= dmg;
     }
-
     cout << A.name << " did " << dmg << " damage\n";
     cout << B.name << " lost " << dmg << " HP\n";
+    cout <<endl;
 }
 
 
 
 void battlesys(Monster &A, Player &B, int attack, int defense) {
-    cout<<endl;
+    cout <<endl;
     cout << A.name << " Hp: " << A.hp << endl;
     cout << B.name << " Hp: " << B.hp << endl;
     
@@ -117,6 +120,11 @@ void battlesys(Monster &A, Player &B, int attack, int defense) {
             dmg = A.attack;
             rdmg = rand() % 31 - 15;
             dmg += dmg * (rdmg / 100);
+
+            if(defense==attack){
+                temp = rand() % 30 + 1;
+                dmg -= dmg * ((50 + temp) / 100);
+            }
             break;
         case 2:
             cout << A.name << " uses skill!\n";
@@ -124,50 +132,46 @@ void battlesys(Monster &A, Player &B, int attack, int defense) {
             def = 0;
             temp = rand() % 3 + 1;
             if (temp == 1) dmg = 0;
+            
+            if(defense==attack){
+                temp = rand() % 4 + 1;
+                if (temp != 1) dmg = 0;
+            }
             break;
         case 3:
             cout << A.name << " uses ultimate!\n";
             dmg = (A.attack + A.magic) * 2;
+
+            if(defense==attack){
+                countered = true;
+            }
             break;
         case 4:
-            temp = rand() % 40 + 1;
-            hp = A.hpmax * ((30 + temp) / 100.0);
+            temp = rand() % 20 + 1;
+            hp = A.hpmax * ((20 + temp) / 100.0);
             A.hp += hp;
             if (A.hp > A.hpmax) A.hp = A.hpmax;
             cout << A.name << " heals +" << hp << " Hp\n";
             return;
     }
-
     switch (defense) {
-        case 1:
-            cout << B.name << " blocks!\n";
-            temp = rand() % 30 + 1;
-            dmg -= dmg * ((50 + temp) / 100);
-            break;
-        case 2:
-            cout << B.name << " dodges!\n";
-            temp = rand() % 4 + 1;
-            if (temp != 1) dmg = 0;
-            break;
-        case 3:
-            cout << B.name << " counters!\n";
-            countered = true;
-            break;
+        case 1:cout << B.name << " blocks!\n";break;
+        case 2:cout << B.name << " dodges!\n";break;
+        case 3:cout << B.name << " counters!\n";break;
         case 4:
             cout << B.name << " gave up!\n";
             dmg = 9999999;
             break;
     }
 
-    if (countered) {
+    if (countered==true) {
         A.hp -= dmg;
     } else {
         B.hp -= dmg;
     }
-
     cout << A.name << " did " << dmg << " damage\n";
     cout << B.name << " lost " << dmg << " HP\n";
-    cout<<endl;
+    cout <<endl;
 }
 
 
@@ -190,7 +194,7 @@ void battle(Player &player, Monster &enemy) {
     while (player.hp > 0 && enemy.hp > 0) {
         cout<<endl;
         int aiattack = rand() % 4 + 1;
-        int aidefense = rand() % 4 + 1;
+        int aidefense = rand() % 3 + 1;
         int attack, defense;
 
         cout << "Round: " << round << endl;
