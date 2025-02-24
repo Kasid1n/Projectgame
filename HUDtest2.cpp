@@ -8,10 +8,18 @@ using namespace std;
 //Screen Output
 void sHUD();//Title
 void nHUD();
+void mon();
+void hero();
 void showattack(string); //entity show
+void showskill(string);
+void showhultimate(string);
+void showheal(string);
 void showdodge(string);
 void showparry(string);
 void showblock(string);
+void showgaveup(string);
+void showwin();
+void showlose();
 void doASCii(string); //ASCii Art
 void doSlow(string); //Text Delay
 void doSlowF(string);
@@ -68,11 +76,17 @@ void sHUD(){
     doASCii(filetxt);
 }
 
-void nHUD(){
+void mon(){
+    SetConsoleTextAttribute(h,4);
+    cout<<"                       =====================================================\n";
+    cout<<"                        mon | HP : 100/100"<<"\n";
+    cout<<"                       =====================================================\n";
+}
+void hero(){
     SetConsoleTextAttribute(h,2);
-    cout<<"=====================================================================================\n";
-    cout<<"Name HP : 1/1"<<setw(20)<<"Gold : 500\n";
-    cout<<"=====================================================================================\n";
+    cout<<"=====================================================\n";
+    cout<<"Name | HP : 100/100"<<"\n";
+    cout<<"=====================================================\n";
 }
  
 
@@ -83,26 +97,82 @@ void showattack(string x){
     cout << "╚════════════════════════════════════════════════════════════════════════════╝\n";
 
     SetConsoleTextAttribute(h,4);//Red
+    mon();
     string filetxt=x;
     doASCii(filetxt);
     SetConsoleTextAttribute(h,2);
+    hero();
     if (true) {  
         cout << ">>> You hit the skeleton!\n";
     } else {
         cout << ">>> Your attack missed!\n";
     }
 }
+void showskill(string x){
+    SetConsoleTextAttribute(h,2);//Green
+    cout << "╔════════════════════════════════════════════════════════════════════════════╗\n";
+    cout << "║                              USES SKILL                                    ║\n";
+    cout << "╚════════════════════════════════════════════════════════════════════════════╝\n";
+
+    SetConsoleTextAttribute(h,4);//Red
+    mon();
+    string filetxt=x;
+    doASCii(filetxt);
+    SetConsoleTextAttribute(h,2);
+    hero();
+    if (true) {  
+        cout << ">>> You hit the skeleton!\n";
+    } else {
+        cout << ">>> Your skill missed!\n";
+    }
+}
+void showultimate(string x){
+    SetConsoleTextAttribute(h,2);//Green
+    cout << "╔════════════════════════════════════════════════════════════════════════════╗\n";
+    cout << "║                             USES ULTIMATE                                  ║\n";
+    cout << "╚════════════════════════════════════════════════════════════════════════════╝\n";
+
+    SetConsoleTextAttribute(h,4);//Red
+    mon();
+    string filetxt=x;
+    doASCii(filetxt);
+    SetConsoleTextAttribute(h,2);
+    hero();
+    if (true) {  
+        cout << ">>> You hit the skeleton!\n";
+    } else {
+        cout << ">>> Your ultimate missed!\n";
+    }
+}
+
+void showheal(string x){
+    SetConsoleTextAttribute(h,2);//Green
+    cout << "╔════════════════════════════════════════════════════════════════════════════╗\n";
+    cout << "║                              HEAL ACTION                                   ║\n";
+    cout << "╚════════════════════════════════════════════════════════════════════════════╝\n";
+
+    SetConsoleTextAttribute(h,4);//Red
+    mon();
+    string filetxt=x;
+    doASCii(filetxt);
+    SetConsoleTextAttribute(h,2);
+    hero();
+    
+}
+
 void showdodge(string x){
     SetConsoleTextAttribute(h,2);//Green
     cout << "╔════════════════════════════════════════════════════════════════════════════╗\n";
     cout << "║                            DODGE ACTION                                    ║\n";
     cout << "╚════════════════════════════════════════════════════════════════════════════╝\n"; 
     SetConsoleTextAttribute(h,4);//Red
+    mon();
     string filetxt=x;
     doASCii(filetxt);
     SetConsoleTextAttribute(h,2);
+    hero();
     if (true) {
-        cout << ">>> You dodged the skeleton's attack!\n";
+        cout << ">>> You successfully dodge the attack!\n";
     } else {
         cout << ">>> You failed to dodge!\n";
     }
@@ -114,9 +184,11 @@ void showparry(string x){
     cout << "║                            PARRY ACTION                                    ║\n";
     cout << "╚════════════════════════════════════════════════════════════════════════════╝\n"; 
     SetConsoleTextAttribute(h,4);//Red
+    mon();
     string filetxt=x;
     doASCii(filetxt);
     SetConsoleTextAttribute(h,2);
+    hero();
     if (true) {
         cout << ">>> You successfully parried the attack!\n";
     } else {
@@ -130,9 +202,11 @@ void showblock(string x){
     cout << "║                             BLOCK ACTION                                   ║\n";
     cout << "╚════════════════════════════════════════════════════════════════════════════╝\n"; 
     SetConsoleTextAttribute(h,4);//Red
+    mon();
     string filetxt=x;
     doASCii(filetxt);
     SetConsoleTextAttribute(h,2);
+    hero();
     if (true) {
         cout << ">>> You blocked the attack!\n";
     } else {
@@ -140,6 +214,37 @@ void showblock(string x){
     }
     
 }
+void showgaveup(string x){
+    SetConsoleTextAttribute(h,2);//Green
+    cout << "╔════════════════════════════════════════════════════════════════════════════╗\n";
+    cout << "║                             YOU GAVE UP                                    ║\n";
+    cout << "╚════════════════════════════════════════════════════════════════════════════╝\n"; 
+    SetConsoleTextAttribute(h,4);//Red
+    mon();
+    string filetxt=x;
+    doASCii(filetxt);
+    hero();
+    
+    showlose ();
+    
+}
+
+void showwin(){ 
+    SetConsoleTextAttribute(h,15);//white
+    cout << endl;
+    doASCii("ascii_folder/WIN");
+    cout << endl;
+    
+}
+
+void showlose (){ 
+    SetConsoleTextAttribute(h,15);//white
+    cout << endl;
+    doASCii("ascii_folder/LOSE");
+    cout << endl;
+    
+}
+
 
 int main(){
     SetConsoleOutputCP(65001);// Set CMD to UTF-8
@@ -162,9 +267,15 @@ int main(){
     }    
     system("cls");
     showattack("ascii_folder/Skeleton.txt");
-    showdodge("ascii_folder/Skeleton.txt");
-    showparry("ascii_folder/Skeleton.txt");
-    showblock ("ascii_folder/Skeleton.txt");
+    showskill("ascii_folder/Skeleton.txt");
+    showultimate("ascii_folder/Skeleton.txt");
+    showheal("ascii_folder/Skeleton.txt");
+    //showdodge("ascii_folder/Skeleton.txt");
+    //showparry("ascii_folder/Skeleton.txt");
+    //showblock ("ascii_folder/Skeleton.txt");
+    showgaveup ("ascii_folder/Skeleton.txt");
+    //showwin();
+    //showlose();
     
     //nHUD();   
 } 
