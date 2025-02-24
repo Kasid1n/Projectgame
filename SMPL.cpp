@@ -96,7 +96,7 @@ private:
 
     void distributeStatPoints() {
         while (statPoints > 0) {
-            cout << "You have " << statPoints << " stat points to allocate." << endl;
+            cout << "You have " << statPoints << " stat points to distribute." << endl;
             cout << "1. HP\n2. Attack\n3. Defense\n4. Magic\nChoose a stat to increase: ";
             int choice;
             cin >> choice;
@@ -174,12 +174,12 @@ int main() {
     
     Player player(playerName, 100, 20, 10, 5);
     player.showStatus();
-    player.addXp(0);
+    player.addXp(10000);
     player.dead();
 
     int playerLevel = player.getLevel();
     Monster randomMon = MonsterFactory::randMonster(playerLevel);
-    Monster fixedMon = MonsterFactory::bossMonster1();
+    Monster fixedMon = MonsterFactory::bossMonster2();
 
     randomMon.showStatus();
     fixedMon.showStatus();
