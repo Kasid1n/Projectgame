@@ -160,7 +160,7 @@ public:
         return fixedMonster;
     }
     static Monster bossMonster2() {
-        static Monster fixedMonster("DragonBoss", 22, 222, 22, 22, 22, 222, 222);
+        static Monster fixedMonster("Dragonlord", 22, 222, 22, 22, 22, 222, 222);
         return fixedMonster;
     }
 };
