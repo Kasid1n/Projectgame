@@ -167,23 +167,17 @@ public:
 
 int main() {
     srand(time(0));
-    
     string playerName;
     cout << "Enter player name: ";
     getline(cin, playerName);
-    
     Player player(playerName, 100, 20, 10, 5);
     player.showStatus();
-    player.addXp(10000);
-    player.dead();
-
+    player.addXp(500); 
     int playerLevel = player.getLevel();
     Monster randomMon = MonsterFactory::randMonster(playerLevel);
-    Monster fixedMon = MonsterFactory::bossMonster2();
-
+    Monster fixedMon = MonsterFactory::bossMonster1();
     randomMon.showStatus();
     fixedMon.showStatus();
-
     player.addGold(randomMon.getGoldDrop());
     player.addXp(randomMon.getXpDrop());
     player.showStatus();
