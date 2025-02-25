@@ -124,7 +124,7 @@ void nHUD(){
         system("cls");
         blank();
         cout<<"=====================================================================================\n";
-        doSlow("You lay against the wall for a few minute...",100);
+        doSlow("You lay against the wall for a few minute... You healed for : " ,100);
         cout<<"\nPress Spacebar to continue.";
         //code event here
 
