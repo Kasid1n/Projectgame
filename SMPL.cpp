@@ -22,14 +22,14 @@ public:
     void start() {
         hp = hpmax;
     }
-
+//ค่าสถานะ
     void showStats() const {
         cout << "HP: " << hp << "/" << hpmax << endl;
         cout << "Attack: " << attack << endl;
         cout << "Defense: " << defense << endl;
         cout << "Magic: " << magic << endl;
     }
-
+//เพื่มค่าสถานะ
     void increaseStat(int choice) {
         switch (choice) {
             case 1: hpmax += 10; hp = hpmax; break;
@@ -59,18 +59,18 @@ public:
         xptolevelup = 100;
         statPoints = 0;
     }
-
+//ระบบเพื่ม XP
     void addXp(int xpGained) {
         xp += xpGained;
         while (xp >= xptolevelup) {
             levelUp();
         }
     }
-
+//ระยย gold
     void addGold(int goldGained) {
         gold += goldGained;
     }
-
+//แสดงสถานะ
     void showStatus() const {
         cout << name << " is level " << level << endl;
         cout << "XP: " << xp << "/" << xptolevelup << endl;
@@ -82,7 +82,7 @@ public:
     int getLevel() const {
         return level;
     }
-
+//ระบบการเพื่มlevel
 private:
     void levelUp() {
         level++;
@@ -93,7 +93,7 @@ private:
         distributeStatPoints();
         showStatus();
     }
-
+//เพื่มค่าสถาน
     void distributeStatPoints() {
         while (statPoints > 0) {
             cout << "You have " << statPoints << " stat points to distribute." << endl;
@@ -104,7 +104,7 @@ private:
             statPoints--;
         }
     }
-
+//reset
 public:
     void dead() {
         level = 1;
@@ -115,7 +115,7 @@ public:
         showStatus();
     }
 };
-
+//มอน
 class Monster {
 private:
     string name;
@@ -123,7 +123,7 @@ private:
     Stats stats;
     int goldDrop;
     int xpDrop;
-
+//ค่าสถานะมอน
 public:
     Monster(string monsterName, int monsterLevel, int hpmax, int attack, int defense, int magic, int gold, int xp)
         : name(monsterName), level(monsterLevel), stats(hpmax, attack, defense, magic), goldDrop(gold * monsterLevel), xpDrop(xp * monsterLevel) {}
@@ -143,7 +143,7 @@ public:
         return xpDrop;
     }
 };
-
+//มอนแบบสุ่ม จะมีโอกาสเจอขึ้นอยู่กับ Level
 class MonsterFactory {
 public:
     static Monster randMonster(int level) {
@@ -154,7 +154,7 @@ public:
         if (level >= 5 && randNum >= 10) return Monster("Warrior-Skeleton", level, 60 + level * 6, 10 + level * 2, 8 + level, 4 + level / 2, 50, 80);
         return Monster("Skeleton", level, 1 + level * 5, 1 + level * 1, 6 + level, 1 + level / 1, 1, 1);
     }
-
+//ส่วนของบอสที่เอาไว้จบเกม
     static Monster bossMonster1() {
         static Monster fixedMonster("ApocalypseSoulsBoss", 11, 111, 11, 11, 11, 111, 111);
         return fixedMonster;
@@ -169,7 +169,7 @@ int main() {
     srand(time(0));
     string playerName;
     cout << "Enter player name: ";
-    getline(cin, playerName);
+    getline(cin, playerName); //ตั้งชื่อ
     Player player(playerName, 100, 20, 10, 5);
     player.showStatus();
     player.addXp(500); 
@@ -178,8 +178,8 @@ int main() {
     Monster fixedMon = MonsterFactory::bossMonster1();
     randomMon.showStatus();
     fixedMon.showStatus();
-    player.addGold(randomMon.getGoldDrop());
-    player.addXp(randomMon.getXpDrop());
+    player.addGold(randomMon.getGoldDrop());// จำเป็นต้องเอาใส่โค้ตหลักไม่งั้น Gold ไม่เพื่ม
+    player.addXp(randomMon.getXpDrop());// จำเป็นต้องเอาใส่โค้ตหลักไม่งั้น XP ไม่เพื่ม
     player.showStatus();
 
     return 0;
