@@ -13,6 +13,7 @@
 #include"event.cpp"
 #include"Shop.cpp"
 #include"SMPL.cpp"
+#include"level.cpp"
 //Function
 
 using namespace std; 
