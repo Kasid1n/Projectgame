@@ -6,6 +6,9 @@
 #include <vector>
 #include <cstdlib>
 #include <string>
+//#include "z.cpp"  // เชื่อมโยง Stats และ Equipment จาก z.cpp
+#include "z.h" // ตามแชท
+
 
 using namespace std;
 
@@ -15,11 +18,7 @@ private:
     int xp;
     int xptolevelup;
     string name;
-    int hp;
-    int hpmax;
-    int attack;
-    int defense;
-    int magic;
+    Stats stats;  // ออบเจ็กต์ Stats ใช้จัดการค่า health, attack, etc.
     int gold ;
 
     void levelup();
@@ -32,8 +31,7 @@ public:
     int getLevel() const;
     int getGold() const;
     void updateGold(int amount);
-    void equipItem(const Equipment& item);
+    void equipItem(const Equipment& item);  // สวมใส่ไอเทมที่ได้รับ
 };
 
 #endif
-  
