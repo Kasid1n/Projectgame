@@ -3,7 +3,7 @@
 #include<windows.h>
 #include <cstdlib>
 #include<iomanip>
-//#include"PVP.h"
+#include"PVP.h"
 using namespace std;
 
 //Screen Output
@@ -11,13 +11,8 @@ void sHUD();//Title
 void nHUD();
 void mon();
 void hero();
-void showattack(string); //entity show
-void showskill(string);
-void showhultimate(string);
-void showheal(string);
-void showdodge(string);
-void showparry(string);
-void showblock(string);
+void blank();
+ //entity show
 void showgaveup(string);
 void showwin();
 void showlose();
@@ -82,7 +77,7 @@ void sHUD(){
 void mon(){
     SetConsoleTextAttribute(h,4);
     cout<<"                       =====================================================\n";
-    cout<<"                        mon | HP : 100/100"<<"\n";
+    cout<<"                        mon | HP : 100/100"/**/<<"\n";
     cout<<"                       =====================================================\n";
 }
 void hero(){
@@ -91,132 +86,14 @@ void hero(){
     cout<<"Name | HP : 100/100"<<"\n";
     cout<<"=====================================================\n";
 }
- 
 
-void showattack(string x){
-    SetConsoleTextAttribute(h,2);//Green
-    cout << "╔════════════════════════════════════════════════════════════════════════════╗\n";
-    cout << "║                            ATTACK ACTION                                   ║\n";
-    cout << "╚════════════════════════════════════════════════════════════════════════════╝\n";
-
-    SetConsoleTextAttribute(h,4);//Red
-    mon();
-    string filetxt=x;
-    doASCii(filetxt);
-    SetConsoleTextAttribute(h,2);
-    hero();
-    if (true) {  
-        cout << ">>> You hit the skeleton!\n";
-    } else {
-        cout << ">>> Your attack missed!\n";
+void blank(){
+    for(int i =0;i<24;i++){
+        cout<<endl;
     }
-}
-void showskill(string x){
-    SetConsoleTextAttribute(h,2);//Green
-    cout << "╔════════════════════════════════════════════════════════════════════════════╗\n";
-    cout << "║                              USES SKILL                                    ║\n";
-    cout << "╚════════════════════════════════════════════════════════════════════════════╝\n";
+}  
 
-    SetConsoleTextAttribute(h,4);//Red
-    mon();
-    string filetxt=x;
-    doASCii(filetxt);
-    SetConsoleTextAttribute(h,2);
-    hero();
-    if (true) {  
-        cout << ">>> You hit the skeleton!\n";
-    } else {
-        cout << ">>> Your skill missed!\n";
-    }
-}
-void showultimate(string x){
-    SetConsoleTextAttribute(h,2);//Green
-    cout << "╔════════════════════════════════════════════════════════════════════════════╗\n";
-    cout << "║                             USES ULTIMATE                                  ║\n";
-    cout << "╚════════════════════════════════════════════════════════════════════════════╝\n";
 
-    SetConsoleTextAttribute(h,4);//Red
-    mon();
-    string filetxt=x;
-    doASCii(filetxt);
-    SetConsoleTextAttribute(h,2);
-    hero();
-    if (true) {  
-        cout << ">>> You hit the skeleton!\n";
-    } else {
-        cout << ">>> Your ultimate missed!\n";
-    }
-}
-
-void showheal(string x){
-    SetConsoleTextAttribute(h,2);//Green
-    cout << "╔════════════════════════════════════════════════════════════════════════════╗\n";
-    cout << "║                              HEAL ACTION                                   ║\n";
-    cout << "╚════════════════════════════════════════════════════════════════════════════╝\n";
-
-    SetConsoleTextAttribute(h,4);//Red
-    mon();
-    string filetxt=x;
-    doASCii(filetxt);
-    SetConsoleTextAttribute(h,2);
-    hero();
-    
-}
-
-void showdodge(string x){
-    SetConsoleTextAttribute(h,2);//Green
-    cout << "╔════════════════════════════════════════════════════════════════════════════╗\n";
-    cout << "║                            DODGE ACTION                                    ║\n";
-    cout << "╚════════════════════════════════════════════════════════════════════════════╝\n"; 
-    SetConsoleTextAttribute(h,4);//Red
-    mon();
-    string filetxt=x;
-    doASCii(filetxt);
-    SetConsoleTextAttribute(h,2);
-    hero();
-    if (true) {
-        cout << ">>> You successfully dodge the attack!\n";
-    } else {
-        cout << ">>> You failed to dodge!\n";
-    }
-}
-
-void showparry(string x){
-    SetConsoleTextAttribute(h,2);//Green
-    cout << "╔════════════════════════════════════════════════════════════════════════════╗\n";
-    cout << "║                            PARRY ACTION                                    ║\n";
-    cout << "╚════════════════════════════════════════════════════════════════════════════╝\n"; 
-    SetConsoleTextAttribute(h,4);//Red
-    mon();
-    string filetxt=x;
-    doASCii(filetxt);
-    SetConsoleTextAttribute(h,2);
-    hero();
-    if (true) {
-        cout << ">>> You successfully parried the attack!\n";
-    } else {
-        cout << ">>> Your parry failed!\n";
-    }
-}
-
-void showblock(string x){
-    SetConsoleTextAttribute(h,2);//Green
-    cout << "╔════════════════════════════════════════════════════════════════════════════╗\n";
-    cout << "║                             BLOCK ACTION                                   ║\n";
-    cout << "╚════════════════════════════════════════════════════════════════════════════╝\n"; 
-    SetConsoleTextAttribute(h,4);//Red
-    mon();
-    string filetxt=x;
-    doASCii(filetxt);
-    SetConsoleTextAttribute(h,2);
-    hero();
-    if (true) {
-        cout << ">>> You blocked the attack!\n";
-    } else {
-        cout << ">>> You failed to block the attack!\n";
-    }
-    
-}
 void showgaveup(string x){
     SetConsoleTextAttribute(h,2);//Green
     cout << "╔════════════════════════════════════════════════════════════════════════════╗\n";
@@ -248,24 +125,16 @@ void showlose (){
     
 }
 
+
 void showAT(string x){
+    blank();
     SetConsoleTextAttribute(h,2);//Green
     cout << "╔════════════════════════════════════════════════════════════════════════════╗\n";
     cout << "║                             TURN TO ATTACK                                 ║\n";
     cout << "╚════════════════════════════════════════════════════════════════════════════╝\n";
 
-    SetConsoleTextAttribute(h,4);//Red
-    mon();
-    string filetxt=x;
-    doASCii(filetxt);
-    SetConsoleTextAttribute(h,2);
-    hero();
-}
-void showDE(string x){
-    SetConsoleTextAttribute(h,2);//Green
-    cout << "╔════════════════════════════════════════════════════════════════════════════╗\n";
-    cout << "║                             TURN TO DEFENSE                                ║\n";
-    cout << "╚════════════════════════════════════════════════════════════════════════════╝\n";
+   
+    //battle(player, enemy);
 
     SetConsoleTextAttribute(h,4);//Red
     mon();
@@ -273,6 +142,60 @@ void showDE(string x){
     doASCii(filetxt);
     SetConsoleTextAttribute(h,2);
     hero();
+    
+    int playerAttackChoice = AttackChoice();
+    switch (playerAttackChoice) {
+        case 1:
+            cout << "You chose to Attack!\n";
+            break;
+        case 2:
+            cout << "You chose to use a Skill!\n";
+            break;
+        case 3:
+            cout << "You chose to use your Ultimate!\n";
+            break;
+        case 4:
+            cout << "You chose to Heal!\n";
+            break;
+        default:
+            cout << "Invalid choice. Try again.\n";
+            break;
+    }
+    Sleep(900);
+}
+void showDE(string x){
+    blank();
+    SetConsoleTextAttribute(h,2);//Green
+    cout << "╔════════════════════════════════════════════════════════════════════════════╗\n";
+    cout << "║                             TURN TO DEFENSE                                ║\n";
+    cout << "╚════════════════════════════════════════════════════════════════════════════╝\n";
+    
+
+    SetConsoleTextAttribute(h,4);//Red
+    mon();
+    string filetxt=x;
+    doASCii(filetxt);
+    SetConsoleTextAttribute(h,2);
+    hero();
+    int playerDefenseChoice = DefenseChoice();
+    switch (playerDefenseChoice) {
+        case 1:
+            cout << "You chose to Block!\n";
+            break;
+        case 2:
+            cout << "You chose to Dodge!\n";
+            break;
+        case 3:
+            cout << "You chose to Parry!\n";
+            break;
+        case 4:
+            cout << "You chose to Give up\n";
+            break;
+        default:
+            cout << "Invalid choice. Try again.\n";
+            break;
+    }
+    Sleep(900);
 }
 
 
@@ -296,19 +219,15 @@ int main(){
         Sleep(10);  // Reduce CPU usage
     }    
     system("cls");
-    showattack("ascii_folder/Skeleton.txt");
-    showskill("ascii_folder/Skeleton.txt");
-    showultimate("ascii_folder/Skeleton.txt");
-    showheal("ascii_folder/Skeleton.txt");
-    //showdodge("ascii_folder/Skeleton.txt");
-    //showparry("ascii_folder/Skeleton.txt");
-    //showblock ("ascii_folder/Skeleton.txt");
-    showgaveup ("ascii_folder/Skeleton.txt");
+
+    //showgaveup ("ascii_folder/Skeleton.txt");
     //showwin();
     //showlose();
     showAT ("ascii_folder/Skeleton.txt");
     showDE ("ascii_folder/Skeleton.txt");
-    
+    showAT ("ascii_folder/Skeleton.txt");
+    showDE ("ascii_folder/Skeleton.txt");
     //nHUD();   
 } 
+
 

@@ -21,17 +21,17 @@ Monster enemy = {"Ajarn Daeng", 500, 500, 15, 8, 12};
 
 int AttackChoice() {/*อันนี้ช้อยของเพลเยอร์*/
     int achoice = 0;
-    cout << "You're Attacker\n";
+    cout << "You're Attacker\n";//turn+P
     while (achoice < 1 || achoice > 4) {
-        cout << "Press 1. Attack\nPress 2.Skill\nPress 3. Ultimate\nPress 4.Heal \n";
+        cout << "Press 1. Attack Press 2.Skill Press 3. Ultimate Press 4.Heal \n"; //ขออยู่บรรทัดเดียวกัน
         cin >> achoice;
     }
     return achoice;}
 int DefenseChoice() {/*อันนี้ช้อยของเพลเยอร์*/
     int dchoice = 0;
-    cout << "You're The Defender\n";
+    cout << "You're The Defender\n";//turn+P
     while (dchoice < 1 || dchoice > 4) {
-        cout << "Press 1.Block(against Attack)\nPress 2.Dodge(against Weapon SKill)\nPress 3.Parry(against ultimate)\nPress 4. Give up\n";
+        cout << "Press 1.Block(against Attack) Press 2.Dodge(against Weapon SKill) Press 3.Parry(against ultimate) Press 4. Give up\n";
         cin >> dchoice;
     }
     return dchoice;}
@@ -48,7 +48,7 @@ void battlesys(Player &A, Monster &B, int attack, int defense) {/*เพรา�
 
     switch (attack) {/*ตี*/
         case 1:
-            cout << A.name << " attacks!\n";
+            cout << A.name << " attacks!\n"; //upP2
             dmg = A.attack;
             rdmg = rand() % 31 - 15;
             dmg += dmg * (rdmg / 100);
@@ -223,8 +223,8 @@ void battle(Player &player, Monster &enemy) {//ฟังก์ชั่นbattle
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-int main() {
+/*int main() {
     srand(time(0));
     battle(player, enemy);
     return 0;
-}
+}*/
