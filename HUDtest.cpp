@@ -6,19 +6,28 @@
 #include<ctime>
 using namespace std;
 
+#include"z.cpp"
+
+Equipment sword(0, 10, 0, 5);
+Equipment shield(0, 0, 10, 0);
+Equipment axe(0, 15, 0, 0);
+Equipment bow(0, 10, 0, 5);
+
+Stats hero(100, 20, 10, 5);
+
 //Screen Output
 void sHUD();//Title
 void nHUD();//Choice Hud
 void blank();//blank screnn
-void batHUD();//Battle Hud
 void showmon(string); //entity show
 void doASCii(string); //ASCii Art
 void doSlow(string); //Text Delay
 void doSlowF(string);
+void showeap(int);//gear show
 HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);//Text setting
 
 string yname;//player name
-
+int startweap;//select start weapon
 void doASCii(string x){
     string line="";
     ifstream inFile;
@@ -64,6 +73,29 @@ void doSlowF(const string &text, int delay){
     cout<<"File failed to load";
     inFile.close();
 }
+
+void showeap(int choice){
+    SetConsoleTextAttribute(h,8);//Text Color Red
+    
+    do{switch(choice){
+        case 1://Axe
+        doASCii("ascii_folder/Axe.txt");
+        break;
+        case 2://Bow
+        doASCii("ascii_folder/Bow.txt");
+        break;
+        case 3://Sword
+        doASCii("ascii_folder/Sword.txt");
+        break;
+        
+        default:
+        
+    }
+    }while(true);
+    
+}
+
+
 
 void sHUD(){
     SetConsoleTextAttribute(h,15);//Text Color Red
@@ -142,9 +174,6 @@ void nHUD(){
     }  
 }
  
-void batHUD(){
-
-}
 void showmon(string x){
     SetConsoleTextAttribute(h,2);//Green
     cout<<"=====================================================================================\n";
@@ -173,6 +202,12 @@ int main(){
     system("cls");
     doSlow("Your name is...",100);
     cin>> yname;
+    doSlow("There's weapon beside you... It is...",100);
+    cout<<"\n[1] Axe"<<setw(15)<<"[2] Bow"<<setw(15)<<"[3] Sword";
+    cin>>startweap; 
+    //โค้ดอุปกรณ์
+
+    //
     system("cls");
     doSlowF("ascii_folder/Story1.txt",100);//Intro
     cout<<"\nPress Spacebar to continue.";  
@@ -186,5 +221,6 @@ int main(){
     blank();
     nHUD();    
 } 
+
 
 
