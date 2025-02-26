@@ -5,15 +5,10 @@
 #include<iomanip>
 #include<ctime>
 using namespace std;
-
 #include"z.cpp"
 
-Equipment sword(0, 10, 0, 5);
-Equipment shield(0, 0, 10, 0);
-Equipment axe(0, 15, 0, 0);
-Equipment bow(0, 10, 0, 5);
 
-Stats hero(100, 20, 10, 5);
+
 
 //Screen Output
 void sHUD();//Title
@@ -23,7 +18,7 @@ void showmon(string); //entity show
 void doASCii(string); //ASCii Art
 void doSlow(string); //Text Delay
 void doSlowF(string);
-void showeap(int);//gear show
+// void showeap(int);//gear show
 HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);//Text setting
 
 string yname;//player name
@@ -74,26 +69,26 @@ void doSlowF(const string &text, int delay){
     inFile.close();
 }
 
-void showeap(int choice){
-    SetConsoleTextAttribute(h,8);//Text Color Red
+// void showeap(int choice){
+//     SetConsoleTextAttribute(h,8);//Text Color Red
     
-    do{switch(choice){
-        case 1://Axe
-        doASCii("ascii_folder/Axe.txt");
-        break;
-        case 2://Bow
-        doASCii("ascii_folder/Bow.txt");
-        break;
-        case 3://Sword
-        doASCii("ascii_folder/Sword.txt");
-        break;
+//     do{switch(choice){
+//         case 1://Axe
+//         doASCii("ascii_folder/Axe.txt");
+//         break;
+//         case 2://Bow
+//         doASCii("ascii_folder/Bow.txt");
+//         break;
+//         case 3://Sword
+//         doASCii("ascii_folder/Sword.txt");
+//         break;
         
-        default:
+//         default:
         
-    }
-    }while(true);
+//     }
+//     }while(true);
     
-}
+// }
 
 
 
@@ -131,7 +126,7 @@ void nHUD(){
             Sleep(10);  // Reduce CPU usage
         }
         //code event here
-        
+
         //
         system("cls");
         blank();
@@ -171,6 +166,8 @@ void nHUD(){
         blank();
         nHUD();
         break;
+        default:
+        cout<<"Choose."; 
     }  
 }
  
@@ -203,7 +200,7 @@ int main(){
     doSlow("Your name is...",100);
     cin>> yname;
     doSlow("There's weapon beside you... It is...",100);
-    cout<<"\n[1] Axe"<<setw(15)<<"[2] Bow"<<setw(15)<<"[3] Sword";
+    cout<<"\n[1] Axe"<<setw(10)<<"[2] Bow"<<setw(10)<<"[3] Sword";
     cin>>startweap; 
     //โค้ดอุปกรณ์
 
