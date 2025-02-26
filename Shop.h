@@ -5,22 +5,22 @@
 #include <string>
 #include <vector>
 #include <cstdlib>
-#include "Equipment.h"
 #include "level.h"
+#include "z.cpp"  // ใช้ Equipment จาก z.cpp
 
 using namespace std;
 
 class NPC {
 private:
-    string npcname;            //std ::string npcname ;
-    vector<string> sellItem;  //std::vector<std::string> sellItem;
-    vector<int> ItemPrice;  //std
-    vector<Equipment> ItemStats; // std
+    string npcname;   //ชื่อ
+    vector<string> sellItem;  // ขายของ
+    vector<int> ItemPrice;  // ราคา
+    vector<Equipment> ItemStats;  // addstat
 
 public:
-    NPC(string name); //std::string name
+    NPC(string name);
     void shop();
     void sellItemToPlayer(Player &player);
 };
 
-#endif 
+#endif
