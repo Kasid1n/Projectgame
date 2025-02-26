@@ -12,25 +12,32 @@
 ✅ เพิ่มระบบโจมตีหรือใช้ไอเท็ม
 ✅ เพิ่มระบบบันทึกและโหลดข้อมูลตัวละคร
 */ 
+
+
+
+
+
+
+
+
+
+
 #include "level.h"
-#include "Equipment.h"
+//#include "Equipment.h"
+#include "z.h" // ตามแชท
+//#include "z.cpp"  // เชื่อมโยงกับ Stats และ Equipment
 #include <ctime>
 
-Player::Player(string Playername, int hpmax, int attack, int defense, int magic) {
+Player::Player(string Playername, int hpmax, int attack, int defense, int magic)
+    : stats(hpmax, attack, defense, magic) {  // เริ่มต้น Stats ในคอนสตรัคเตอร์
     this->name = Playername;
-    this->hpmax = hpmax;
-    this->hp = hpmax;  // กำหนดค่าเริ่มต้นให้ hp = hpmax
-    this->attack = attack;
-    this->defense = defense;
-    this->magic = magic;
     this->level = 1;
     this->xp = 0;
     this->xptolevelup = 100;
     this->gold = 0;
 }
 
-
-void Player::addxp(int xpgained) {      //เพิ่ม xp และให้เวลตัน 100
+void Player::addxp(int xpgained) { 
     xp += xpgained;
     while (xp >= xptolevelup && level < 100) {
         levelup();
@@ -40,39 +47,33 @@ void Player::addxp(int xpgained) {      //เพิ่ม xp และให้�
     }
 }
 
-void Player::showstatus() const {  //แสดงค่าสถานะ
+void Player::showstatus() const {
     cout << name << " is level " << level << endl;
     cout << name << " xp is " << xp << endl;
-    cout << "HP: " << hp << "/" << hpmax << endl;
-    cout << "Attack: " << attack << endl;
-    cout << "Defense: " << defense << endl;
-    cout << "Magic: " << magic << endl;
+    stats.printStats();  // แสดงสถานะจากคลาส Stats
     cout << "Gold: " << gold << endl;
 }
 
-void Player::levelup() {  //เวลอัพ
+void Player::levelup() {
     if (level < 100) {
         level++;
         xp -= xptolevelup;
-        xptolevelup += (100 * level); //ใส่มั่ว
+        xptolevelup += (100 * level);
         cout << name << " reached level " << level << "!!!!" << endl;
         showstatus();
     }
 }
 
-void Player::dead() {  //ตาย re ค่า
+void Player::dead() {
     level = 1;
     xp = 0;
     xptolevelup = 100;
-    hp = hpmax = 100 ;
-    attack = 10 ;
-    defense = 5 :
-    magic = 5 ;
-    gold  =  0 ;
+    stats = Stats(100, 10, 5, 5);  // รีเซ็ตสถานะ
+    gold = 0;
     showstatus();
 }
 
-int Player::getLevel() const {  
+int Player::getLevel() const {
     return level;
 }
 
@@ -80,18 +81,15 @@ int Player::getGold() const {
     return gold;
 }
 
-void Player::updateGold(int amount) {  
+void Player::updateGold(int amount) {
     gold += amount;
 }
 
-void Player::equipItem(const Equipment& item) {  // ใส่ของจากร้านค้า
-    vector<int> stats = item.getStat();
-    hpmax += stats[0];
-    attack += stats[1];
-    defense += stats[2];
-    magic += stats[3];
+void Player::equipItem(const Equipment& item) {
+    stats.equip(new Equipment(item));  // สวมใส่ไอเทมโดยส่งไปยัง Stats
 }
 
+// ใช้เพื่อ compile g++ z.cpp level.cpp -o level
 
 
 
