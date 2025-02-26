@@ -3,6 +3,7 @@
 #include<windows.h>
 #include <cstdlib>
 #include<iomanip>
+//#include"PVP.h"
 using namespace std;
 
 //Screen Output
@@ -20,6 +21,8 @@ void showblock(string);
 void showgaveup(string);
 void showwin();
 void showlose();
+void showAT();
+void showDE();
 void doASCii(string); //ASCii Art
 void doSlow(string); //Text Delay
 void doSlowF(string);
@@ -245,6 +248,33 @@ void showlose (){
     
 }
 
+void showAT(string x){
+    SetConsoleTextAttribute(h,2);//Green
+    cout << "╔════════════════════════════════════════════════════════════════════════════╗\n";
+    cout << "║                             TURN TO ATTACK                                 ║\n";
+    cout << "╚════════════════════════════════════════════════════════════════════════════╝\n";
+
+    SetConsoleTextAttribute(h,4);//Red
+    mon();
+    string filetxt=x;
+    doASCii(filetxt);
+    SetConsoleTextAttribute(h,2);
+    hero();
+}
+void showDE(string x){
+    SetConsoleTextAttribute(h,2);//Green
+    cout << "╔════════════════════════════════════════════════════════════════════════════╗\n";
+    cout << "║                             TURN TO DEFENSE                                ║\n";
+    cout << "╚════════════════════════════════════════════════════════════════════════════╝\n";
+
+    SetConsoleTextAttribute(h,4);//Red
+    mon();
+    string filetxt=x;
+    doASCii(filetxt);
+    SetConsoleTextAttribute(h,2);
+    hero();
+}
+
 
 int main(){
     SetConsoleOutputCP(65001);// Set CMD to UTF-8
@@ -276,6 +306,8 @@ int main(){
     showgaveup ("ascii_folder/Skeleton.txt");
     //showwin();
     //showlose();
+    showAT ("ascii_folder/Skeleton.txt");
+    showDE ("ascii_folder/Skeleton.txt");
     
     //nHUD();   
 } 
