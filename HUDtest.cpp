@@ -65,6 +65,7 @@ void doSlowF(const string &text, int delay){
                 cout << c << flush;
                 Sleep(delay);  // Delay in milliseconds
             };
+            cout<<endl; 
         }
     }
     else
