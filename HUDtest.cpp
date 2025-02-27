@@ -81,7 +81,7 @@ void showeap(){
     while (true){
         cin>> choice;
     switch(choice){
-        case 1:
+        case '1':
         switch(gear.at(0)){
             case 1:
             doASCii("ascii_folder/Axe.txt");
@@ -94,7 +94,7 @@ void showeap(){
             break;
         }
         break;
-        case 2:
+        case '2':
         switch(gear.at(1)){
             case 1:
             doASCii("ascii_folder/Axe.txt");
@@ -109,7 +109,7 @@ void showeap(){
 
         doASCii("ascii_folder/Bow.txt");
         break;
-        case 3:
+        case '3':
         switch(gear.at(2)){
             case 1:
             doASCii("ascii_folder/Axe.txt");
@@ -124,7 +124,12 @@ void showeap(){
         }
         
         break;
-        
+        case 'e':
+        system("cls");
+        blank();
+        nHUD();
+        break;
+
         default:
         cout<<"You only have 3 slot of Equipment.\n";
     }
