@@ -18,11 +18,13 @@ void blank();//blank screnn
 void doASCii(string); //ASCii Art
 void doSlow(string); //Text Delay
 void doSlowF(string);
-// void showeap(int);//gear show
+void showeap(int);//gear show
 HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);//Text setting
 
 string hero;//player name
 int startweap;//select start weapon
+vector<int> gear(3);
+
 void doASCii(string x){
     string line="";
     ifstream inFile;
@@ -69,26 +71,65 @@ void doSlowF(const string &text, int delay){
     inFile.close();
 }
 
-// void showeap(int choice){
-//     SetConsoleTextAttribute(h,8);//Text Color Red
-    
-//     do{switch(choice){
-//         case 1://Axe
-//         doASCii("ascii_folder/Axe.txt");
-//         break;
-//         case 2://Bow
-//         doASCii("ascii_folder/Bow.txt");
-//         break;
-//         case 3://Sword
-//         doASCii("ascii_folder/Sword.txt");
-//         break;
+void showeap(int choice){
+    SetConsoleTextAttribute(h,7);
+    blank();
+    cout<<"=====================================================================================\n";
+    cout<<"Which one...\n";
+    cout<<"[1]  [2]  [3]  [E] Quit. \n";
+    while (true){
+    switch(choice){
+        case 1:
+        switch(gear.at(0)){
+            case 1:
+            doASCii("ascii_folder/Axe.txt");
+            break;
+            case 2:
+            doASCii("ascii_folder/Bow.txt");
+            break;
+            case 3:
+            doASCii("ascii_folder/Sword.txt");
+            break;
+        }
+        break;
+        case 2:
+        switch(gear.at(1)){
+            case 1:
+            doASCii("ascii_folder/Axe.txt");
+            break;
+            case 2:
+            doASCii("ascii_folder/Bow.txt");
+            break;
+            case 3:
+            doASCii("ascii_folder/Sword.txt");
+            break;
+        }
+
+        doASCii("ascii_folder/Bow.txt");
+        break;
+        case 3:
+        switch(gear.at(2)){
+            case 1:
+            doASCii("ascii_folder/Axe.txt");
+            break;
+            case 2:
+            doASCii("ascii_folder/Bow.txt");
+            break;
+            case 3:
+            doASCii("ascii_folder/Sword.txt");
+            break;
+
+        }
         
-//         default:
+        break;
         
-//     }
-//     }while(true);
+        default:
+        cout<<"You only have 3 slot of Equipment.\n";
+    }
+    }
     
-// }
+    
+}
 
 
 
@@ -209,12 +250,15 @@ int main(){
     switch(startweap){
         case 1:
         hero.equip(&axe);
+        gear.at(0)=1;//gearid of axe
         break;
         case 2:
         hero.equip(&bow);
+        gear.at(0)=2;//id bow
         break;
         case 3:
         hero.equip(&sword);
+        gear.at(0)=3;//id sword
         break;
         default:
         cout<<"There's nothing else...";

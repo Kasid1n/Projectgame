@@ -155,7 +155,7 @@ void Stats::printStats() {
 
 //         if (unequipChoice == 'y') {
 //             int index;
-//             cout << "Enter the index of the item to unequip (0 to " << hero.getEquipmentCount() - 1 << "): ";
+//             cout << "Enter the index of the item to unequip (0 to " << hero.getEquipmentCount() << "): ";
 //             cin >> index;
 //             hero.unequip(index);
 //             hero.printStats();
