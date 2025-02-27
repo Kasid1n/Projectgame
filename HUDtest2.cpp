@@ -158,18 +158,26 @@ void showAT(Player &A, Monster &B){
             cout << "Invalid choice. Try again.\n";
             break;
     }
-    D = battlesys(A, B, playerAttackChoice);//float return pvp
+    t = battlesys(A, B, playerAttackChoice);//float return pvp
     cout << "╔════════════════════════════════════════════════════════════════════════════╗\n";
     cout << "║                             TURN TO ATTACK                                 ║\n";
     cout << "╚════════════════════════════════════════════════════════════════════════════╝\n";
+    
+    
     mon(B);
     hero(A);
+    switch (t.d) {/*อันนี้ 1-3ทำให้มัน coutเฉยๆว่าเลือกอะไรไป*/
+        case 1:cout << B.name << " blocks!\n";break;
+        case 2:cout << B.name << " dodges!\n";break;
+        case 3:cout << B.name << " counters!\n";break;
+        case 4:
+            cout << B.name << " gave up!\n";
+            break;
+    }
     
-    cout << A.name << " did " << D << " damage\n";
-    cout << B.name << " lost " << D << " HP\n";
+    cout << A.name << " did " << t.D << " damage\n";
+    cout << B.name << " lost " << t.D << " HP\n";
     Sleep(2000);
-    
-    
     
    // Sleep(900);
 }
@@ -201,7 +209,7 @@ void showDE(Player &A, Monster &B){
             cout << "Invalid choice. Try again.\n";
             break;
     }
-    D = battlesys(B, A, playerDefenseChoice); //float return pvp
+    t = battlesys(B, A, playerDefenseChoice); //float return pvp
     SetConsoleTextAttribute(h,2);//Green
     
     cout << "╔════════════════════════════════════════════════════════════════════════════╗\n";
@@ -209,11 +217,28 @@ void showDE(Player &A, Monster &B){
     cout << "╚════════════════════════════════════════════════════════════════════════════╝\n";
     mon(B);
     hero(A);
-    cout << A.name << " did " << D << " damage\n";
-    cout << B.name << " lost " << D << " HP\n";
+    switch (t.d) {/*อันนี้ 1-3ทำให้มัน coutเฉยๆว่าเลือกอะไรไป*/
+        case 1:cout << B.name << " blocks!\n";break;
+        case 2:cout << B.name << " dodges!\n";break;
+        case 3:cout << B.name << " counters!\n";break;
+        case 4:
+            cout << B.name << " gave up!\n";
+            break;
+    }
+    cout << B.name << " did " << t.D <<" damage\n"; 
+    cout << A.name << " lost " << t.D << " HP\n";
     Sleep(2000);
 }
 
+void showbattle(Player &player, Monster &enemy){ //เหลือใครเริ่มก่อน
+    while (player.hp > 0 && enemy.hp > 0){
+        showDE(player,enemy);
+        if (enemy.hp <= 0 || player.hp <= 0) break;
+        showAT(player,enemy);
+        if (enemy.hp <= 0 || player.hp <= 0) break;
+    }
+
+}
 
 int main(){
     SetConsoleOutputCP(65001);// Set CMD to UTF-8
@@ -242,11 +267,7 @@ int main(){
     //mon(enemy);
     //hero(player);
     //showAT(player,enemy);
-    showDE(player,enemy);
-    showAT(player,enemy);
-    showDE(player,enemy);
-    showAT(player,enemy);
-
+    showbattle(player,enemy);
     //nHUD();   
 } 
 
