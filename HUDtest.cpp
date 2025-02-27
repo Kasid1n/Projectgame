@@ -73,11 +73,13 @@ void doSlowF(const string &text, int delay){
 
 void showeap(){
     SetConsoleTextAttribute(h,7);
+    char choice;
     blank();
     cout<<"=====================================================================================\n";
     cout<<"Which one...\n";
     cout<<"[1]  [2]  [3]  [E] Quit. \n";
     while (true){
+        cin>> choice;
     switch(choice){
         case 1:
         switch(gear.at(0)){
