@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <string>
 #include <ctime>
@@ -409,7 +408,7 @@ public:
 int Statseq::getEquipmentCount() {
     return equipmentList.size();
 }
-Statseq::Stats(int h, int a, int d, int m) {
+Statseq::Statseq(int h, int a, int d, int m) {
     hpmax = h;
     hp = h; // Initialize hp to max at the start
     attack = a;
