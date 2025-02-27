@@ -15,6 +15,7 @@ class Equipment {
 public:
     Equipment(int h, int a, int d, int m);
     vector<int> getStat();
+    
 };
 
 Equipment::Equipment(int h, int a, int d, int m) {

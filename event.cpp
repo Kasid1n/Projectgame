@@ -64,7 +64,7 @@ void event(int &i){
 }
 
 }
-
+ 
 void mon(){
   
   doSlow("You encounter a monster!",50);

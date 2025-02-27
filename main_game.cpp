@@ -9,12 +9,11 @@
 //Library
 
 #include"HUDtest.cpp"
-#include"PVP.cpp"
 #include"event.cpp"
 #include"Shop.cpp"
-#include"SMPL.cpp"
 #include"level.cpp"
 #include"z.cpp"
+#include"Battle.cpp"
 //Function
 
 using namespace std; 
@@ -45,26 +44,26 @@ int main(){
     doSlow("There's a weapon beside you... It is...",100);
     
     cout<<"\n[1] Axe"<<setw(10)<<"[2] Bow"<<setw(10)<<"[3] Sword";
-    while(true){
-    cin>>startweap;
-    switch(startweap){
-        case 1:
-        hero.equip(&axe);
-        gear.at(0)=1;//gearid of axe
-        break;
-        case 2:
-        hero.equip(&bow);
-        gear.at(0)=2;//id bow
-        break;
-        case 3:
-        hero.equip(&sword);
-        gear.at(0)=3;//id sword
-        break;
-        default:
-        cout<<"There's nothing else...";
-    }
-    break;
-    } 
+    // while(true){
+    // cin>>startweap;
+    // switch(startweap){
+    //     case 1:
+    //     hero.equip(&axe);
+    //     gear.at(0)=1;//gearid of axe
+    //     break;
+    //     case 2:
+    //     hero.equip(&bow);
+    //     gear.at(0)=2;//id bow
+    //     break;
+    //     case 3:
+    //     hero.equip(&sword);
+    //     gear.at(0)=3;//id sword
+    //     break;
+    //     default:
+    //     cout<<"There's nothing else...";
+    // }
+    // break;
+    // } 
 
     system("cls");
     doSlowF("ascii_folder/Story1.txt",100);//Intro
