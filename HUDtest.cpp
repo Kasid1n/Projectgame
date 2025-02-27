@@ -18,7 +18,7 @@ void blank();//blank screnn
 void doASCii(string); //ASCii Art
 void doSlow(string); //Text Delay
 void doSlowF(string);
-void showeap(int);//gear show
+void showeap();//gear show
 HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);//Text setting
 
 string hero;//player name
@@ -71,7 +71,7 @@ void doSlowF(const string &text, int delay){
     inFile.close();
 }
 
-void showeap(int choice){
+void showeap(){
     SetConsoleTextAttribute(h,7);
     blank();
     cout<<"=====================================================================================\n";
@@ -209,7 +209,9 @@ void nHUD(){
         system("cls");
         blank();
         nHUD();
-        break; 
+        break;
+        case 3:
+        showeap();
         default:
             cout<<"Choose.\n"; 
     }
