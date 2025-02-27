@@ -208,21 +208,155 @@ void showeap(){
                 blank();
                 nHUD();
                 break;
+            default:
+            system("cls");
+            blank();
+            bar();
+            cout<<"You don't have equipment in that slot\n";
+            cout<<"\nPress Spacebar to go back.";
+                spaceb();
+                system("cls");
+                blank();
+                nHUD();
+                break;
 
-            
         }
             break;
+
         case '2':
         switch(gear.at(1)){
             case 1:
+            system("cls");
+            SetConsoleTextAttribute(h,2);
             doASCii("ascii_folder/Axe.txt");
+            SetConsoleTextAttribute(h,7);
+            bar();
+            cout<<"Axe | Stat";
+            cout<<"\nPress Spacebar to go back.";
+            spaceb();
+            system("cls");
+            blank();
+            nHUD();
             break;
-            case 2:
+        case 2:
+            system("cls");
+            SetConsoleTextAttribute(h,2);
             doASCii("ascii_folder/Bow.txt");
+            SetConsoleTextAttribute(h,7);
+            bar();
+            cout<<"Bow | Stat";
+            cout<<"\nPress Spacebar to go back.";
+            spaceb();
+            system("cls");
+            blank();
+            nHUD();
             break;
-            case 3:
+        case 3:
+            system("cls");
+            SetConsoleTextAttribute(h,2);
             doASCii("ascii_folder/Sword.txt");
+            SetConsoleTextAttribute(h,7);
+            bar();
+            cout<<"Sword | Stat";
+            cout<<"\nPress Spacebar to go back.";
+            spaceb();
+            system("cls");
+            blank();
+            nHUD();
             break;
+        case 4:
+            system("cls");
+            SetConsoleTextAttribute(h,2);
+            doASCii("ascii_folder/Shield.txt");
+            SetConsoleTextAttribute(h,7);
+            bar();
+            cout<<"Shield | Stat";
+            cout<<"\nPress Spacebar to go back.";
+            spaceb();
+            system("cls");
+            blank();
+            nHUD();
+            break;
+        case 5:
+            system("cls");
+            SetConsoleTextAttribute(h,3);
+            doASCii("ascii_folder/BetterAxe.txt");
+            SetConsoleTextAttribute(h,7);
+            bar();
+            cout<<"Waraxe | Stat";
+            cout<<"\nPress Spacebar to go back.";
+            spaceb();
+            system("cls");
+            blank();
+            nHUD();
+            break;
+
+        case 6:
+            system("cls");
+            SetConsoleTextAttribute(h,3);
+            doASCii("ascii_folder/BetterSword.txt");
+            SetConsoleTextAttribute(h,7);
+            bar();
+            cout<<"Da Sword | Stat";
+            cout<<"\nPress Spacebar to go back.";
+            spaceb();
+            system("cls");
+            blank();
+            nHUD();
+            break;
+
+        case 7:
+            system("cls");
+            SetConsoleTextAttribute(h,3);
+            doASCii("ascii_folder/BetterShield.txt");
+            SetConsoleTextAttribute(h,7);
+            bar();
+            cout<<"Saint'Wall | Stat";
+            cout<<"\nPress Spacebar to go back.";
+            spaceb();
+            system("cls");
+            blank();
+            nHUD();
+            break;
+
+        case 8:
+            system("cls");
+            SetConsoleTextAttribute(h,2);
+            doASCii("ascii_folder/Armor.txt");
+            SetConsoleTextAttribute(h,7);
+            bar();
+            cout<<"Armor | Stat";
+            cout<<"\nPress Spacebar to go back.";
+            spaceb();
+            system("cls");
+            blank();
+            nHUD();
+            break;
+
+        case 9:
+            system("cls");
+            SetConsoleTextAttribute(h,2);
+            doASCii("ascii_folder/Necklace.txt");
+            SetConsoleTextAttribute(h,7); 
+            bar();
+            cout<<"Necklace | Stat";
+            cout<<"\nPress Spacebar to go back.";
+            spaceb();
+            system("cls");
+            blank();
+            nHUD();
+            break;
+        default:
+            system("cls");
+            blank();
+            bar();
+            cout<<"You don't have equipment in that slot\n";
+            cout<<"\nPress Spacebar to go back.";
+                spaceb();
+                system("cls");
+                blank();
+                nHUD();
+                break;
         }  
 
         doASCii("ascii_folder/Bow.txt");
@@ -230,18 +364,137 @@ void showeap(){
         case '3':
         switch(gear.at(2)){
             case 1:
+            system("cls");
+            SetConsoleTextAttribute(h,2);
             doASCii("ascii_folder/Axe.txt");
-            cout<<"=====================================================================================\n";
-            
+            SetConsoleTextAttribute(h,7);
+            bar();
+            cout<<"Axe | Stat";
+            cout<<"\nPress Spacebar to go back.";
+            spaceb();
+            system("cls");
+            blank();
+            nHUD();
             break;
-            case 2:
+        case 2:
+            system("cls");
+            SetConsoleTextAttribute(h,2);
             doASCii("ascii_folder/Bow.txt");
-
+            SetConsoleTextAttribute(h,7);
+            bar();
+            cout<<"Bow | Stat";
+            cout<<"\nPress Spacebar to go back.";
+            spaceb();
+            system("cls");
+            blank();
+            nHUD();
             break;
-            case 3:
+        case 3:
+            system("cls");
+            SetConsoleTextAttribute(h,2);
             doASCii("ascii_folder/Sword.txt");
-
+            SetConsoleTextAttribute(h,7);
+            bar();
+            cout<<"Sword | Stat";
+            cout<<"\nPress Spacebar to go back.";
+            spaceb();
+            system("cls");
+            blank();
+            nHUD();
             break;
+        case 4:
+            system("cls");
+            SetConsoleTextAttribute(h,2);
+            doASCii("ascii_folder/Shield.txt");
+            SetConsoleTextAttribute(h,7);
+            bar();
+            cout<<"Shield | Stat";
+            cout<<"\nPress Spacebar to go back.";
+            spaceb();
+            system("cls");
+            blank();
+            nHUD();
+            break;
+        case 5:
+            system("cls");
+            SetConsoleTextAttribute(h,3);
+            doASCii("ascii_folder/BetterAxe.txt");
+            SetConsoleTextAttribute(h,7);
+            bar();
+            cout<<"Waraxe | Stat";
+            cout<<"\nPress Spacebar to go back.";
+            spaceb();
+            system("cls");
+            blank();
+            nHUD();
+            break;
+
+        case 6:
+            system("cls");
+            SetConsoleTextAttribute(h,3);
+            doASCii("ascii_folder/BetterSword.txt");
+            SetConsoleTextAttribute(h,7);
+            bar();
+            cout<<"Da Sword | Stat";
+            cout<<"\nPress Spacebar to go back.";
+            spaceb();
+            system("cls");
+            blank();
+            nHUD();
+            break;
+
+        case 7:
+            system("cls");
+            SetConsoleTextAttribute(h,3);
+            doASCii("ascii_folder/BetterShield.txt");
+            SetConsoleTextAttribute(h,7);
+            bar();
+            cout<<"Saint'Wall | Stat";
+            cout<<"\nPress Spacebar to go back.";
+            spaceb();
+            system("cls");
+            blank();
+            nHUD();
+            break;
+
+        case 8:
+            system("cls");
+            SetConsoleTextAttribute(h,2);
+            doASCii("ascii_folder/Armor.txt");
+            SetConsoleTextAttribute(h,7);
+            bar();
+            cout<<"Armor | Stat";
+            cout<<"\nPress Spacebar to go back.";
+            spaceb();
+            system("cls");
+            blank();
+            nHUD();
+            break;
+
+        case 9:
+            system("cls");
+            SetConsoleTextAttribute(h,2);
+            doASCii("ascii_folder/Necklace.txt");
+            SetConsoleTextAttribute(h,7); 
+            bar();
+            cout<<"Necklace | Stat";
+            cout<<"\nPress Spacebar to go back.";
+            spaceb();
+            system("cls");
+            blank();
+            nHUD();
+            break;
+        default:
+            system("cls");
+            blank();
+            bar();
+            cout<<"You don't have equipment in that slot\n";
+            cout<<"\nPress Spacebar to go back.";
+                spaceb();
+                system("cls");
+                blank();
+                nHUD();
+                break;
 
         }
         
@@ -257,7 +510,7 @@ void showeap(){
         blank();
         nHUD();
         break;
- 
+
         default:
         cout<<"You only have 3 slot of Equipment.\n";
     }
@@ -422,12 +675,7 @@ int main(){
     system("cls");
     doSlowF("ascii_folder/Story1.txt",50);//Intro
     cout<<"\nPress Spacebar to continue.";  
-    while (true) {
-        if (GetAsyncKeyState(VK_SPACE) & 0x8000) {  // Check if space bar is pressed
-            break;
-        }
-        Sleep(10);  // Reduce CPU usage
-    }  
+    spaceb;
     system("cls");
     blank();
     nHUD();
