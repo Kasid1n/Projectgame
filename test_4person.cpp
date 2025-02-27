@@ -85,10 +85,15 @@ int hpmax=stats.hpmax,hp=stats.hp,attack=stats.attack,defense=stats.defense,magi
 //ระบบเพื่ม XP
     void addXp(int xpGained) {
         xp += xpGained;
-        while (xp >= xptolevelup) {
-            levelUp();
-        }
+    
+    while (xp >= xptolevelup && level < 100) {
+        levelUp();
     }
+
+    if (level >= 100) {
+        xp = xptolevelup; // ป้องกัน XP เกินลิมิต
+    }
+}
 //ระยย gold
     void addGold(int goldGained) {
         gold += goldGained;
@@ -175,7 +180,7 @@ public:
         if (level >= 7 && randNum >= 40) return Monster("Harpy.", level, 80 + level * 8, 15 + level * 2, 10 + level, 6 + level / 2, 100, 150);
         if (level >= 6 && randNum >= 20) return Monster("Hound", level, 60 + level * 6, 10 + level * 2, 8 + level, 4 + level / 2, 50, 80);
         if (level >= 5 && randNum >= 10) return Monster("Warrior-Skeleton", level, 60 + level * 6, 10 + level * 2, 8 + level, 4 + level / 2, 50, 80);
-        return Monster("Skeleton", level, 1 + level * 5, 1 + level * 1, 6 + level, 1 + level / 1, 1, 1);
+        return Monster("Skeleton", level, 1 + level * 5, 1 + level * 1, 6 + level, 1 + level / 1, 1000, 1);
     }
 //ส่วนของบอสที่เอาไว้จบเกม
     static Monster bossMonster1() {
@@ -597,8 +602,13 @@ class NPC {
     }
     
     NPC getRandomNPC() {
-        vector<string> npcNames = {"A", "B", "Secretmaster"}; 
-        int randomIndex = rand() % npcNames.size(); // สุ่มตัวเจอ
+        vector<string> npcNames = {
+            "A", "A", "A", "A", "A", "A", "A", "A", "A", "A",  // 10 ครั้ง (50%)
+            "B", "B", "B", "B", "B", "B", "B",                  // 7 ครั้ง (35%)
+            "Secretmaster", "Secretmaster", "Secretmaster"      // 3 ครั้ง (15%)
+        };
+        
+        int randomIndex = rand() % npcNames.size(); // สุ่ม NPC ตามอัตราส่วน
         return NPC(npcNames[randomIndex]);
     }
 
@@ -610,7 +620,7 @@ int main() {
     getline(cin, playerName); //ตั้งชื่อ
     Player player(playerName, 100, 20, 10, 5);
     player.showStatus();
-    player.addXp(200); 
+    player.addXp(10); 
     int playerLevel = player.getLevel();
     Monster randomMon = MonsterFactory::randMonster(playerLevel);
     Monster fixedMon = MonsterFactory::bossMonster1();
@@ -623,6 +633,14 @@ int main() {
     switch(WR){
         case 1:cout<<"player win"; break;
         case 2:cout<<"monster win";break;}
+         cout << "\n--- Player Status After Battle ---\n";
+    player.showStatus();
+    cout << "\n--- Visiting a Shop ---\n";
+    NPC shopNPC = getRandomNPC();
+    shopNPC.sellItemToPlayer(player);
+    cout << "\n--- Player Status After Shopping ---\n";
+    player.showStatus();
+    
 
     return 0;
 }
