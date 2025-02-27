@@ -24,8 +24,8 @@
 
 #include "level.h"
 //#include "Equipment.h"
-#include "z.h" // ตามแชท
-//#include "z.cpp"  // เชื่อมโยงกับ Stats และ Equipment
+//#include "z.h" // ตามแชท
+#include "z.cpp"  // เชื่อมโยงกับ Stats และ Equipment
 #include <ctime>
 
 Player::Player(string Playername, int hpmax, int attack, int defense, int magic)
@@ -50,7 +50,7 @@ void Player::addxp(int xpgained) {
 void Player::showstatus() const {
     cout << name << " is level " << level << endl;
     cout << name << " xp is " << xp << endl;
-    stats.printStats();  // แสดงสถานะจากคลาส Stats
+    //stats.printStats();  // แสดงสถานะจากคลาส Stats  เจอปัยหา
     cout << "Gold: " << gold << endl;
 }
 
