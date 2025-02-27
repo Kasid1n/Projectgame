@@ -80,6 +80,9 @@ void mon(Monster &B){
     cout<<"                       "<< B.name << " | HP : "<< B.hp << "/" << B.hpmax <<"\n";
     cout<<"                       =====================================================\n";
     //if(B.name=="Skeleton"){doASCii("ascii_folder/Skeleton.txt");}
+    //if(B.name==""){doASCii("ascii_folder/.txt");}
+    //if(B.name==""){doASCii("ascii_folder/.txt");}
+    //if(B.name==""){doASCii("ascii_folder/.txt");}
     doASCii("ascii_folder/Skeleton.txt");
 
 }
@@ -137,7 +140,35 @@ void showAT(Player &A, Monster &B){
     cout << "╚════════════════════════════════════════════════════════════════════════════╝\n";
     mon(B);
     hero(A);
-    battle(A,B);
+    int playerAttackChoice = AttackChoice();
+    switch (playerAttackChoice) {
+        case 1:
+            cout << "You chose to Attack!\n";
+            break;
+        case 2:
+            cout << "You chose to use Skill!\n";
+            break;
+        case 3:
+            cout << "You chose to use Ultimate!\n";
+            break;
+        case 4:
+            cout << "You chose to Heal\n";
+            break;
+        default:
+            cout << "Invalid choice. Try again.\n";
+            break;
+    }
+    D = battlesys(A, B, playerAttackChoice);//float return pvp
+    cout << "╔════════════════════════════════════════════════════════════════════════════╗\n";
+    cout << "║                             TURN TO ATTACK                                 ║\n";
+    cout << "╚════════════════════════════════════════════════════════════════════════════╝\n";
+    mon(B);
+    hero(A);
+    
+    cout << A.name << " did " << D << " damage\n";
+    cout << B.name << " lost " << D << " HP\n";
+    Sleep(2000);
+    
     
     
    // Sleep(900);
@@ -170,8 +201,17 @@ void showDE(Player &A, Monster &B){
             cout << "Invalid choice. Try again.\n";
             break;
     }
-    Sleep(900);
-    battlesys(A,B,1,1);
+    D = battlesys(B, A, playerDefenseChoice); //float return pvp
+    SetConsoleTextAttribute(h,2);//Green
+    
+    cout << "╔════════════════════════════════════════════════════════════════════════════╗\n";
+    cout << "║                             TURN TO DEFENSE                                ║\n";
+    cout << "╚════════════════════════════════════════════════════════════════════════════╝\n";
+    mon(B);
+    hero(A);
+    cout << A.name << " did " << D << " damage\n";
+    cout << B.name << " lost " << D << " HP\n";
+    Sleep(2000);
 }
 
 
@@ -203,6 +243,9 @@ int main(){
     //hero(player);
     //showAT(player,enemy);
     showDE(player,enemy);
+    showAT(player,enemy);
+    showDE(player,enemy);
+    showAT(player,enemy);
 
     //nHUD();   
 } 
