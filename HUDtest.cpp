@@ -14,7 +14,7 @@ using namespace std;
 void sHUD();//Title
 void nHUD();//Choice Hud
 void blank();//blank screnn
-void showmon(string); //entity show
+
 void doASCii(string); //ASCii Art
 void doSlow(string); //Text Delay
 void doSlowF(string);
@@ -175,15 +175,6 @@ void nHUD(){
     }  
 }
  
-void showmon(string x){
-    SetConsoleTextAttribute(h,2);//Green
-    cout<<"=====================================================================================\n";
-    cout<<"                                    Mon                                              \n";
-    cout<<"=====================================================================================\n";
-    SetConsoleTextAttribute(h,4);//Red
-    string filetxt=x;
-    doASCii(filetxt);
-}
 
 void blank(){
     for(int i =0;i<24;i++){
