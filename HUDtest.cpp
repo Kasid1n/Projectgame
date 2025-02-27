@@ -201,7 +201,7 @@ int main(){
     doSlow("Your name is...",100);
     cin>> hero;
     Stats hero(100, 20, 10, 5);
-    doSlow("There's weapon beside you... It is...",100);
+    doSlow("There's a weapon beside you... It is...",100);
     
     cout<<"\n[1] Axe"<<setw(10)<<"[2] Bow"<<setw(10)<<"[3] Sword";
     while(true){
@@ -219,10 +219,9 @@ int main(){
         default:
         cout<<"There's nothing else...";
     }
+    break;
     } 
-    //โค้ดอุปกรณ์
 
-    //
     system("cls");
     doSlowF("ascii_folder/Story1.txt",100);//Intro
     cout<<"\nPress Spacebar to continue.";  
@@ -234,7 +233,8 @@ int main(){
     }  
     system("cls");
     blank();
-    nHUD();    
+    nHUD();
+    
 } 
 
 
