@@ -416,7 +416,7 @@ int main(){
         cout<<"There's nothing else...";
     }
     break;
-    } 
+    }  
 
     system("cls");
     doSlowF("ascii_folder/Story1.txt",50);//Intro
