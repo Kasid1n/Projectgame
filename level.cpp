@@ -15,17 +15,16 @@
 
 
 
+//      -----------------ไม่ได้ใช้เอาไปรวมกับแชมป์แล้ว
 
 
 
 
 
-
-
+//เอาไปรวมแล้ว    ไม่ได้ใช้
 #include "level.h"
 //#include "Equipment.h"
 //#include "z.h" // ตามแชท
-#include "z.cpp"  // เชื่อมโยงกับ Stats และ Equipment
 #include <ctime>
 
 Player::Player(string Playername, int hpmax, int attack, int defense, int magic)
@@ -85,9 +84,9 @@ void Player::updateGold(int amount) {
     gold += amount;
 }
 
-void Player::equipItem(const Equipment& item) {
-    stats.equip(new Equipment(item));  // สวมใส่ไอเทมโดยส่งไปยัง Stats
-}
+    // void Player::equipItem(const Equipment& item) {
+    //     stats.equip(new Equipment(item));  // สวมใส่ไอเทมโดยส่งไปยัง Stats
+    // }
 
 // ใช้เพื่อ compile g++ z.cpp level.cpp -o level
 
