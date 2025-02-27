@@ -38,8 +38,9 @@ int DefenseChoice() {/*อันนี้ช้อยของเพลเยอ
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*เป็นระบบการต่อสู้ คำนวน*/
-void battlesys(Player &A, Monster &B, int attack, int defense) {/*เพราะมอนกับผู้เล่นมันคนละคลาสกัน เลยต้องทำ2อัน*/ /*อันนี้สำหรับคนตีมอนกัน*/
+void battlesys(Player &A, Monster &B, int attack) {/*เพราะมอนกับผู้เล่นมันคนละคลาสกัน เลยต้องทำ2อัน*/ /*อันนี้สำหรับคนตีมอนกัน*/
     cout <<endl;
+    int defense = rand() % 3 + 1;
     cout << A.name << " Hp: " << A.hp << endl;
     cout << B.name << " Hp: " << B.hp << endl;
     
@@ -106,8 +107,9 @@ void battlesys(Player &A, Monster &B, int attack, int defense) {/*เพรา�
     cout <<endl;
 }
 
-void battlesys(Monster &A, Player &B, int attack, int defense) {/*มอนกันคนตี*/ /*ด้านในเหมือนด้านบน แค่สลับinputเฉยๆ*/
+void battlesys(Monster &A, Player &B, int defense) {/*มอนกันคนตี*/ /*ด้านในเหมือนด้านบน แค่สลับinputเฉยๆ*/
     cout <<endl;
+    int attack = rand() % 4 + 1;
     cout << A.name << " Hp: " << A.hp << endl;
     cout << B.name << " Hp: " << B.hp << endl;
     
@@ -201,17 +203,17 @@ void battle(Player &player, Monster &enemy) {//ฟังก์ชั่นbattle
 
         if (coin == rcoin) {//สำหรับเหรีียญตรง จะได้เป็นattackerก่อน
             attack = AttackChoice();
-            battlesys(player/*คนตี*/, enemy/*คนกัน*/, attack/*ช้อยตีว่ากดตีแบบไหน*/, aidefense/*ช้อยกัน*/);
+            battlesys(player/*คนตี*/, enemy/*คนกัน*/, attack/*ช้อยตีว่ากดตีแบบไยกัน*/);
             if (enemy.hp <= 0 || player.hp <= 0) break;
             defense = DefenseChoice();
-            battlesys(enemy, player, aiattack, defense);
+            battlesys(enemy, player, defense);
             if (enemy.hp <= 0 || player.hp <= 0) break;
         } else {//เหรียญไม่ตรง
             defense = DefenseChoice();
-            battlesys(enemy, player, aiattack, defense);
+            battlesys(enemy, player, defense);
             if (enemy.hp <= 0 || player.hp <= 0) break;
             attack = AttackChoice();
-            battlesys(player, enemy, attack, aidefense);
+            battlesys(player, enemy, attack);
             if (enemy.hp <= 0 || player.hp <= 0) break;
         }
         round++;
@@ -223,8 +225,8 @@ void battle(Player &player, Monster &enemy) {//ฟังก์ชั่นbattle
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-/*int main() {
+int main() {
     srand(time(0));
     battle(player, enemy);
     return 0;
-}*/
+}
