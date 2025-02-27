@@ -4,6 +4,12 @@
 #include <cstdlib>
 #include <vector>
 using namespace std;
+
+struct R {
+    float D;
+    int d;
+};
+R t;
 //ของแชมป์
 class Stats {
 public:
@@ -213,13 +219,14 @@ int DefenseChoice() {/*อันนี้ช้อยของเพลเยอ
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //ของเจต
 /*เป็นระบบการต่อสู้ คำนวน*/
-void battlesys(Player &A, Monster &B, int attack) {/*เพราะมอนกับผู้เล่นมันคนละคลาสกัน เลยต้องทำ2อัน*/ /*อันนี้สำหรับคนตีมอนกัน*/
+R battlesys(Player &A, Monster &B, int attack) {/*เพราะมอนกับผู้เล่นมันคนละคลาสกัน เลยต้องทำ2อัน*/ /*อันนี้สำหรับคนตีมอนกัน*/
     cout <<endl;
     int defense = rand() % 3 + 1;
+
     cout << A.name << " Hp: " << A.hp << endl;
     cout << B.name << " Hp: " << B.hp << endl;
     
-    float dmg = 0, def = defense, temp, rdmg, hp;
+    float dmg = 0, def = B.defense, temp, rdmg, hp;
     bool countered = false;
 
     switch (attack) {/*ตี*/
@@ -260,7 +267,7 @@ void battlesys(Player &A, Monster &B, int attack) {/*เพราะมอนก
             A.hp += hp;
             if (A.hp > A.hpmax) A.hp = A.hpmax;
             cout << A.name << " heals +" << hp << " Hp\n";
-            return;
+            
     }
     switch (defense) {/*อันนี้ 1-3ทำให้มัน coutเฉยๆว่าเลือกอะไรไป*/
         case 1:cout << B.name << " blocks!\n";break;
@@ -280,11 +287,16 @@ void battlesys(Player &A, Monster &B, int attack) {/*เพราะมอนก
     cout << A.name << " did " << dmg << " damage\n";
     cout << B.name << " lost " << dmg << " HP\n";
     cout <<endl;
+    t.D=dmg;
+    t.d=defense;
+
+    return t;
 }
 
-void battlesys(Monster &A, Player &B, int defense) {/*มอนกันคนตี*/ /*ด้านในเหมือนด้านบน แค่สลับinputเฉยๆ*/
+R battlesys(Monster &A, Player &B, int defense) {/*มอนกันคนตี*/ /*ด้านในเหมือนด้านบน แค่สลับinputเฉยๆ*/
     cout <<endl;
     int attack = rand() % 4 + 1;
+    
     cout << A.name << " Hp: " << A.hp << endl;
     cout << B.name << " Hp: " << B.hp << endl;
     
@@ -329,12 +341,12 @@ void battlesys(Monster &A, Player &B, int defense) {/*มอนกันคน�
             A.hp += hp;
             if (A.hp > A.hpmax) A.hp = A.hpmax;
             cout << A.name << " heals +" << hp << " Hp\n";
-            return;
+            
     }
     switch (defense) {
-        case 1:cout << B.name << " blocks!\n";break;
-        case 2:cout << B.name << " dodges!\n";break;
-        case 3:cout << B.name << " counters!\n";break;
+        case 1:cout << B.name << " blocks!\n"; break;
+        case 2:cout << B.name << " dodges!\n"; break;
+        case 3:cout << B.name << " counters!\n"; break;
         case 4:
             cout << B.name << " gave up!\n";
             dmg = 9999999;
@@ -349,51 +361,13 @@ void battlesys(Monster &A, Player &B, int defense) {/*มอนกันคน�
     cout << A.name << " did " << dmg << " damage\n";
     cout << B.name << " lost " << dmg << " HP\n";
     cout <<endl;
+
+    t.D=dmg;
+    t.d=attack;
+
+    return t;
 }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void battle(Player &player, Monster &enemy) {//ฟังก์ชั่นbattle ใช้วนจนhpฝ่ายนึงหมด
-    int WR;
-    cout << "Battle begins: " << player.name << " vs " << enemy.name << "!\n";
 
-    int rcoin = rand() % 2, coin = 2;
-    string scoin;
-    
-    do {/*สุ่มเหรียญ*/
-        cout << "Pick head or tail: ";
-        cin >> scoin;
-        if (scoin == "head") coin = 0;
-        else if (scoin == "tail") coin = 1;
-        else cout << "Error. Try Again\n";
-    } while (coin == 2);
-
-    int round = 1;
-    while (player.hp > 0 && enemy.hp > 0) {/*ถ้าเลือดหมดจะจบ*/
-        cout<<endl;
-        int attack, defense;
-
-        cout << "Round: " << round << endl;
-
-        if (coin == rcoin) {//สำหรับเหรีียญตรง จะได้เป็นattackerก่อน
-            attack = AttackChoice();
-            battlesys(player/*คนตี*/, enemy/*คนกัน*/, attack/*ช้อยตีว่ากดตีแบบไยกัน*/);
-            if (enemy.hp <= 0 || player.hp <= 0) break;
-            defense = DefenseChoice();
-            battlesys(enemy, player, defense);
-            if (enemy.hp <= 0 || player.hp <= 0) break;
-        } else {//เหรียญไม่ตรง
-            defense = DefenseChoice();
-            battlesys(enemy, player, defense);
-            if (enemy.hp <= 0 || player.hp <= 0) break;
-            attack = AttackChoice();
-            battlesys(player, enemy, attack);
-            if (enemy.hp <= 0 || player.hp <= 0) break;
-        }
-        round++;
-    }
-
-    if (player.hp > 0){WR=1; cout << "\n" << player.name << " wins!\n";}/*เช็คว่าใครชนะ*/
-    else {WR=2; cout << "\n" << enemy.name << " wins!\n";}
-    cout<<endl;}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //ของมิค
 
@@ -569,53 +543,38 @@ class NPC {
             cout << i + 1 << ". " << sellItem[i] << " (Price: " << ItemPrice[i] << ")\n";
         }
     }
-void NPC::sellItemToPlayer(Player &player) {
-    cout << npcname << " offers the following items for sale:" << endl;
-    for (int i = 0; i < sellItem.size(); i++) {
-        cout << i + 1 << ". " << sellItem[i] << " - Price: " << ItemPrice[i] << " Gold" << endl;
+    
+    void NPC::sellItemToPlayer(Player &player) { // ขายของให้
+        int choice;
+        while (true) {
+            shop();
+            cout << "Your Gold: " << player.getGold() << endl;
+            cout << "Enter item number (0 to exit): ";
+    
+            if (!(cin >> choice)) { // ตรวจสอบการป้อนข้อมูล
+                cin.clear(); // ป้อนไม่ถูก clear
+                cin.ignore(1000, '\n'); // ข้ามที่ป้อนผิด
+                cout << "Invalid input! Please enter a number.\n";
+                continue;
+            }
+    
+            if (choice == 0) break;
+    
+            if (choice > 0 && choice <= sellItem.size()) { // เลือก item ที่มี
+                int index = choice - 1;
+                if (player.getGold() >= ItemPrice[index]) { // check gold
+                    player.updateGold(-ItemPrice[index]); // ลบตัง
+                    player.equipItem(ItemStats[index]); // ใส่
+                    cout << "You bought " << sellItem[index] << "!\n";
+                } else {
+                    cout << "Not enough gold!\n";
+                }
+            } else {
+                cout << "Invalid choice!\n";
+            }
+        }
     }
-
-    int itemChoice;
-    cout << "Enter the number of the item you want to buy (or 0 to exit): ";
-    cin >> itemChoice;
-
-    if (itemChoice == 0) {
-        cout << "Exiting the shop..." << endl;
-        return;
-    }
-
-    // ตรวจสอบว่าไอเทมที่เลือกถูกต้อง
-    if (itemChoice < 1 || itemChoice > sellItem.size()) {
-        cout << "Invalid choice!" << endl;
-        return;
-    }
-
-    // ตรวจสอบว่าเพียงพอทองหรือไม่
-    int itemPrice = ItemPrice[itemChoice - 1];
-    if (player.getGold() < itemPrice) {
-        cout << "You don't have enough gold to buy this item!" << endl;
-        return;
-    }
-
-    // ลดทองจากผู้เล่น
-    player.updateGold(-itemPrice);
-
-    // เอาไอเทมที่ซื้อมาเพิ่มเข้าไปใน inventory
-    Equipment purchasedItem = ItemStats[itemChoice - 1];
-    player.equipItem(purchasedItem);
-
-    // เพิ่ม stat จากไอเทมที่ซื้อ
-    vector<int> itemStats = purchasedItem.getStat();
-    player.stats.hpmax += itemStats[0];
-    player.stats.attack += itemStats[1];
-    player.stats.defense += itemStats[2];
-    player.stats.magic += itemStats[3];
-
-    cout << "You bought a " << sellItem[itemChoice - 1] << " for " << itemPrice << " Gold!" << endl;
-    cout << "Your new stats are:" << endl;
-    player.showStatus(); // แสดงสถานะหลังจากซื้อ
-}
-
+    
     NPC getRandomNPC() {
         vector<string> npcNames = {
             "A", "A", "A", "A", "A", "A", "A", "A", "A", "A",  // 10 ครั้ง (50%)
