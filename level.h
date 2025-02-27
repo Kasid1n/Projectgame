@@ -1,3 +1,4 @@
+// ไม่ได้ใช้ เอาไปรวมกับ แชมป์แล้ว
 #ifndef LEVEL_H
 #define LEVEL_H
 
@@ -6,7 +7,6 @@
 #include <vector>
 #include <cstdlib>
 #include <string>
-#include "z.cpp"  // เชื่อมโยง Stats และ Equipment จาก z.cpp
 //#include "z.h" // ตามแชท
 
 
@@ -31,7 +31,7 @@ public:
     int getLevel() const;
     int getGold() const;
     void updateGold(int amount);
-    void equipItem(const Equipment& item);  // สวมใส่ไอเทมที่ได้รับ
+    //void equipItem(const Equipment& item);  // สวมใส่ไอเทมที่ได้รับ
 };
 
 #endif
