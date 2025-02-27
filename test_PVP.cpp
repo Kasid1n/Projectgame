@@ -370,12 +370,6 @@ void battle(Player &player, Monster &enemy) {//ฟังก์ชั่นbattle
 
 
 int main() {
-    srand(time(0));
-    
-    return 0;
-}
-
-int main() {
     int WR=0;
     srand(time(0));
     string playerName;
