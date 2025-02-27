@@ -5,7 +5,7 @@
 #include <cstdlib>
 #include <vector>
 using namespace std;
-
+//ของแชมป์
 class Stats {
 public:
     int hp;
@@ -148,7 +148,7 @@ class MonsterFactory {
 public:
     static Monster randMonster(int level) {
         int randNum = rand() % 100;
-        if (level >= 10 && randNum >= 70) return Monster("Chest", level, 100 + level * 10, 20 + level * 2, 12 + level, 8 + level / 2, 200, 300);
+        if (level >= 10 && randNum >= 70) return Monster("Spider", level, 100 + level * 10, 20 + level * 2, 12 + level, 8 + level / 2, 200, 300);
         if (level >= 7 && randNum >= 40) return Monster("Harpy.", level, 80 + level * 8, 15 + level * 2, 10 + level, 6 + level / 2, 100, 150);
         if (level >= 6 && randNum >= 20) return Monster("Hound", level, 60 + level * 6, 10 + level * 2, 8 + level, 4 + level / 2, 50, 80);
         if (level >= 5 && randNum >= 10) return Monster("Warrior-Skeleton", level, 60 + level * 6, 10 + level * 2, 8 + level, 4 + level / 2, 50, 80);
@@ -183,6 +183,7 @@ int DefenseChoice() {/*อันนี้ช้อยของเพลเยอ
     return dchoice;}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//ของเจต
 /*เป็นระบบการต่อสู้ คำนวน*/
 void battlesys(Player &A, Monster &B, int attack) {/*เพราะมอนกับผู้เล่นมันคนละคลาสกัน เลยต้องทำ2อัน*/ /*อันนี้สำหรับคนตีมอนกัน*/
     cout <<endl;
@@ -322,7 +323,6 @@ void battlesys(Monster &A, Player &B, int defense) {/*มอนกันคน�
     cout <<endl;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 void battle(Player &player, Monster &enemy) {//ฟังก์ชั่นbattle ใช้วนจนhpฝ่ายนึงหมด
     int WR;
     cout << "Battle begins: " << player.name << " vs " << enemy.name << "!\n";
@@ -367,7 +367,103 @@ void battle(Player &player, Monster &enemy) {//ฟังก์ชั่นbattle
     else {WR=2; cout << "\n" << enemy.name << " wins!\n";}
     cout<<endl;}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//ของมิค
+class Equipment {
+    int hpmax;
+    int atk;
+    int def;
+    int magic;
+public:
+    Equipment(int h, int a, int d, int m);
+    vector<int> getStat();
+};
 
+Equipment::Equipment(int h, int a, int d, int m) {
+    hpmax = h;
+    atk = a;
+    def = d;
+    magic = m;
+}
+
+vector<int> Equipment::getStat() {
+    vector<int> stats = {hpmax, atk, def, magic};
+    return stats;
+}
+
+class Statseq {
+    int hp;
+    int hpmax;
+    int attack;
+    int defense; 
+    int magic;
+    vector<Equipment*> equipmentList;
+
+public:
+    Statseq(int h, int a, int d, int m);
+    void start(); 
+    void equip(Equipment* eq); 
+    void unequip(int index); 
+    void printStats(); 
+    int getEquipmentCount();
+};
+int Statseq::getEquipmentCount() {
+    return equipmentList.size();
+}
+Statseq::Stats(int h, int a, int d, int m) {
+    hpmax = h;
+    hp = h; // Initialize hp to max at the start
+    attack = a;
+    defense = d;
+    magic = m;
+}
+
+void Statseq::start() {
+    hp = hpmax; 
+}
+
+void Statseq::equip(Equipment* eq) {
+    if (equipmentList.size() >= 3) {
+        cout << "Cannot equip more than 3 items." << endl;
+        return;
+    }
+
+    equipmentList.push_back(eq);
+    vector<int> stat = eq->getStat();
+    hpmax += stat[0];
+    attack += stat[1];
+    defense += stat[2];
+    magic += stat[3];
+
+    if (hp > hpmax) {
+        hp = hpmax; 
+    }
+}
+
+void Statseq::unequip(int index) {
+    if (index < 0 || index >= equipmentList.size()) {
+        cout << "Invalid equipment index." << endl;
+        return;
+    }
+ 
+    vector<int> stat = equipmentList[index]->getStat();
+    hpmax -= stat[0];
+    attack -= stat[1];
+    defense -= stat[2];
+    magic -= stat[3];
+
+    equipmentList.erase(equipmentList.begin() + index);
+
+    if (hp > hpmax) {
+        hp = hpmax; 
+    }
+}
+
+void Statseq::printStats() {
+    cout << "HP: " << hp << "/" << hpmax << endl;
+    cout << "Attack: " << attack << endl;
+    cout << "Defense: " << defense << endl;
+    cout << "Magic: " << magic << endl;
+}
 
 int main() {
     int WR=0;
@@ -377,7 +473,7 @@ int main() {
     getline(cin, playerName); //ตั้งชื่อ
     Player player(playerName, 100, 20, 10, 5);
     player.showStatus();
-    player.addXp(500); 
+    player.addXp(200); 
     int playerLevel = player.getLevel();
     Monster randomMon = MonsterFactory::randMonster(playerLevel);
     Monster fixedMon = MonsterFactory::bossMonster1();
