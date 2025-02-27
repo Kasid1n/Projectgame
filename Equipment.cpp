@@ -83,7 +83,7 @@ void Stats::unequip(int index) {
         cout << "Invalid equipment index." << endl;
         return;
     }
-
+ 
     vector<int> stat = equipmentList[index]->getStat();
     hpmax -= stat[0];
     attack -= stat[1];

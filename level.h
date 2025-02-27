@@ -6,8 +6,8 @@
 #include <vector>
 #include <cstdlib>
 #include <string>
-//#include "z.cpp"  // เชื่อมโยง Stats และ Equipment จาก z.cpp
-#include "z.h" // ตามแชท
+#include "z.cpp"  // เชื่อมโยง Stats และ Equipment จาก z.cpp
+//#include "z.h" // ตามแชท
 
 
 using namespace std;
