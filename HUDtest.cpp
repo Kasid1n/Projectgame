@@ -200,7 +200,7 @@ int main(){
     system("cls");
     doSlow("Your name is...",100);
     cin>> hero;
-    Stats yname(100, 20, 10, 5);
+    Stats hero(100, 20, 10, 5);
     doSlow("There's weapon beside you... It is...",100);
     
     cout<<"\n[1] Axe"<<setw(10)<<"[2] Bow"<<setw(10)<<"[3] Sword";
@@ -208,8 +208,16 @@ int main(){
     cin>>startweap;
     switch(startweap){
         case 1:
-
-        
+        hero.equip(&axe);
+        break;
+        case 2:
+        hero.equip(&bow);
+        break;
+        case 3:
+        hero.equip(&sword);
+        break;
+        default:
+        cout<<"There's nothing else...";
     }
     } 
     //โค้ดอุปกรณ์
