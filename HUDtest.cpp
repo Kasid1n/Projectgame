@@ -24,7 +24,7 @@ HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);//Text setting
 string hero;//player name
 int startweap;//select start weapon
 vector<int> gear(3);
-
+vector<Equipment> inven(3);
 void doASCii(string x){
     string line="";
     ifstream inFile;
@@ -113,18 +113,22 @@ void showeap(){
         switch(gear.at(2)){
             case 1:
             doASCii("ascii_folder/Axe.txt");
+            cout<<"=====================================================================================\n";
+            
             break;
             case 2:
             doASCii("ascii_folder/Bow.txt");
+
             break;
             case 3:
             doASCii("ascii_folder/Sword.txt");
+
             break;
 
         }
         
         break;
-        case 'e':
+        case 'e'||'E':
         system("cls");
         blank();
         nHUD();
