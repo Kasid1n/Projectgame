@@ -3,7 +3,7 @@
 #include<windows.h>
 #include <cstdlib>
 #include<iomanip>
-#include"PVP.h"
+#include"PVP.cpp"
 using namespace std;
 
 //Screen Output
@@ -74,16 +74,19 @@ void sHUD(){
     doASCii(filetxt);
 }
 
-void mon(){
+void mon(Monster &B){
     SetConsoleTextAttribute(h,4);
     cout<<"                       =====================================================\n";
-    cout<<"                        mon | HP : 100/100"/**/<<"\n";
+    cout<<"                       "<< B.name << " | HP : "<< B.hp << "/" << B.hpmax <<"\n";
     cout<<"                       =====================================================\n";
+    //if(B.name=="Skeleton"){doASCii("ascii_folder/Skeleton.txt");}
+    doASCii("ascii_folder/Skeleton.txt");
+
 }
-void hero(){
+void hero(Player &A){
     SetConsoleTextAttribute(h,2);
     cout<<"=====================================================\n";
-    cout<<"Name | HP : 100/100"<<"\n";
+    cout<< A.name << " | HP : "<< A.hp << "/" << A.hpmax <<"\n";
     cout<<"=====================================================\n";
 }
 
@@ -94,7 +97,7 @@ void blank(){
 }  
 
 
-void showgaveup(string x){
+/*void showgaveup(string x){
     SetConsoleTextAttribute(h,2);//Green
     cout << "╔════════════════════════════════════════════════════════════════════════════╗\n";
     cout << "║                             YOU GAVE UP                                    ║\n";
@@ -107,7 +110,7 @@ void showgaveup(string x){
     
     showlose ();
     
-}
+}*/
 
 void showwin(){ 
     SetConsoleTextAttribute(h,15);//white
@@ -126,57 +129,29 @@ void showlose (){
 }
 
 
-void showAT(string x){
+void showAT(Player &A, Monster &B){
     blank();
     SetConsoleTextAttribute(h,2);//Green
     cout << "╔════════════════════════════════════════════════════════════════════════════╗\n";
     cout << "║                             TURN TO ATTACK                                 ║\n";
     cout << "╚════════════════════════════════════════════════════════════════════════════╝\n";
-
-   
-    //battle(player, enemy);
-
-    SetConsoleTextAttribute(h,4);//Red
-    mon();
-    string filetxt=x;
-    doASCii(filetxt);
-    SetConsoleTextAttribute(h,2);
-    hero();
+    mon(B);
+    hero(A);
+    battle(A,B);
     
-    int playerAttackChoice = AttackChoice();
-    switch (playerAttackChoice) {
-        case 1:
-            cout << "You chose to Attack!\n";
-            break;
-        case 2:
-            cout << "You chose to use a Skill!\n";
-            break;
-        case 3:
-            cout << "You chose to use your Ultimate!\n";
-            break;
-        case 4:
-            cout << "You chose to Heal!\n";
-            break;
-        default:
-            cout << "Invalid choice. Try again.\n";
-            break;
-    }
-    Sleep(900);
+    
+   // Sleep(900);
 }
-void showDE(string x){
+
+void showDE(Player &A, Monster &B){
     blank();
     SetConsoleTextAttribute(h,2);//Green
     cout << "╔════════════════════════════════════════════════════════════════════════════╗\n";
     cout << "║                             TURN TO DEFENSE                                ║\n";
     cout << "╚════════════════════════════════════════════════════════════════════════════╝\n";
-    
+    mon(B);
+    hero(A);
 
-    SetConsoleTextAttribute(h,4);//Red
-    mon();
-    string filetxt=x;
-    doASCii(filetxt);
-    SetConsoleTextAttribute(h,2);
-    hero();
     int playerDefenseChoice = DefenseChoice();
     switch (playerDefenseChoice) {
         case 1:
@@ -196,6 +171,7 @@ void showDE(string x){
             break;
     }
     Sleep(900);
+    battlesys(A,B,1,1);
 }
 
 
@@ -223,10 +199,11 @@ int main(){
     //showgaveup ("ascii_folder/Skeleton.txt");
     //showwin();
     //showlose();
-    showAT ("ascii_folder/Skeleton.txt");
-    showDE ("ascii_folder/Skeleton.txt");
-    showAT ("ascii_folder/Skeleton.txt");
-    showDE ("ascii_folder/Skeleton.txt");
+    //mon(enemy);
+    //hero(player);
+    //showAT(player,enemy);
+    showDE(player,enemy);
+
     //nHUD();   
 } 
 
