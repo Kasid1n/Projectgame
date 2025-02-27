@@ -231,12 +231,21 @@ void showDE(Player &A, Monster &B){
 }
 
 void showbattle(Player &player, Monster &enemy){ //เหลือใครเริ่มก่อน
+    int r =rand()%2;
+    if(r==0){
     while (player.hp > 0 && enemy.hp > 0){
         showDE(player,enemy);
         if (enemy.hp <= 0 || player.hp <= 0) break;
         showAT(player,enemy);
         if (enemy.hp <= 0 || player.hp <= 0) break;
-    }
+    }}
+    else{
+        while (player.hp > 0 && enemy.hp > 0){
+            showAT(player,enemy);
+            if (enemy.hp <= 0 || player.hp <= 0) break;
+            showDE(player,enemy);
+            if (enemy.hp <= 0 || player.hp <= 0) break;
+        }}
 
 }
 

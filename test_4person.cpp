@@ -569,38 +569,53 @@ class NPC {
             cout << i + 1 << ". " << sellItem[i] << " (Price: " << ItemPrice[i] << ")\n";
         }
     }
-    
-    void NPC::sellItemToPlayer(Player &player) { // ขายของให้
-        int choice;
-        while (true) {
-            shop();
-            cout << "Your Gold: " << player.getGold() << endl;
-            cout << "Enter item number (0 to exit): ";
-    
-            if (!(cin >> choice)) { // ตรวจสอบการป้อนข้อมูล
-                cin.clear(); // ป้อนไม่ถูก clear
-                cin.ignore(1000, '\n'); // ข้ามที่ป้อนผิด
-                cout << "Invalid input! Please enter a number.\n";
-                continue;
-            }
-    
-            if (choice == 0) break;
-    
-            if (choice > 0 && choice <= sellItem.size()) { // เลือก item ที่มี
-                int index = choice - 1;
-                if (player.getGold() >= ItemPrice[index]) { // check gold
-                    player.updateGold(-ItemPrice[index]); // ลบตัง
-                    player.equipItem(ItemStats[index]); // ใส่
-                    cout << "You bought " << sellItem[index] << "!\n";
-                } else {
-                    cout << "Not enough gold!\n";
-                }
-            } else {
-                cout << "Invalid choice!\n";
-            }
-        }
+void NPC::sellItemToPlayer(Player &player) {
+    cout << npcname << " offers the following items for sale:" << endl;
+    for (int i = 0; i < sellItem.size(); i++) {
+        cout << i + 1 << ". " << sellItem[i] << " - Price: " << ItemPrice[i] << " Gold" << endl;
     }
-    
+
+    int itemChoice;
+    cout << "Enter the number of the item you want to buy (or 0 to exit): ";
+    cin >> itemChoice;
+
+    if (itemChoice == 0) {
+        cout << "Exiting the shop..." << endl;
+        return;
+    }
+
+    // ตรวจสอบว่าไอเทมที่เลือกถูกต้อง
+    if (itemChoice < 1 || itemChoice > sellItem.size()) {
+        cout << "Invalid choice!" << endl;
+        return;
+    }
+
+    // ตรวจสอบว่าเพียงพอทองหรือไม่
+    int itemPrice = ItemPrice[itemChoice - 1];
+    if (player.getGold() < itemPrice) {
+        cout << "You don't have enough gold to buy this item!" << endl;
+        return;
+    }
+
+    // ลดทองจากผู้เล่น
+    player.updateGold(-itemPrice);
+
+    // เอาไอเทมที่ซื้อมาเพิ่มเข้าไปใน inventory
+    Equipment purchasedItem = ItemStats[itemChoice - 1];
+    player.equipItem(purchasedItem);
+
+    // เพิ่ม stat จากไอเทมที่ซื้อ
+    vector<int> itemStats = purchasedItem.getStat();
+    player.stats.hpmax += itemStats[0];
+    player.stats.attack += itemStats[1];
+    player.stats.defense += itemStats[2];
+    player.stats.magic += itemStats[3];
+
+    cout << "You bought a " << sellItem[itemChoice - 1] << " for " << itemPrice << " Gold!" << endl;
+    cout << "Your new stats are:" << endl;
+    player.showStatus(); // แสดงสถานะหลังจากซื้อ
+}
+
     NPC getRandomNPC() {
         vector<string> npcNames = {
             "A", "A", "A", "A", "A", "A", "A", "A", "A", "A",  // 10 ครั้ง (50%)
