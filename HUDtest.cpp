@@ -654,7 +654,7 @@ int main(){
         case 1:
         hero.equip(&axe);
         gear.at(0)=1;//gearid of axe
-        
+         
         break;
         case 2:
         hero.equip(&bow);
