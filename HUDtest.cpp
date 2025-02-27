@@ -21,7 +21,7 @@ void doSlowF(string);
 // void showeap(int);//gear show
 HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);//Text setting
 
-string yname;//player name
+string hero;//player name
 int startweap;//select start weapon
 void doASCii(string x){
     string line="";
@@ -104,7 +104,7 @@ void nHUD(){
         cout<<endl;
     }
     cout<<"=====================================================================================\n";
-    cout<<yname<<setw(15)<<"HP : 1/1"<<setw(15)<<"Level : 1 "<<setw(15)<<"Gold : 500\n";  
+    cout<<hero<<setw(15)<<"| HP : 1/1"<<setw(15)<<"Level : 1 "<<setw(15)<<"Gold : 500\n";  
     cout<<"=====================================================================================\n";
     doSlow("You decide to :\n",100);
     cout<<"[1] Moving Forward"<<setw(15)<<"[2] Rest"<<setw(30)<<"[3] Check your equipment";
@@ -191,6 +191,12 @@ void blank(){
     }
 }  
 int main(){
+    Equipment sword(0, 10, 0, 5);
+    Equipment shield(0, 0, 10, 0);
+    Equipment axe(0, 15, 0, 0);
+    Equipment bow(0, 10, 0, 5);
+    
+
     SetConsoleOutputCP(65001);// Set CMD to UTF-8
     system("cls");//Clear Screen
     sHUD();
@@ -202,10 +208,19 @@ int main(){
     }
     system("cls");
     doSlow("Your name is...",100);
-    cin>> yname;
+    cin>> hero;
+    Stats yname(100, 20, 10, 5);
     doSlow("There's weapon beside you... It is...",100);
+    
     cout<<"\n[1] Axe"<<setw(10)<<"[2] Bow"<<setw(10)<<"[3] Sword";
-    cin>>startweap; 
+    while(true){
+    cin>>startweap;
+    switch(startweap){
+        case 1:
+
+        
+    }
+    } 
     //โค้ดอุปกรณ์
 
     //
