@@ -1,3 +1,4 @@
+//ไม่ใช้   รวมกับแชมป์แล้ว
 #ifndef SHOP_H
 #define SHOP_H
 
@@ -6,7 +7,6 @@
 #include <vector>
 #include <cstdlib>
 #include "level.h"
-#include "z.cpp"  // ใช้ Equipment จาก z.cpp
 
 using namespace std;
 
