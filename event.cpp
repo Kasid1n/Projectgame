@@ -93,24 +93,24 @@ void box(){
 }
 /* npc -talk,got iteam-heal-gold ,lose iteam-hp minigame?
 */
-void npc() {
-    int action = rand() % 4;
+// void npc() {
+//     int action = rand() % 4;
 
-    if (action == 0) {
-        // NPC talks
-        cout << "NPC: \"Hello, traveler! XXXXX\"" << endl;
-    }
-    if (action == 1) {
-         int heal = 1 + rand() % 10;
-         cout << "NPC healing  " << heal << endl;
-    }
-   if (action == 2)
-         int gold = 1 + rand() % 10;
-         cout << "You got " << gold << " gold." << endl;
-    }
-    else {
-         int gold = 1 + rand() % 10;
-         cout << "You were robbed.\n You lose " << gold << " gold." << endl;
-   }
-}
+//     if (action == 0) {
+//         // NPC talks
+//         cout << "NPC: \"Hello, traveler! XXXXX\"" << endl;
+//     }
+//     if (action == 1) {
+//          int heal = 1 + rand() % 10;
+//          cout << "NPC healing  " << heal << endl;
+//     }
+//    if (action == 2){
+//          int gold = 1 + rand() % 10;
+//          cout << "You got " << gold << " gold." << endl;
+//     }
+//     else {
+//          int gold = 1 + rand() % 10;
+//          cout << "You were robbed.\n You lose " << gold << " gold." << endl;
+//    }
+// }
    

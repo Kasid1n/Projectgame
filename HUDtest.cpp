@@ -109,9 +109,12 @@ void nHUD(){
     doSlow("You decide to :\n",100);
     cout<<"[1] Moving Forward"<<setw(15)<<"[2] Rest"<<setw(30)<<"[3] Check your equipment";
     int choice;
-    cin>> choice;
+    
     int sc = rand()%50;//Different Scenery
+    while(true){ 
+        cin>> choice; 
     switch(choice){
+        
         case 1://Move
         system("cls");
         if(sc>=10){
@@ -126,7 +129,7 @@ void nHUD(){
             Sleep(10);  // Reduce CPU usage
         }
         //code event here
-
+                
         //
         system("cls");
         blank();
@@ -151,7 +154,7 @@ void nHUD(){
         system("cls");
         blank();
         cout<<"=====================================================================================\n";
-        doSlow("You lay against the wall for a few minute... You healed for : " ,100);
+        doSlow("You lay against the wall for a few minute... You healed for : " ,50);
         cout<<"\nPress Spacebar to continue.";
         //code event here
 
@@ -165,9 +168,10 @@ void nHUD(){
         system("cls");
         blank();
         nHUD();
-        break;
+        break; 
         default:
-        cout<<"Choose."; 
+            cout<<"Choose.\n"; 
+    }
     }  
 }
  

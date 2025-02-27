@@ -6,6 +6,7 @@
 
 using namespace std;
 
+
 class Equipment {
     int hpmax;
     int atk;
