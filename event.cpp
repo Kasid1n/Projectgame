@@ -2,6 +2,7 @@
 #include <string>
 #include<ctime>
 using namespace std;
+
 #include"HUDtest.cpp"
 
 void mon();//event mon
@@ -74,7 +75,10 @@ void mon(){
   spaceb;
   //Code battle
 
-  //
+  ////////
+  system("cls");
+        blank();
+        nHUD();
 }
 
 void shop(){
@@ -86,7 +90,10 @@ cout<<"\nPress Spacebar to continue.";
 spaceb;
 //Code shop
 
-//
+////////
+system("cls");
+        blank();
+        nHUD();
 }
 
 void treasure(){
@@ -108,7 +115,10 @@ cout<<"\nPress Spacebar to continue.";
 spaceb;
 //Code Boss
 
-//
+////////
+system("cls");
+        blank();
+        nHUD();
 }
 
 void box(){
@@ -121,6 +131,9 @@ spaceb;
 //Code chest
 
 //
+system("cls");
+        blank();
+        nHUD();
 }
 
    

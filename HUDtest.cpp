@@ -6,13 +6,12 @@
 #include<ctime>
 using namespace std;
 
-
 #include"Equipment.cpp"
 
 
 //Screen Output
 void sHUD();//Title
-void nHUD();//Choice Hud
+void nHUD();//Choice Hud, Main hud
 void blank();//blank screnn
 void bar();//cout bar
 void doASCii(string); //ASCii Art
@@ -24,8 +23,9 @@ HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);//Text setting
 
 string hero;//player name
 int startweap;//select start weapon
-vector<int> gear(3);
-//vector<Equipment> inven(3);
+vector<int> gear(3);//inventory
+int turn=0;//turn count
+
 void doASCii(string x){
     string line="";
     ifstream inFile;
@@ -534,7 +534,7 @@ void sHUD(){
     doASCii(filetxt);
 }
 
-void nHUD(){
+void nHUD(){//main system
     SetConsoleTextAttribute(h,7);//White
     for(int i =0;i<24;i++){
         cout<<endl;
@@ -553,7 +553,7 @@ void nHUD(){
         
         case 1://Move
         system("cls");
-        if(sc>=10){
+        if(sc>=20){
         doASCii("ascii_folder/walls2.txt");
         cout<<"=====================================================================================\n";
         doSlow("You walk past the dark hallway...",50);
@@ -565,7 +565,7 @@ void nHUD(){
             Sleep(10);  // Reduce CPU usage
         }
         //code event here
-                
+        event(turn);
         //
         system("cls");
         blank();
@@ -593,7 +593,7 @@ void nHUD(){
         doSlow("You lay against the wall for a few minute... You healed for : " ,50);
         cout<<"\nPress Spacebar to continue.";
         //code event here
-
+        event(turn);
         //
         while (true) {
             if (GetAsyncKeyState(VK_SPACE) & 0x8000) {  // Check if space bar is pressed
