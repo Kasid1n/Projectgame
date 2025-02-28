@@ -4,11 +4,11 @@
 using namespace std;
 #include"HUDtest.cpp"
 
-void mon();
-void shop();
-void box();
-void treasure();
-void boss();
+void mon();//event mon
+void shop();//event shop
+void box();//event chest
+void treasure();//event win
+void boss();//event boss
 
 void event(int &i){
    int r = rand()%100+1;
@@ -66,25 +66,55 @@ void event(int &i){
 }
  
 void mon(){
-  
+  blank;
+  bar;
   doSlow("You encounter a monster!",50);
+  cout<<"Press Spacebar to continue.\n";
+  spaceb;
+  //Code battle
 
+  //
 }
 
 void shop(){
+blank;
+bar;
+doSlow("You found a merchant.",50);
+cout<<"\nPress Spacebar to continue.";
+spaceb;
+//Code shop
 
+//
 }
 
 void treasure(){
-
+doASCii("ascii_folder/Chest.txt");
+bar;
+doSlow("You found a chest!",50);
+cout<<"\nPress Spacebar to continue.";
+spaceb;
 }
 
 void boss(){
+blank;
+bar;
+doSlow("!!!",200);
+cout<<"\nPress Spacebar to continue.";
+spaceb;
+//Code Boss
 
+//
 }
 
 void box(){
-  
+doASCii("ascii_folder/Chest.txt");
+bar;
+doSlow("You found a chest!",50);
+cout<<"\nPress Spacebar to continue.";
+spaceb;
+//Code chest
+
+//
 }
 
    
