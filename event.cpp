@@ -10,10 +10,10 @@ void box();//event chest
 void treasure();//event win
 void boss();//event boss
 
-void event(int &i){
+void event(int &i){//turn
    int r = rand()%100+1;
 
-  if(i<10) {
+  if(i<10) {// 10 ตาแรกจะไม่เจอบอส
     if(r<=80){
       mon;
     }
@@ -26,7 +26,7 @@ void event(int &i){
     i++;
   }
 
-  else if(i>=10>30){
+  else if(i>=10>30){// ผ่านไปสิบตามีโอกาสเจอบอส
         if(r<=75){
           mon;
         }
@@ -36,7 +36,7 @@ void event(int &i){
         else if(r>85 && r<=90){
           box;
         }
-        else if(r>90 && r<=95){
+        else if(r>90 && r<=95){//จบเกม
           treasure;
         }
         else if(r>95 && r<=100){
@@ -44,7 +44,7 @@ void event(int &i){
         }
         i++;
   }
-  else if(i>=30){
+  else if(i>=30){// เพิ้มโอกาสเจอบอส
     if(r<=55){
       mon;
     }
@@ -54,7 +54,7 @@ void event(int &i){
     else if(r>65 && r<=70){
       box;
     }
-    else if(r>70 && r<=80){
+    else if(r>70 && r<=80){//จบเกม
       treasure;
     }
     else if(r>80 && r<=100){
