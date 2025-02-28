@@ -66,6 +66,7 @@ void event(int &i){//turn
 }
  
 void mon(){
+  system("cls");
   blank;
   bar;
   doSlow("You encounter a monster!",50);
@@ -77,6 +78,7 @@ void mon(){
 }
 
 void shop(){
+  system("cls");
 blank;
 bar;
 doSlow("You found a merchant.",50);
@@ -88,14 +90,17 @@ spaceb;
 }
 
 void treasure(){
-doASCii("ascii_folder/Chest.txt");
+  system("cls");
+doASCii("ascii_folder/Grail.txt");
 bar;
-doSlow("You found a chest!",50);
+doSlow("You found what you came here for!",50);
 cout<<"\nPress Spacebar to continue.";
 spaceb;
+doASCii("ascii_folder/WIN.txt");
 }
 
 void boss(){
+  system("cls");
 blank;
 bar;
 doSlow("!!!",200);
@@ -107,6 +112,7 @@ spaceb;
 }
 
 void box(){
+  system("cls");
 doASCii("ascii_folder/Chest.txt");
 bar;
 doSlow("You found a chest!",50);
