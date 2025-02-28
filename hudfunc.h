@@ -22,7 +22,7 @@ HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);//Text setting
 string hero;//player name
 int startweap;//select start weapon
 vector<int> gear(3);//inventory
-int turn=0;//turn count
+
 
 void doASCii(string x){
     string line="";
@@ -527,7 +527,7 @@ void spaceb(){
 }
 
 void sHUD(){
-    SetConsoleTextAttribute(h,15);//Text Color Red
+    SetConsoleTextAttribute(h,15);
     string filetxt="ascii_folder/text.txt";//Game Title
     doASCii(filetxt);
 }
@@ -563,7 +563,7 @@ void nHUD(){//main system
             Sleep(10);  // Reduce CPU usage
         }
         //code event here
-        event(turn);
+        //event(&turn);
         //
         system("cls");
         blank();
@@ -591,7 +591,7 @@ void nHUD(){//main system
         doSlow("You lay against the wall for a few minute... You healed for : " ,50);
         cout<<"\nPress Spacebar to continue.";
         //code event here
-        event(turn);
+        //event(&turn);
         //
         while (true) {
             if (GetAsyncKeyState(VK_SPACE) & 0x8000) {  // Check if space bar is pressed
@@ -621,7 +621,7 @@ void blank(){
     }
 }
 
-////////
+/////////////////////////////////event
 
 void mon();//event mon
 void shop();//event shop
