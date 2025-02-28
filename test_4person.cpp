@@ -6,8 +6,7 @@
 using namespace std;
 
 struct R {
-    float D;
-    int d;
+    int D,d,h;
 };
 R t;
 //ของแชมป์
@@ -183,7 +182,7 @@ public:
     static Monster randMonster(int level) {
         int randNum = rand() % 100;
         if (level >= 10 && randNum >= 70) return Monster("Spider", level, 100 + level * 10, 20 + level * 2, 12 + level, 8 + level / 2, 200, 300);
-        if (level >= 7 && randNum >= 40) return Monster("Harpy.", level, 80 + level * 8, 15 + level * 2, 10 + level, 6 + level / 2, 100, 150);
+        if (level >= 7 && randNum >= 40) return Monster("Harpy", level, 80 + level * 8, 15 + level * 2, 10 + level, 6 + level / 2, 100, 150);
         if (level >= 6 && randNum >= 20) return Monster("Hound", level, 60 + level * 6, 10 + level * 2, 8 + level, 4 + level / 2, 50, 80);
         if (level >= 5 && randNum >= 10) return Monster("Warrior-Skeleton", level, 60 + level * 6, 10 + level * 2, 8 + level, 4 + level / 2, 50, 80);
         return Monster("Skeleton", level, 1 + level * 5, 1 + level * 1, 6 + level, 1 + level / 1, 1000, 1);
@@ -203,7 +202,7 @@ int AttackChoice() {/*อันนี้ช้อยของเพลเยอ�
     int achoice = 0;
     cout << "You're Attacker\n";//turn+P
     while (achoice < 1 || achoice > 4) {
-        cout << "Press 1. Attack Press 2.Skill Press 3. Ultimate Press 4.Heal \n"; //ขออยู่บรรทัดเดียวกัน
+        cout << "Press 1. Attack Press 2.Skill Press 3. Ultimate Press 4.Heal "; //ขออยู่บรรทัดเดียวกัน
         cin >> achoice;
     }
     return achoice;}
@@ -211,7 +210,7 @@ int DefenseChoice() {/*อันนี้ช้อยของเพลเยอ
     int dchoice = 0;
     cout << "You're The Defender\n";//turn+P
     while (dchoice < 1 || dchoice > 4) {
-        cout << "Press 1.Block(against Attack) Press 2.Dodge(against Weapon SKill) Press 3.Parry(against ultimate) Press 4. Give up\n";
+        cout << "Press 1.Block(against Attack) Press 2.Dodge(against Weapon SKill) Press 3.Parry(against ultimate) Press 4. Give up";
         cin >> dchoice;
     }
     return dchoice;}
@@ -223,10 +222,10 @@ R battlesys(Player &A, Monster &B, int attack) {/*เพราะมอนกั
     cout <<endl;
     int defense = rand() % 3 + 1;
 
-    cout << A.name << " Hp: " << A.hp << endl;
-    cout << B.name << " Hp: " << B.hp << endl;
+    //cout << A.name << " Hp: " << A.hp << endl;
+    //cout << B.name << " Hp: " << B.hp << endl;
     
-    float dmg = 0, def = B.defense, temp, rdmg, hp;
+    int dmg = 0, def = B.defense, temp, rdmg, hp;
     bool countered = false;
 
     switch (attack) {/*ตี*/
@@ -264,17 +263,21 @@ R battlesys(Player &A, Monster &B, int attack) {/*เพราะมอนกั
         case 4:
             temp = rand() % 20 + 1;
             hp = A.hpmax * ((20 + temp) / 100.0);
+            t.h=hp;
             A.hp += hp;
             if (A.hp > A.hpmax) A.hp = A.hpmax;
             cout << A.name << " heals +" << hp << " Hp\n";
             
     }
     switch (defense) {/*อันนี้ 1-3ทำให้มัน coutเฉยๆว่าเลือกอะไรไป*/
-        case 1:cout << B.name << " blocks!\n";break;
-        case 2:cout << B.name << " dodges!\n";break;
-        case 3:cout << B.name << " counters!\n";break;
+        case 1://cout << B.name << " blocks!\n";
+        break;
+        case 2://cout << B.name << " dodges!\n";
+        break;
+        case 3://cout << B.name << " counters!\n";
+        break;
         case 4:
-            cout << B.name << " gave up!\n";
+            //cout << B.name << " gave up!\n";
             dmg = 9999999;
             break;
     }
@@ -284,9 +287,9 @@ R battlesys(Player &A, Monster &B, int attack) {/*เพราะมอนกั
     } else {/*โดนดาเมทธรรมดา*/
         B.hp -= dmg;
     }
-    cout << A.name << " did " << dmg << " damage\n";
+    /*cout << A.name << " did " << dmg << " damage\n";
     cout << B.name << " lost " << dmg << " HP\n";
-    cout <<endl;
+    cout <<endl;*/
     t.D=dmg;
     t.d=defense;
 
@@ -297,10 +300,10 @@ R battlesys(Monster &A, Player &B, int defense) {/*มอนกันคนต�
     cout <<endl;
     int attack = rand() % 4 + 1;
     
-    cout << A.name << " Hp: " << A.hp << endl;
-    cout << B.name << " Hp: " << B.hp << endl;
+    //cout << A.name << " Hp: " << A.hp << endl;
+    //cout << B.name << " Hp: " << B.hp << endl;
     
-    float dmg = 0, def = B.defense, temp, rdmg, hp;
+    int dmg = 0, def = B.defense, temp, rdmg, hp;
     bool countered = false;
 
     switch (attack) {
@@ -340,15 +343,18 @@ R battlesys(Monster &A, Player &B, int defense) {/*มอนกันคนต�
             hp = A.hpmax * ((20 + temp) / 100.0);
             A.hp += hp;
             if (A.hp > A.hpmax) A.hp = A.hpmax;
-            cout << A.name << " heals +" << hp << " Hp\n";
+           // cout << A.name << " heals +" << hp << " Hp\n";
             
     }
     switch (defense) {
-        case 1:cout << B.name << " blocks!\n"; break;
-        case 2:cout << B.name << " dodges!\n"; break;
-        case 3:cout << B.name << " counters!\n"; break;
+        case 1://cout << B.name << " blocks!\n"; 
+        break;
+        case 2://cout << B.name << " dodges!\n"; 
+        break;
+        case 3://cout << B.name << " counters!\n"; 
+        break;
         case 4:
-            cout << B.name << " gave up!\n";
+            //cout << B.name << " gave up!\n";
             dmg = 9999999;
             break;
     }
@@ -358,9 +364,9 @@ R battlesys(Monster &A, Player &B, int defense) {/*มอนกันคนต�
     } else {
         B.hp -= dmg;
     }
-    cout << A.name << " did " << dmg << " damage\n";
+   /* cout << A.name << " did " << dmg << " damage\n";
     cout << B.name << " lost " << dmg << " HP\n";
-    cout <<endl;
+    cout <<endl;*/
 
     t.D=dmg;
     t.d=attack;
@@ -586,7 +592,7 @@ class NPC {
         return NPC(npcNames[randomIndex]);
     }
 
-int main() {
+/*int main() {
     int WR=0;
     srand(time(0));
     string playerName;
@@ -617,4 +623,4 @@ int main() {
     
 
     return 0;
-}
+}*/
