@@ -9,15 +9,22 @@ using namespace std;
 
 //Screen Output
 void sHUD();//Title
-void nHUD();//Choice Hud, Main hud
+void nHUD(int &);//Choice Hud, Main hud
 void blank();//blank screnn
 void bar();//cout bar
 void doASCii(string); //ASCii Art
 void doSlow(string); //Text Delay
 void doSlowF(string);
-void showeap();//gear show
+void showeap(int);//gear show
 void spaceb();//press space bar
 HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);//Text setting
+
+void mon();//event mon
+void shop();//event shop
+void box();//event chest
+void treasure();//event win
+void boss();//event boss
+void event(int &);
 
 string hero;//player name
 int startweap;//select start weapon
@@ -73,7 +80,7 @@ void doSlowF(const string &text, int delay){
 
 
 
-void showeap(){
+void showeap(int s){
     SetConsoleTextAttribute(h,7);
     char choice;
     blank();
@@ -96,7 +103,7 @@ void showeap(){
                 spaceb();
                 system("cls");
                 blank();
-                nHUD();
+                nHUD(s);
                 break;
             case 2:
                 system("cls");
@@ -109,7 +116,7 @@ void showeap(){
                 spaceb();
                 system("cls");
                 blank();
-                nHUD();
+                nHUD(s);
                 break;
             case 3:
                 system("cls");
@@ -122,7 +129,7 @@ void showeap(){
                 spaceb();
                 system("cls");
                 blank();
-                nHUD();
+                nHUD(s);
                 break;
             case 4:
                 system("cls");
@@ -135,7 +142,7 @@ void showeap(){
                 spaceb();
                 system("cls");
                 blank();
-                nHUD();
+                nHUD(s);
                 break;
             case 5:
                 system("cls");
@@ -148,7 +155,7 @@ void showeap(){
                 spaceb();
                 system("cls");
                 blank();
-                nHUD();
+                nHUD(s);
                 break;
 
             case 6:
@@ -162,7 +169,7 @@ void showeap(){
                 spaceb();
                 system("cls");
                 blank();
-                nHUD();
+                nHUD(s);
                 break;
 
             case 7:
@@ -176,7 +183,7 @@ void showeap(){
                 spaceb();
                 system("cls");
                 blank();
-                nHUD();
+                nHUD(s);
                 break;
 
             case 8:
@@ -190,7 +197,7 @@ void showeap(){
                 spaceb();
                 system("cls");
                 blank();
-                nHUD();
+                nHUD(s);
                 break;
 
             case 9:
@@ -204,7 +211,7 @@ void showeap(){
                 spaceb();
                 system("cls");
                 blank();
-                nHUD();
+                nHUD(s);
                 break;
             default:
             system("cls");
@@ -215,7 +222,7 @@ void showeap(){
                 spaceb();
                 system("cls");
                 blank();
-                nHUD();
+                nHUD(s);
                 break;
 
         }
@@ -234,7 +241,7 @@ void showeap(){
             spaceb();
             system("cls");
             blank();
-            nHUD();
+            nHUD(s);
             break;
         case 2:
             system("cls");
@@ -247,7 +254,7 @@ void showeap(){
             spaceb();
             system("cls");
             blank();
-            nHUD();
+            nHUD(s);
             break;
         case 3:
             system("cls");
@@ -260,7 +267,7 @@ void showeap(){
             spaceb();
             system("cls");
             blank();
-            nHUD();
+            nHUD(s);
             break;
         case 4:
             system("cls");
@@ -273,7 +280,7 @@ void showeap(){
             spaceb();
             system("cls");
             blank();
-            nHUD();
+            nHUD(s);
             break;
         case 5:
             system("cls");
@@ -286,7 +293,7 @@ void showeap(){
             spaceb();
             system("cls");
             blank();
-            nHUD();
+            nHUD(s);
             break;
 
         case 6:
@@ -300,7 +307,7 @@ void showeap(){
             spaceb();
             system("cls");
             blank();
-            nHUD();
+            nHUD(s);
             break;
 
         case 7:
@@ -314,7 +321,7 @@ void showeap(){
             spaceb();
             system("cls");
             blank();
-            nHUD();
+            nHUD(s);
             break;
 
         case 8:
@@ -328,7 +335,7 @@ void showeap(){
             spaceb();
             system("cls");
             blank();
-            nHUD();
+            nHUD(s);
             break;
 
         case 9:
@@ -342,7 +349,7 @@ void showeap(){
             spaceb();
             system("cls");
             blank();
-            nHUD();
+            nHUD(s);
             break;
         default:
             system("cls");
@@ -353,7 +360,7 @@ void showeap(){
                 spaceb();
                 system("cls");
                 blank();
-                nHUD();
+                nHUD(s);
                 break;
         }  
 
@@ -372,7 +379,7 @@ void showeap(){
             spaceb();
             system("cls");
             blank();
-            nHUD();
+            nHUD(s);
             break;
         case 2:
             system("cls");
@@ -385,7 +392,7 @@ void showeap(){
             spaceb();
             system("cls");
             blank();
-            nHUD();
+            nHUD(s);
             break;
         case 3:
             system("cls");
@@ -398,7 +405,7 @@ void showeap(){
             spaceb();
             system("cls");
             blank();
-            nHUD();
+            nHUD(s);
             break;
         case 4:
             system("cls");
@@ -411,7 +418,7 @@ void showeap(){
             spaceb();
             system("cls");
             blank();
-            nHUD();
+            nHUD(s);
             break;
         case 5:
             system("cls");
@@ -424,7 +431,7 @@ void showeap(){
             spaceb();
             system("cls");
             blank();
-            nHUD();
+            nHUD(s);
             break;
 
         case 6:
@@ -438,7 +445,7 @@ void showeap(){
             spaceb();
             system("cls");
             blank();
-            nHUD();
+            nHUD(s);
             break;
 
         case 7:
@@ -452,7 +459,7 @@ void showeap(){
             spaceb();
             system("cls");
             blank();
-            nHUD();
+            nHUD(s);
             break;
 
         case 8:
@@ -466,7 +473,7 @@ void showeap(){
             spaceb();
             system("cls");
             blank();
-            nHUD();
+            nHUD(s);
             break;
 
         case 9:
@@ -480,7 +487,7 @@ void showeap(){
             spaceb();
             system("cls");
             blank();
-            nHUD();
+            nHUD(s);
             break;
         default:
             system("cls");
@@ -491,7 +498,7 @@ void showeap(){
                 spaceb();
                 system("cls");
                 blank();
-                nHUD();
+                nHUD(s);
                 break;
 
         }
@@ -500,13 +507,13 @@ void showeap(){
         case 'e':
         system("cls");
         blank();
-        nHUD();
+        nHUD(s);
         break;
 
         case 'E':
         system("cls");
         blank();
-        nHUD();
+        nHUD(s);
         break;
 
         default:
@@ -527,18 +534,18 @@ void spaceb(){
 }
 
 void sHUD(){
-    SetConsoleTextAttribute(h,15);
+    SetConsoleTextAttribute(h,14);
     string filetxt="ascii_folder/text.txt";//Game Title
     doASCii(filetxt);
 }
 
-void nHUD(){//main system
+void nHUD(int &t){//main system
     SetConsoleTextAttribute(h,7);//White
     for(int i =0;i<24;i++){
         cout<<endl;
     }
     cout<<"=====================================================================================\n";
-    cout<<hero<<setw(15)<<"| HP : 1/1"<<setw(15)<<"Level : 1 "<<setw(15)<<"Gold : 500\n";  
+    cout<<hero<<setw(15)<<"| HP : 1/1"<<setw(15)<<"Level : 1 "<<setw(15)<<"Gold : 500"<<setw(15)<<"Turn : "<<t+1<<endl; 
     cout<<"=====================================================================================\n";
     doSlow("You decide to :\n",50);
     cout<<"[1] Moving Forward"<<setw(15)<<"[2] Rest"<<setw(30)<<"[3] Check your equipment\n>";
@@ -552,7 +559,9 @@ void nHUD(){//main system
         case 1://Move
         system("cls");
         if(sc>=20){
+        SetConsoleTextAttribute(h,8);
         doASCii("ascii_folder/walls2.txt");
+        SetConsoleTextAttribute(h,7);
         cout<<"=====================================================================================\n";
         doSlow("You walk past the dark hallway...",50);
         cout<<"\nPress Spacebar to continue.";
@@ -563,13 +572,17 @@ void nHUD(){//main system
             Sleep(10);  // Reduce CPU usage
         }
         //code event here
-        //event(&turn);
+        event(t);
         //
         system("cls");
         blank();
-        nHUD();
+        t++;
+        nHUD(t);
         }
-        else {doASCii("ascii_folder/walls1.txt");
+        else {
+        SetConsoleTextAttribute(h,8);
+        doASCii("ascii_folder/walls1.txt");
+        SetConsoleTextAttribute(h,7);
         cout<<"=====================================================================================\n";
         doSlow("You found a gate and open it...",50);
         cout<<"\nPress Spacebar to continue.";
@@ -579,9 +592,13 @@ void nHUD(){//main system
             }
             Sleep(10);  // Reduce CPU usage
         }
+        //code event here
+        event(t);
+        //
         system("cls");
         blank();
-        nHUD();
+        t++;
+        nHUD(t);
         }
         break;
         case 2://Rest
@@ -590,21 +607,22 @@ void nHUD(){//main system
         cout<<"=====================================================================================\n";
         doSlow("You lay against the wall for a few minute... You healed for : " ,50);
         cout<<"\nPress Spacebar to continue.";
-        //code event here
-        //event(&turn);
-        //
+        
         while (true) {
             if (GetAsyncKeyState(VK_SPACE) & 0x8000) {  // Check if space bar is pressed
                 break;
             }
             Sleep(10);  // Reduce CPU usage
         }
+        //code event here
+        event(t);
+        //
         system("cls");
         blank();
-        nHUD();
+        nHUD(t);
         break;
         case 3:
-        showeap();
+        showeap(t);
         default:
             cout<<"Choose.\n"; 
     }
@@ -623,133 +641,119 @@ void blank(){
 
 /////////////////////////////////event
 
-void mon();//event mon
-void shop();//event shop
-void box();//event chest
-void treasure();//event win
-void boss();//event boss
+
 
 void event(int &i){//turn
    int r = rand()%100+1;
 
-  if(i<10) {// 10 ตาแรกจะไม่เจอบอส
-    if(r<=80){
-      mon;
+  if(i<6) {// 10 ตาแรกจะไม่เจอบอส
+    if(r<=60){
+      mon();
     }
-    else if(r>80 && r<=95){
-      shop;
-    }
-    else if(r>95 && r<=100){
-      box;
-    }
-    i++;
-  }
-
-  else if(i>=10>30){// ผ่านไปสิบตามีโอกาสเจอบอส
-        if(r<=75){
-          mon;
-        }
-        else if(r>75 && r<=85){
-          shop;
-        }
-        else if(r>85 && r<=90){
-          box;
-        }
-        else if(r>90 && r<=95){//จบเกม
-          treasure;
-        }
-        else if(r>95 && r<=100){
-          boss;
-        }
-        i++;
-  }
-  else if(i>=30){// เพิ้มโอกาสเจอบอส
-    if(r<=55){
-      mon;
-    }
-    else if(r>55 && r<=65){
-      shop;
-    }
-    else if(r>65 && r<=70){
-      box;
-    }
-    else if(r>70 && r<=80){//จบเกม
-      treasure;
+    else if(r>60 && r<=80){
+      shop();
     }
     else if(r>80 && r<=100){
-      boss;
+      box();
     }
-    i++;
+    
+  }
+
+  else if(i>=6&&i<11){// ผ่านไปสิบตามีโอกาสเจอบอส
+        if(r<=50){
+          mon();
+        }
+        else if(r>50 && r<=70){
+          shop();
+        }
+        else if(r>70 && r<=80){
+          box();
+        }
+        else if(r>80 && r<=90){//จบเกม
+          treasure();
+        }
+        else if(r>90 && r<=100){
+          boss();
+        }
+        
+  }
+  else if(i>=11){// เพิ้มโอกาสเจอบอส
+    if(r<=40){
+      mon();
+    }
+    else if(r>40 && r<=60){
+      shop();
+    }
+    else if(r>60 && r<=70){
+      box();
+    }
+    else if(r>70 && r<=80){//จบเกม
+      treasure();
+    }
+    else if(r>80 && r<=100){
+      boss();
+    }
+    
 }
 
 }
  
 void mon(){
   system("cls");
-  blank;
-  bar;
+  blank();
+  bar();
   doSlow("You encounter a monster!",50);
-  cout<<"Press Spacebar to continue.\n";
-  spaceb;
+  cout<<"\nPress Spacebar to continue.";
+  spaceb();
   //Code battle
 
   ////////
-  system("cls");
-        blank();
-        nHUD();
 }
 
 void shop(){
   system("cls");
-blank;
-bar;
+blank();
+bar();
 doSlow("You found a merchant.",50);
 cout<<"\nPress Spacebar to continue.";
-spaceb;
+spaceb();
 //Code shop
 
 ////////
-system("cls");
-        blank();
-        nHUD();
 }
 
 void treasure(){
   system("cls");
+  SetConsoleTextAttribute(h,14);
 doASCii("ascii_folder/Grail.txt");
-bar;
+
+bar();
 doSlow("You found what you came here for!",50);
 cout<<"\nPress Spacebar to continue.";
-spaceb;
+spaceb();
 doASCii("ascii_folder/WIN.txt");
 }
 
 void boss(){
   system("cls");
-blank;
-bar;
-doSlow("!!!",200);
+blank();
+bar();
+doSlow("!!!!!",200);
 cout<<"\nPress Spacebar to continue.";
-spaceb;
+spaceb();
 //Code Boss
 
 ////////
-system("cls");
-        blank();
-        nHUD();
 }
 
 void box(){
     system("cls");
 doASCii("ascii_folder/Chest.txt");
-bar;
+bar();
 doSlow("You found a chest!",50);
 cout<<"\nPress Spacebar to continue.";
-spaceb;
+spaceb();
 //Code chest
 
 //
-system("cls");
-        blank();
-        nHUD();
 }
