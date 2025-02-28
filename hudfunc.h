@@ -243,7 +243,7 @@ void showeap(int s){
             blank();
             nHUD(s);
             break;
-        case 2:
+        case 2: 
             system("cls");
             SetConsoleTextAttribute(h,2);
             doASCii("ascii_folder/Bow.txt");
