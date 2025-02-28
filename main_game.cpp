@@ -8,9 +8,8 @@
 #include<iomanip>
 //Library
 
+#include "Equipment.h"
 #include"hudfunc.h"
-#include"Shop.cpp"
-#include"Equipment.h"
 //Function
 
 using namespace std; 
@@ -37,9 +36,11 @@ int main(){
     }
     system("cls");
     doSlow("Your name is...",50);
-    cin>> hero;
-    Stats hero(100, 20, 10, 5);
-    doSlow("There's a weapon beside you... It is...",50);
+    getline(cin, hero);
+    Stats hero(100,20,10,5);
+    //Player player(hero,100, 20, 10, 5);
+    //Statseq hero(100,20,10,5);
+    doSlow("There's a weapon beside you... It is...",50); 
     cout<<"\n[1] Axe"<<setw(10)<<"[2] Bow"<<setw(15)<<"[3] Sword\n>";
     while(true){   
     cin>>startweap;
@@ -47,7 +48,7 @@ int main(){
         case 1:
         hero.equip(&axe);
         gear.at(0)=1;//gearid of axe
-         
+
         break;
         case 2:
         hero.equip(&bow);

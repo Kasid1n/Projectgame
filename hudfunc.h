@@ -7,6 +7,8 @@
 #include<vector>
 using namespace std;
 
+
+
 //Screen Output
 void sHUD();//Title
 void nHUD(int &);//Choice Hud, Main hud
@@ -81,6 +83,7 @@ void doSlowF(const string &text, int delay){
 
 
 void showeap(int s){
+
     SetConsoleTextAttribute(h,7);
     char choice;
     blank();
@@ -98,7 +101,7 @@ void showeap(int s){
                 doASCii("ascii_folder/Axe.txt");
                 SetConsoleTextAttribute(h,7);
                 bar();
-                cout<<"Axe | Stat";
+                cout<<"Axe | HPmax +0 Atk +15 Def +0 Mag +0";
                 cout<<"\nPress Spacebar to go back.";
                 spaceb();
                 system("cls");
@@ -541,22 +544,19 @@ void sHUD(){
 
 void nHUD(int &t){//main system
     SetConsoleTextAttribute(h,7);//White
-    for(int i =0;i<24;i++){
-        cout<<endl;
-    }
     cout<<"=====================================================================================\n";
     cout<<hero<<setw(15)<<"| HP : 1/1"<<setw(15)<<"Level : 1 "<<setw(15)<<"Gold : 500"<<setw(15)<<"Turn : "<<t+1<<endl; 
     cout<<"=====================================================================================\n";
     doSlow("You decide to :\n",50);
     cout<<"[1] Moving Forward"<<setw(15)<<"[2] Rest"<<setw(30)<<"[3] Check your equipment\n>";
-    int choice;
+    char choice;
     
     int sc = rand()%50;//Different Scenery
     while(true){ 
         cin>> choice; 
     switch(choice){
         
-        case 1://Move
+        case '1'://Move
         system("cls");
         if(sc>=20){
         SetConsoleTextAttribute(h,8);
@@ -601,7 +601,7 @@ void nHUD(int &t){//main system
         nHUD(t);
         }
         break;
-        case 2://Rest
+        case '2'://Rest
         system("cls");
         blank();
         cout<<"=====================================================================================\n";
@@ -621,7 +621,7 @@ void nHUD(int &t){//main system
         blank();
         nHUD(t);
         break;
-        case 3:
+        case '3':
         showeap(t);
         default:
             cout<<"Choose.\n"; 

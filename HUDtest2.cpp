@@ -3,7 +3,7 @@
 #include<windows.h>
 #include <cstdlib>
 #include<iomanip>
-#include"test_4person.cpp"
+#include"test_4person.h"
 using namespace std;
 
 //Screen Output
@@ -22,7 +22,7 @@ void doASCii(string); //ASCii Art
 void doSlow(string); //Text Delay
 void doSlowF(string);
 HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);//Text setting
-
+ 
 void enter() {
     int pressCount = 0;
     SetConsoleTextAttribute(h,15);
@@ -262,9 +262,9 @@ void showDE(Player &A, Monster &B){
         case 1:cout << B.name << " Attack!\n";break;
         case 2:cout << B.name << " Use Skill!\n";break;
         case 3:cout << B.name << " Use Ultimate!\n";break;
-        case 4:
+        /*case 4:
             cout << B.name << " Heal!\n";
-            break;
+            break;*/
     }
     SetConsoleTextAttribute(h,2);
     if(t.d==4){cout << B.name << " heals +" << t.h << " Hp\n";}
@@ -334,10 +334,10 @@ int main(){
     player.addXp(10); 
     //int playerLevel = player.getLevel();
     Monster randomMon = MonsterFactory::randMonster(11);
-    Monster fixedMon = MonsterFactory::bossMonster1();
+    Monster fixedMon = MonsterFactory::bossMonster2();
     randomMon.showStatus();
-    showbattle(player,randomMon);
-
+    //showbattle(player,randomMon);
+    showbattle(player,fixedMon);
     }
     //nHUD();   
     
