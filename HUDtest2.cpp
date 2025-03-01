@@ -266,7 +266,7 @@ void showDE(Player &A, Monster &B){
             cout << B.name << " Heal!\n";
             break;*/
     }
-    SetConsoleTextAttribute(h,2);
+    SetConsoleTextAttribute(h,4);
     if(t.d==4){cout << B.name << " heals +" << t.h << " Hp\n";}
     else
     SetConsoleTextAttribute(h,4); 

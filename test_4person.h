@@ -284,8 +284,12 @@ R battlesys(Player &A, Monster &B, int attack) {/*เพราะมอนกั
 
     if (countered==true) {/*รีเทินดาเมทของอันติ*/
         A.hp -= dmg;
+        if (A.hp<0)
+        { A.hp=0;}
     } else {/*โดนดาเมทธรรมดา*/
         B.hp -= dmg;
+        if (B.hp<0)
+        { B.hp=0;}
     }
     /*cout << A.name << " did " << dmg << " damage\n";
     cout << B.name << " lost " << dmg << " HP\n";
@@ -361,8 +365,13 @@ R battlesys(Monster &A, Player &B, int defense) {/*มอนกันคนต�
 
     if (countered==true) {
         A.hp -= dmg;
+        if (A.hp<0)
+        { A.hp=0;}
+        
     } else {
         B.hp -= dmg;
+        if (B.hp<0)
+        { B.hp=0;}
     }
    /* cout << A.name << " did " << dmg << " damage\n";
     cout << B.name << " lost " << dmg << " HP\n";
