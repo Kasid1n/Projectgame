@@ -5,7 +5,7 @@
 #include <vector>
 using namespace std;
 
-struct R {
+struct R {//ไว้รับช้อย ของมอน ไปทำ hud
     int D,d,h;
 };
 R t;
@@ -30,6 +30,11 @@ public:
     int defense;
     int magic;
     vector<Equipment*> equipmentList; // รายการอุปกรณ์
+    int statPointsHp = 0;
+    int statPointsAttack = 0;
+    int statPointsDefense = 0;
+    int statPointsMagic = 0;
+
 
     Stats(int hpmax, int attack, int defense, int magic)
         : hpmax(hpmax), attack(attack), defense(defense), magic(magic) {
@@ -46,15 +51,15 @@ public:
         cout << "Attack: " << attack << endl;
         cout << "Defense: " << defense << endl;
         cout << "Magic: " << magic << endl;
-    }
+    }       
 
     // เพิ่มค่าสถานะ
     void increaseStat(int choice) {
         switch (choice) {
-            case 1: hpmax += 10; hp = hpmax; break;
-            case 2: attack += 2; break;
-            case 3: defense += 2; break;
-            case 4: magic += 2; break;
+            case 1: hpmax += 10; hp = hpmax; statPointsHp++; break;
+            case 2: attack += 2; statPointsAttack++; break;
+            case 3: defense += 2; statPointsDefense++; break;
+            case 4: magic += 2; statPointsMagic++; break;
             default: cout << "Invalid choice!" << endl; break;
         }
     }
@@ -111,6 +116,7 @@ public:
     Stats stats;
     int gold;
     vector<Equipment> inventory;
+    vector<Equipment*> equipmentList;
 
 int hpmax=stats.hpmax,hp=stats.hp,attack=stats.attack,defense=stats.defense,magic=stats.magic;
     Player(string playerName, int hpmax, int attack, int defense, int magic)
@@ -131,6 +137,75 @@ int hpmax=stats.hpmax,hp=stats.hp,attack=stats.attack,defense=stats.defense,magi
 
     void equipItem(Equipment item) {
         inventory.push_back(item);  // เพิ่มไอเทมเข้าไปใน inventory ของผู้เล่น
+    }
+    void equip(int index) {
+        if (index < 0 || index >= inventory.size()) {
+            cout << "Invalid inventory index." << endl;
+            return;
+        }
+    
+        if (equipmentList.size() >= 3) {
+            cout << "Cannot equip more than 3 items." << endl;
+            return;
+        }
+    
+        Equipment* item = &inventory[index];
+        equipmentList.push_back(item);
+    
+        vector<int> stat = item->getStat();
+        stats.hpmax += stat[0];    // Add HP bonus
+        stats.attack += stat[1];   // Add Attack bonus
+        stats.defense += stat[2];  // Add Defense bonus
+        stats.magic += stat[3];    // Add Magic bonus
+    
+        if (stats.hp > stats.hpmax) stats.hp = stats.hpmax;
+    
+        cout << "Equipped: Item at index " << index << endl;
+    }
+
+    // Unequip an item
+    void unequip(int index) {
+        if (index < 0 || index >= equipmentList.size()) {
+            cout << "Invalid equipment index." << endl;
+            return;
+        }
+
+        // Remove the item from the equipmentList
+        equipmentList.erase(equipmentList.begin() + index);
+
+    }
+
+    // Recalculate player stats based on base stats (ignore equipment bonuses)
+    void recalculateStats() {
+        // Base stats from leveling up
+        int baseHpmax = 100 + (level - 1) * 10; // Example base HP calculation
+        int baseAttack = 20 + (level - 1) * 2;  // Example base Attack calculation
+        int baseDefense = 10 + (level - 1) * 1; // Example base Defense calculation
+        int baseMagic = 5 + (level - 1) * 1;    // Example base Magic calculation
+    
+        // Add stat points to base stats
+        baseHpmax += stats.statPointsHp * 10;    // +10 HP per stat point
+        baseAttack += stats.statPointsAttack * 2; // +2 Attack per stat point
+        baseDefense += stats.statPointsDefense * 2; // +2 Defense per stat point
+        baseMagic += stats.statPointsMagic * 2;   // +2 Magic per stat point
+    
+        // Reset stats to base values
+        stats.hpmax = baseHpmax;
+        stats.attack = baseAttack;
+        stats.defense = baseDefense;
+        stats.magic = baseMagic;
+    
+        // Add equipment bonuses
+        for (Equipment* item : equipmentList) {
+            vector<int> stat = item->getStat();
+            stats.hpmax += stat[0];    // Add HP bonus
+            stats.attack += stat[1];   // Add Attack bonus
+            stats.defense += stat[2];  // Add Defense bonus
+            stats.magic += stat[3];    // Add Magic bonus
+        }
+    
+        // Ensure HP does not exceed the new maximum
+        if (stats.hp > stats.hpmax) stats.hp = stats.hpmax;
     }
     ///////
 //ระบบเพื่ม XP
@@ -339,12 +414,8 @@ R battlesys(Player &A, Monster &B, int attack) {/*เพราะมอนกั
 
     if (countered==true) {/*รีเทินดาเมทของอันติ*/
         A.hp -= dmg;
-        if (A.hp<0)
-        { A.hp=0;}
     } else {/*โดนดาเมทธรรมดา*/
         B.hp -= dmg;
-        if (B.hp<0)
-        { B.hp=0;}
     }
     /*cout << A.name << " did " << dmg << " damage\n";
     cout << B.name << " lost " << dmg << " HP\n";
@@ -420,12 +491,8 @@ R battlesys(Monster &A, Player &B, int defense) {/*มอนกันคนต�
 
     if (countered==true) {
         A.hp -= dmg;
-        if (A.hp<0)
-        { A.hp=0;}
     } else {
         B.hp -= dmg;
-        if (B.hp<0)
-        { B.hp=0;}
     }
    /* cout << A.name << " did " << dmg << " damage\n";
     cout << B.name << " lost " << dmg << " HP\n";
@@ -444,34 +511,35 @@ R battlesys(Monster &A, Player &B, int defense) {/*มอนกันคนต�
 //guitar
 
 class NPC {
-    private:
-        string npcname;   //ชื่อ
-        vector<string> sellItem;  // ขายของ
-        vector<int> ItemPrice;  // ราคา
-        vector<Equipment> ItemStats;  // addstat
+    public:
+        string npcname;
+        vector<string> sellItem;
+        vector<int> ItemPrice;
+        vector<Equipment> ItemStats;
         bool hasShopped = false;  // เพิ่มตัวแปรเพื่อตรวจสอบว่าผู้เล่นได้ซื้อไปแล้วหรือยัง
     
-    public:
         NPC(string name);
+    
         void shop();
         void sellItemToPlayer(Player &player);
     };
+//---------------------------------------------------------------------------------------------------------------------------------//
+//---------------------------------------------------------------------------------------------------------------------------------//
+NPC::NPC(string name) {
+    npcname = name;
 
-    NPC::NPC(string name) {
-        npcname = name;
-    
-        if (npcname == "A") {
-            // รายการของไอเทมที่ A สามารถขาย
-            vector<string> possibleItems = {"Axe", "SuperAxe", "Sword"};
-            int numItems = rand() % 3 + 1;  // ขาย 1 ถึง 3 ไอเทม
-    
-            for (int i = 0; i < numItems; i++) {
-                int randIndex = rand() % possibleItems.size(); 
-                sellItem.push_back(possibleItems[randIndex]); // เพิ่ม item ที่สุ่มไปขาย
-                int price = rand() % 11 + 15;  // ราคาของไอเทมสุ่มจาก 15 ถึง 25
-                ItemPrice.push_back(price);
-    
-                // กำหนด stat ของ item
+    if (npcname == "A") {
+        // รายการของไอเทมที่ A สามารถขาย
+        vector<string> possibleItems = {"Axe", "SuperAxe", "Sword"};
+        int numItems = rand() % 3 + 1;  // ขาย 1 ถึง 3 ไอเทม
+
+        for (int i = 0; i < numItems; i++) {
+            int randIndex = rand() % possibleItems.size(); 
+            sellItem.push_back(possibleItems[randIndex]); // เพิ่ม item ที่สุ่มไปขาย
+            int price = rand() % 11 + 15;  // ราคาของไอเทมสุ่มจาก 15 ถึง 25
+            ItemPrice.push_back(price);
+
+            // กำหนด stat ของ item
             if (possibleItems[randIndex] == "Axe") {
                 ItemStats.push_back(Equipment(0, rand()%5 +10, 0, 0));
             } else if (possibleItems[randIndex] == "SuperAxe") {
@@ -479,164 +547,209 @@ class NPC {
             } else if (possibleItems[randIndex] == "Sword") {
                 ItemStats.push_back(Equipment(0, rand()%10 +10, 0, 0));
             }
-            }
         }
-        else if (npcname == "B") {
-            // รายการของไอเทมที่ B สามารถขาย
-            vector<string> possibleItems = {"Shield", "Better Shield","Armor"};
-            int numItems = rand() % 3 + 1;  // ขาย 1 ถึง 3 ไอเทม
-    
-            for (int i = 0; i < numItems; i++) {
-                int randIndex = rand() % possibleItems.size();
-                sellItem.push_back(possibleItems[randIndex]);
-                int price = rand() % 11 + 20;  // ราคาของไอเทมสุ่มจาก 20 ถึง 30
-                ItemPrice.push_back(price);
-    
-                // กำหนดสถิติของไอเทมที่ขาย
-                if (possibleItems[randIndex] == "Shield") {
-                    ItemStats.push_back(Equipment(0, 0, rand()%5 +10, 0));
-                } else if (possibleItems[randIndex] == "Better Shield") {
-                    ItemStats.push_back(Equipment(0, 0, rand() % 8 +10, 0));
-                } else if (possibleItems[randIndex] == "Armor") {
-                    ItemStats.push_back(Equipment(0, 0, rand()%10 + 10, 0));
-                }
-            }
-        }
-        else if (npcname == "Secretmaster") {
-            vector<string> secretItems = {"Attack Potion", "Heal Potion", "Defense Potion", "Necklace"};
-            int numItems = rand() % 4 + 1;
-    
-            for (int i = 0; i < numItems; i++) {
-                int randIndex = rand() % secretItems.size();
-                sellItem.push_back(secretItems[randIndex]);
-                int price = rand() % 21 + 10;  // ราคาของไอเทมสุ่มจาก 10 ถึง 30
-                ItemPrice.push_back(price);
-    
-                if (secretItems[randIndex] == "Attack Potion") {
-                    ItemStats.push_back(Equipment(0, rand()%5 +10, 0, 0));
-                } else if (secretItems[randIndex] == "Heal Potion") {
-                    ItemStats.push_back(Equipment(rand()%10 +10, 0, 0, 0));
-                } else if (secretItems[randIndex] == "Defense Potion"){
-                    ItemStats.push_back(Equipment(0, 0, rand()%5 +10, 0));
-                } else {
-                    ItemStats.push_back(Equipment(0, 0, 0, rand()%5 + 10 )) ;
-                }
+    }
+    else if (npcname == "B") {
+        // รายการของไอเทมที่ B สามารถขาย
+        vector<string> possibleItems = {"Shield", "Better Shield","Armor"};
+        int numItems = rand() % 3 + 1;  // ขาย 1 ถึง 3 ไอเทม
+
+        for (int i = 0; i < numItems; i++) {
+            int randIndex = rand() % possibleItems.size();
+            sellItem.push_back(possibleItems[randIndex]);
+            int price = rand() % 11 + 20;  // ราคาของไอเทมสุ่มจาก 20 ถึง 30
+            ItemPrice.push_back(price);
+
+            // กำหนดสถิติของไอเทมที่ขาย
+            if (possibleItems[randIndex] == "Shield") {
+                ItemStats.push_back(Equipment(0, 0, rand()%5 +10, 0));
+            } else if (possibleItems[randIndex] == "Better Shield") {
+                ItemStats.push_back(Equipment(0, 0, rand() % 8 +10, 0));
+            } else if (possibleItems[randIndex] == "Armor") {
+                ItemStats.push_back(Equipment(0, 0, rand()%10 + 10, 0));
             }
         }
     }
-    
-    void NPC::shop() { // ขาย ดูว่าสุ่มได้ npc ตัวไหนขายตามนั้น
-        cout << npcname << "'s Shop\n";
+    else if (npcname == "Secretmaster") {
+        vector<string> secretItems = {"Attack Potion", "Heal Potion", "Defense Potion", "Necklace"};
+        int numItems = rand() % 4 + 1;
+
+        for (int i = 0; i < numItems; i++) {
+            int randIndex = rand() % secretItems.size();
+            sellItem.push_back(secretItems[randIndex]);
+            int price = rand() % 21 + 10;  // ราคาของไอเทมสุ่มจาก 10 ถึง 30
+            ItemPrice.push_back(price);
+
+            if (secretItems[randIndex] == "Attack Potion") {
+                ItemStats.push_back(Equipment(0, rand()%5 +10, 0, 0));
+            } else if (secretItems[randIndex] == "Heal Potion") {
+                ItemStats.push_back(Equipment(rand()%10 +10, 0, 0, 0));
+            } else if (secretItems[randIndex] == "Defense Potion"){
+                ItemStats.push_back(Equipment(0, 0, rand()%5 +10, 0));
+            } else {
+                ItemStats.push_back(Equipment(0, 0, 0, rand()%5 + 10 )) ;
+            }
+        }
+    }
+}
+
+void NPC::shop() { // ขาย ดูว่าสุ่มได้ npc ตัวไหนขายตามนั้น
+    cout << npcname << "'s Shop\n";
     for (size_t i = 0; i < sellItem.size(); i++) {
         cout << i + 1 << ". " << sellItem[i] << "  ( Price: " << ItemPrice[i] << " )\n";
-             // ใช้ getStat() เพื่อดึงค่า stats
-             vector<int> stats = ItemStats[i].getStat();  
-             cout << "Attack+: " << stats[1] << " ";
-             cout << "Defense+: " << stats[2] << " ";
-             cout << "Health+: " << stats[0] << " ";
-             cout << "Magic+: " << stats[3] << endl;
-         }
+        cout << "Attack+: " << ItemStats[i].getStat()[1] << " ";
+        cout << "Defense+: " << ItemStats[i].getStat()[2] << " ";
+        cout << "Heal+: " << ItemStats[i].getStat()[0] << " ";
+        cout << "Magic+: " << ItemStats[i].getStat()[3] << endl;
     }
-    
-    void NPC::sellItemToPlayer(Player &player) {
-        if (hasShopped) {
+}
+
+void NPC::sellItemToPlayer(Player &player) { // ขายของให้
+    if (hasShopped) {
         cout << "You have already purchased from " << npcname << ". You can't buy more this time!" << endl;
         return;
     }
 
-        cout << npcname << " offers the following items for sale:" << endl;
-        for (int i = 0; i < sellItem.size(); i++) {
-            cout << i + 1 << ". " << sellItem[i] << " - Price: " << ItemPrice[i] << " Gold" << endl;
-        }
-        
-    
-        int itemChoice;
+    int choice;
+    while (true) {
+        shop();
         cout << "Your Gold: " << player.getGold() << endl;
-        cout << "Enter the number of the item you want to buy (or 0 to exit): ";
-        cin >> itemChoice;
-    
-        if (itemChoice == 0) {
-            cout << "Exiting the shop..." << endl;
-            return;
+        cout << "Enter item number (0 to exit): ";
+
+        if (!(cin >> choice)) { // ตรวจสอบการป้อนข้อมูล
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "Invalid input! Please enter a number.\n";
+            continue;
         }
-    
-        // ตรวจสอบว่าไอเทมที่เลือกถูกต้อง
-        if (itemChoice < 1 || itemChoice > sellItem.size()) {
-            cout << "Invalid choice!" << endl;
-            return;
+
+        if (choice == 0) break;
+
+        if (choice > 0 && choice <= sellItem.size()) { // เลือก item ที่มี
+            int index = choice - 1;
+            if (player.getGold() >= ItemPrice[index]) { // ตรวจสอบเงิน
+                player.updateGold(-ItemPrice[index]); // หักเงิน
+
+                // ตรวจสอบว่าเป็น Potion หรือไม่
+                if (sellItem[index] == "Attack Potion") {
+                    int atkBoost = rand() % 5 + 10;
+                    player.attack += atkBoost;
+                    cout << "You used Attack Potion! Attack increased by " << atkBoost << "!\n";
+                } 
+                else if (sellItem[index] == "Heal Potion") {
+                    int healAmount = rand() % 10 + 10;
+                    player.hpmax += healAmount;
+                    cout << "You used Heal Potion! Max HP increased by " << healAmount << "!\n";
+                } 
+                else if (sellItem[index] == "Defense Potion") {
+                    int defBoost = rand() % 5 + 10;
+                    player.defense += defBoost;
+                    cout << "You used Defense Potion! Defense increased by " << defBoost << "!\n";
+                } 
+                else {
+                    // กรณีไอเทมอื่น (เช่น Necklace) ให้ใส่เข้า inventory
+                    player.equipItem(ItemStats[index]);
+                    cout << "You bought " << sellItem[index] << "!\n";
+                    vector<int> stat = ItemStats[index].getStat();
+                    player.stats.hpmax += stat[0];
+                    player.stats.attack += stat[1];
+                    player.stats.defense += stat[2];
+                    player.stats.magic += stat[3];
+
+                    // Ensure HP does not exceed the new maximum
+                    if (player.stats.hp > player.stats.hpmax) player.stats.hp = player.stats.hpmax;
+                }
+
+                hasShopped = true;
+                return;
+            } else {
+                cout << "Not enough gold!\n";
+            }
+        } else {
+            cout << "Invalid choice!\n";
         }
-    
-        // ตรวจสอบว่าเพียงพอทองหรือไม่
-        int itemPrice = ItemPrice[itemChoice - 1];
-        if (player.getGold() < itemPrice) {
-            cout << "You don't have enough gold to buy this item!" << endl;
-            return;
-        }
-    
-        // ลดทองจากผู้เล่น
-        player.updateGold(-itemPrice);
-    
-        // เอาไอเทมที่ซื้อมาเพิ่มเข้าไปใน inventory
-        Equipment purchasedItem = ItemStats[itemChoice - 1];
-        player.equipItem(purchasedItem);
-    
-        // เพิ่ม stat จากไอเทมที่ซื้อ
-        vector<int> itemStats = purchasedItem.getStat();
-        player.stats.hpmax += itemStats[0];
-        player.stats.attack += itemStats[1];
-        player.stats.defense += itemStats[2];
-        player.stats.magic += itemStats[3];
-        
-        
-        hasShopped = true;
     }
+}
+
+NPC getRandomNPC() {
+    vector<string> npcNames = {
+        "A", "A", "A", "A", "A", "A", "A", "A", "A", "A",  // 10 ครั้ง (50%)
+        "B", "B", "B", "B", "B", "B", "B",                  // 7 ครั้ง (35%)
+        "Secretmaster", "Secretmaster", "Secretmaster"      // 3 ครั้ง (15%)
+    };
     
-    NPC getRandomNPC() {
-        vector<string> npcNames = {
-            "A", "A", "A", "A", "A", "A", "A", "A", "A", "A",  // 10 ครั้ง (50%)
-            "B", "B", "B", "B", "B", "B", "B",                  // 7 ครั้ง (35%)
-            "Secretmaster", "Secretmaster", "Secretmaster"      // 3 ครั้ง (15%)
-        };
-        
-        int randomIndex = rand() % npcNames.size(); // สุ่ม NPC ตามอัตราส่วน
-        return NPC(npcNames[randomIndex]);
+    int randomIndex = rand() % npcNames.size(); // สุ่ม NPC ตามอัตราส่วน
+    return NPC(npcNames[randomIndex]);
+}
+
+int main() {
+    int WR=0;
+    srand(time(0));
+    string playerName;
+    cout << "Enter player name: ";
+    getline(cin, playerName); //ตั้งชื่อ
+    Player player(playerName, 100, 20, 10, 5);
+    player.showStatus();
+    player.addXp(100); 
+    int playerLevel = player.getLevel();
+    Monster randomMon = MonsterFactory::randMonster(playerLevel);
+    Monster fixedMon = MonsterFactory::bossMonster();
+    randomMon.showStatus();
+    fixedMon.showStatus();
+    player.addGold(randomMon.getGoldDrop());// จำเป็นต้องเอาใส่โค้ตหลักไม่งั้น Gold ไม่เพื่ม
+    player.addXp(randomMon.getXpDrop());// จำเป็นต้องเอาใส่โค้ตหลักไม่งั้น XP ไม่เพื่ม
+    player.showStatus();
+    int attackChoice;
+    std::cout << "Choose attack: (1) Attack, (2) Skill, (3) Ultimate, (4) Heal\n";
+    std::cin >> attackChoice;
+
+    R result = battlesys(player, randomMon, attackChoice); // เรียกใช้ battlesys
+
+    std::cout << "You dealt " << result.D << " damage!\n";
+    switch(WR){
+        case 1:cout<<"player win"; break;
+        case 2:cout<<"monster win";break;}
+         cout << "\n--- Player Status After Battle ---\n";
+    player.showStatus();
+    cout << "\n--- Visiting a Shop ---\n";
+    NPC shopNPC = getRandomNPC();
+    shopNPC.sellItemToPlayer(player);
+    cout << "\n--- Player Status After Shopping ---\n";
+    player.showStatus();
+    Equipment sword(0, 10, 0, 0);  // Sword: +10 attack
+    Equipment shield(0, 0, 10, 0); // Shield: +10 defense
+    Equipment robe(20, 0, 0, 5);   // Robe: +20 HP, +5 magic
+
+    player.equipItem(sword);  // Add sword to inventory
+    player.equipItem(shield); // Add shield to inventory
+    player.equipItem(robe);   // Add robe to inventory
+
+    // Show initial status
+    cout << "\n--- Initial Player Status ---\n";
+    player.showStatus();
+
+    // Equip items from inventory using their indices
+    cout << "\n--- Equipping Sword (Index 0) ---\n";
+    player.equip(0);  // Equip the sword (index 0)
+    player.showStatus();
+
+    cout << "\n--- Equipping Shield (Index 1) ---\n";
+    player.equip(1);  // Equip the shield (index 1)
+    player.showStatus();
+
+    cout << "\n--- Equipping Robe (Index 2) ---\n";
+    player.equip(2);  // Equip the robe (index 2)
+    player.showStatus();
+
+    // Try equipping an extra item (should fail)
+    cout << "\n--- Trying to Equip Extra Item (Should Fail) ---\n";
+    player.equip(0);  // Try to equip the sword again (index 0)
+    player.showStatus();
+
+    // Test unequipping an item
+    cout << "\n--- Unequipping First Item (Index 0) ---\n";
+    player.unequip(0);  // Unequip the first item (sword)
+    player.showStatus();
+
+    return 0;
     }
-
-// int main() {
-//     int WR=0;
-//     srand(time(0));
-//     string playerName;
-//     cout << "Enter player name: ";
-//     getline(cin, playerName); //ตั้งชื่อ
-//     Player player(playerName, 100, 20, 10, 5);
-//     player.showStatus();
-//     player.addXp(100); 
-//     int playerLevel = player.getLevel();
-//     Monster randomMon = MonsterFactory::randMonster(playerLevel);
-//     Monster fixedMon = MonsterFactory::bossMonster();
-//     randomMon.showStatus();
-//     fixedMon.showStatus();
-//     player.addGold(randomMon.getGoldDrop());// จำเป็นต้องเอาใส่โค้ตหลักไม่งั้น Gold ไม่เพื่ม
-//     player.addXp(randomMon.getXpDrop());// จำเป็นต้องเอาใส่โค้ตหลักไม่งั้น XP ไม่เพื่ม
-//     player.showStatus();
-//     int attackChoice;
-//     std::cout << "Choose attack: (1) Attack, (2) Skill, (3) Ultimate, (4) Heal\n";
-//     std::cin >> attackChoice;
-
-//     R result = battlesys(player, randomMon, attackChoice); // เรียกใช้ battlesys
-
-//     std::cout << "You dealt " << result.D << " damage!\n";
-//     switch(WR){
-//         case 1:cout<<"player win"; break;
-//         case 2:cout<<"monster win";break;}
-//          cout << "\n--- Player Status After Battle ---\n";
-//     player.showStatus();
-//     cout << "\n--- Visiting a Shop ---\n";
-//     NPC shopNPC = getRandomNPC();
-//     shopNPC.sellItemToPlayer(player);
-//     cout << "\n--- Player Status After Shopping ---\n";
-//     player.showStatus();
-    
-
-//     return 0;
-// }
