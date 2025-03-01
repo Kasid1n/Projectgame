@@ -43,6 +43,7 @@ class Equipment {
         vector<string> sellItem;
         vector<int> ItemPrice;
         vector<Equipment> ItemStats;
+        bool hasShopped = false;  // เพิ่มตัวแปรเพื่อตรวจสอบว่าผู้เล่นได้ซื้อไปแล้วหรือยัง
     
         NPC(string name);
     
@@ -131,6 +132,12 @@ void NPC::shop() { // ขาย ดูว่าสุ่มได้ npc ตั�
 }
 
 void NPC::sellItemToPlayer(Player &player) { // ขายของให้
+    if (hasShopped) {
+        cout << "You have already purchased from " << npcname << ". You can't buy more this time!" << endl;
+        return;
+    }
+
+
     int choice;
     while (true) {
         shop();
@@ -159,6 +166,7 @@ void NPC::sellItemToPlayer(Player &player) { // ขายของให้
             cout << "Invalid choice!\n";
         }
     }
+    hasShopped = true ;
 }
 
 NPC getRandomNPC() {
