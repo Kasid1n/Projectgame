@@ -12,16 +12,13 @@ using namespace std;
 //Screen Output
 void sHUD();//Title
 void nHUD(int &);//Choice Hud, Main hud
-void blank();//blank screnn
-void bar();//cout bar
-void doASCii(string); //ASCii Art
-void doSlow(string); //Text Delay
-void doSlowF(string);
-void showeap(int);//gear show
-void spaceb();//press space bar
-HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);//Text setting
 
-void mon();//event mon
+
+void showeap(int);//gear show
+
+
+
+void mon(Player &);//event mon
 void shop();//event shop
 void box();//event chest
 void treasure();//event win
@@ -33,57 +30,10 @@ int startweap;//select start weapon
 vector<int> gear(3);//inventory
 
 
-void doASCii(string x){
-    string line="";
-    ifstream inFile;
-    inFile.open(x);
-    if(inFile.is_open())
-    {
-        while(getline(inFile,line)){
-            cout<<line<<endl;
-        }
-    }
-    else
-    cout<<"File failed to load";
-    inFile.close();
-}
-void doSlow(const string &text, int delay) {
-    for (char c : text) {
-        if (GetAsyncKeyState(VK_LCONTROL) & 0x8000) {  // Ctrl to Skip
-            continue; 
-        }
-        cout << c << flush;
-        Sleep(delay);  // Delay in milliseconds
-    };
-}
-void doSlowF(const string &text, int delay){
-    string line="";
-    ifstream inFile;
-    inFile.open(text);
-    if(inFile.is_open())
-    {
-        while(getline(inFile,line)){
-            
-            Sleep(10);  // Reduce CPU usage  
-            for (char c : line) {
-                if (GetAsyncKeyState(VK_LCONTROL) & 0x8000) {  // Ctrl to Skip
-                    continue; 
-                }
-                cout << c << flush;
-                Sleep(delay);  // Delay in milliseconds
-            };
-            cout<<endl; 
-        }
-    }
-    else
-    cout<<"File failed to load";
-    inFile.close();
-}
-
 
 
 void showeap(int s){
-
+    system("cls");
     SetConsoleTextAttribute(h,7);
     char choice;
     blank();
@@ -698,7 +648,7 @@ void event(int &i){//turn
 
 }
  
-void mon(){
+void mon(Player &player){
   system("cls");
   blank();
   bar();
@@ -706,8 +656,10 @@ void mon(){
   cout<<"\nPress Spacebar to continue.";
   spaceb();
   //Code battle
-
+  Monster randomMon = MonsterFactory::randMonster(11);
+  showbattle(player,randomMon);
   ////////
+  
 }
 
 void shop(){
@@ -755,3 +707,8 @@ spaceb();
 
 //
 }
+
+
+
+
+////////////////////////////////////////////////////////////////
