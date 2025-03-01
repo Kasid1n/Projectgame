@@ -159,6 +159,8 @@ void NPC::sellItemToPlayer(Player &player) { // ขายของให้
                 player.updateGold(-ItemPrice[index]); // ลบตัง
                 player.equipItem(ItemStats[index]); // ใส่
                 cout << "You bought " << sellItem[index] << "!\n";
+                hasShopped = true ;
+                return ;
             } else {
                 cout << "Not enough gold!\n";
             }
@@ -166,7 +168,6 @@ void NPC::sellItemToPlayer(Player &player) { // ขายของให้
             cout << "Invalid choice!\n";
         }
     }
-    hasShopped = true ;
 }
 
 NPC getRandomNPC() {
