@@ -21,6 +21,10 @@ class Equipment {
         vector<Equipment> inventory;
     
     public:
+        int hpmax ;
+        int attack ;
+        int defense ;
+        int magic ;
         Player(int initialGold) : gold(initialGold) {}
     
         int getGold() {
@@ -137,7 +141,6 @@ void NPC::sellItemToPlayer(Player &player) { // ขายของให้
         return;
     }
 
-
     int choice;
     while (true) {
         shop();
@@ -145,8 +148,8 @@ void NPC::sellItemToPlayer(Player &player) { // ขายของให้
         cout << "Enter item number (0 to exit): ";
 
         if (!(cin >> choice)) { // ตรวจสอบการป้อนข้อมูล
-            cin.clear(); // ป้อนไม่ถูก clear
-            cin.ignore(1000, '\n'); // ข้ามที่ป้อนผิด
+            cin.clear();
+            cin.ignore(1000, '\n');
             cout << "Invalid input! Please enter a number.\n";
             continue;
         }
@@ -155,12 +158,33 @@ void NPC::sellItemToPlayer(Player &player) { // ขายของให้
 
         if (choice > 0 && choice <= sellItem.size()) { // เลือก item ที่มี
             int index = choice - 1;
-            if (player.getGold() >= ItemPrice[index]) { // check gold
-                player.updateGold(-ItemPrice[index]); // ลบตัง
-                player.equipItem(ItemStats[index]); // ใส่
-                cout << "You bought " << sellItem[index] << "!\n";
-                hasShopped = true ;
-                return ;
+            if (player.getGold() >= ItemPrice[index]) { // ตรวจสอบเงิน
+                player.updateGold(-ItemPrice[index]); // หักเงิน
+
+                // ตรวจสอบว่าเป็น Potion หรือไม่
+                if (sellItem[index] == "Attack Potion") {
+                    int atkBoost = rand() % 5 + 10;
+                    player.attack += atkBoost;
+                    cout << "You used Attack Potion! Attack increased by " << atkBoost << "!\n";
+                } 
+                else if (sellItem[index] == "Heal Potion") {
+                    int healAmount = rand() % 10 + 10;
+                    player.hpmax += healAmount;
+                    cout << "You used Heal Potion! Max HP increased by " << healAmount << "!\n";
+                } 
+                else if (sellItem[index] == "Defense Potion") {
+                    int defBoost = rand() % 5 + 10;
+                    player.defense += defBoost;
+                    cout << "You used Defense Potion! Defense increased by " << defBoost << "!\n";
+                } 
+                else {
+                    // กรณีไอเทมอื่น (เช่น Necklace) ให้ใส่เข้า inventory
+                    player.equipItem(ItemStats[index]);
+                    cout << "You bought " << sellItem[index] << "!\n";
+                }
+
+                hasShopped = true;
+                return;
             } else {
                 cout << "Not enough gold!\n";
             }
@@ -180,7 +204,6 @@ NPC getRandomNPC() {
     int randomIndex = rand() % npcNames.size(); // สุ่ม NPC ตามอัตราส่วน
     return NPC(npcNames[randomIndex]);
 }
-
 
  
 // test
