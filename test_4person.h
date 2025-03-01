@@ -5,7 +5,7 @@
 #include <vector>
 using namespace std;
 
-struct R {
+struct R {//ไว้รับช้อย ของมอน ไปทำ hud
     int D,d,h;
 };
 R t;
