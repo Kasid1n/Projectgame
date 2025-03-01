@@ -463,19 +463,19 @@ class NPC {
                 ItemPrice.push_back(price);
     
                 // กำหนด stat ของ item
-                if (possibleItems[randIndex] == "Axe") {
-                    ItemStats.push_back(Equipment(0, 5, 0, 0));
-                } else if (possibleItems[randIndex] == "SuperAxe") {
-                    ItemStats.push_back(Equipment(0, 8, 0, 0));
-                } else if (possibleItems[randIndex] == "Sword") {
-                    ItemStats.push_back(Equipment(0, 10, 0, 0));
-                }
+            if (possibleItems[randIndex] == "Axe") {
+                ItemStats.push_back(Equipment(0, rand()%5 +10, 0, 0));
+            } else if (possibleItems[randIndex] == "SuperAxe") {
+                ItemStats.push_back(Equipment(0, rand()%8 +10, 0, 0));
+            } else if (possibleItems[randIndex] == "Sword") {
+                ItemStats.push_back(Equipment(0, rand()%10 +10, 0, 0));
+            }
             }
         }
         else if (npcname == "B") {
             // รายการของไอเทมที่ B สามารถขาย
-            vector<string> possibleItems = {"Shield", "Better Shield"};
-            int numItems = rand() % 2 + 1;  // ขาย 1 ถึง 2 ไอเทม
+            vector<string> possibleItems = {"Shield", "Better Shield","Armor"};
+            int numItems = rand() % 3 + 1;  // ขาย 1 ถึง 3 ไอเทม
     
             for (int i = 0; i < numItems; i++) {
                 int randIndex = rand() % possibleItems.size();
@@ -485,15 +485,17 @@ class NPC {
     
                 // กำหนดสถิติของไอเทมที่ขาย
                 if (possibleItems[randIndex] == "Shield") {
-                    ItemStats.push_back(Equipment(0, 0, 5, 0));
+                    ItemStats.push_back(Equipment(0, 0, rand()%5 +10, 0));
                 } else if (possibleItems[randIndex] == "Better Shield") {
-                    ItemStats.push_back(Equipment(0, 0, 8, 0));
+                    ItemStats.push_back(Equipment(0, 0, rand() % 8 +10, 0));
+                } else if (possibleItems[randIndex] == "Armor") {
+                    ItemStats.push_back(Equipment(0, 0, rand()%10 + 10, 0));
                 }
             }
         }
         else if (npcname == "Secretmaster") {
-            vector<string> secretItems = {"Attack Potion", "Heal Potion", "Defense Potion"};
-            int numItems = rand() % 3 + 1;
+            vector<string> secretItems = {"Attack Potion", "Heal Potion", "Defense Potion", "Necklace"};
+            int numItems = rand() % 4 + 1;
     
             for (int i = 0; i < numItems; i++) {
                 int randIndex = rand() % secretItems.size();
@@ -502,11 +504,13 @@ class NPC {
                 ItemPrice.push_back(price);
     
                 if (secretItems[randIndex] == "Attack Potion") {
-                    ItemStats.push_back(Equipment(0, 5, 0, 0));
+                    ItemStats.push_back(Equipment(0, rand()%5 +10, 0, 0));
                 } else if (secretItems[randIndex] == "Heal Potion") {
-                    ItemStats.push_back(Equipment(10, 0, 0, 0));
+                    ItemStats.push_back(Equipment(rand()%10 +10, 0, 0, 0));
+                } else if (secretItems[randIndex] == "Defense Potion"){
+                    ItemStats.push_back(Equipment(0, 0, rand()%5 +10, 0));
                 } else {
-                    ItemStats.push_back(Equipment(0, 0, 5, 0));
+                    ItemStats.push_back(Equipment(0, 0, 0, rand()%5 + 10 )) ;
                 }
             }
         }
@@ -514,9 +518,15 @@ class NPC {
     
     void NPC::shop() { // ขาย ดูว่าสุ่มได้ npc ตัวไหนขายตามนั้น
         cout << npcname << "'s Shop\n";
-        for (size_t i = 0; i < sellItem.size(); i++) {
-            cout << i + 1 << ". " << sellItem[i] << " (Price: " << ItemPrice[i] << ")\n";
-        }
+    for (size_t i = 0; i < sellItem.size(); i++) {
+        cout << i + 1 << ". " << sellItem[i] << "  ( Price: " << ItemPrice[i] << " )\n";
+             // ใช้ getStat() เพื่อดึงค่า stats
+             vector<int> stats = ItemStats[i].getStat();  
+             cout << "Attack+: " << stats[1] << " ";
+             cout << "Defense+: " << stats[2] << " ";
+             cout << "Health+: " << stats[0] << " ";
+             cout << "Magic+: " << stats[3] << endl;
+         }
     }
     
     void NPC::sellItemToPlayer(Player &player) {
