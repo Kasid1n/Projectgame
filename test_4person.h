@@ -441,6 +441,7 @@ class NPC {
         vector<string> sellItem;  // ขายของ
         vector<int> ItemPrice;  // ราคา
         vector<Equipment> ItemStats;  // addstat
+        bool hasShopped = false;  // เพิ่มตัวแปรเพื่อตรวจสอบว่าผู้เล่นได้ซื้อไปแล้วหรือยัง
     
     public:
         NPC(string name);
@@ -530,6 +531,11 @@ class NPC {
     }
     
     void NPC::sellItemToPlayer(Player &player) {
+        if (hasShopped) {
+        cout << "You have already purchased from " << npcname << ". You can't buy more this time!" << endl;
+        return;
+    }
+
         cout << npcname << " offers the following items for sale:" << endl;
         for (int i = 0; i < sellItem.size(); i++) {
             cout << i + 1 << ". " << sellItem[i] << " - Price: " << ItemPrice[i] << " Gold" << endl;
@@ -572,6 +578,9 @@ class NPC {
         player.stats.attack += itemStats[1];
         player.stats.defense += itemStats[2];
         player.stats.magic += itemStats[3];
+        
+        
+        hasShopped = true;
     }
     
     NPC getRandomNPC() {
@@ -585,41 +594,41 @@ class NPC {
         return NPC(npcNames[randomIndex]);
     }
 
-// int main() {
-//     int WR=0;
-//     srand(time(0));
-//     string playerName;
-//     cout << "Enter player name: ";
-//     getline(cin, playerName); //ตั้งชื่อ
-//     Player player(playerName, 100, 20, 10, 5);
-//     player.showStatus();
-//     player.addXp(100); 
-//     int playerLevel = player.getLevel();
-//     Monster randomMon = MonsterFactory::randMonster(playerLevel);
-//     Monster fixedMon = MonsterFactory::bossMonster();
-//     randomMon.showStatus();
-//     fixedMon.showStatus();
-//     player.addGold(randomMon.getGoldDrop());// จำเป็นต้องเอาใส่โค้ตหลักไม่งั้น Gold ไม่เพื่ม
-//     player.addXp(randomMon.getXpDrop());// จำเป็นต้องเอาใส่โค้ตหลักไม่งั้น XP ไม่เพื่ม
-//     player.showStatus();
-//     int attackChoice;
-//     std::cout << "Choose attack: (1) Attack, (2) Skill, (3) Ultimate, (4) Heal\n";
-//     std::cin >> attackChoice;
+int main() {
+    int WR=0;
+    srand(time(0));
+    string playerName;
+    cout << "Enter player name: ";
+    getline(cin, playerName); //ตั้งชื่อ
+    Player player(playerName, 100, 20, 10, 5);
+    player.showStatus();
+    player.addXp(100); 
+    int playerLevel = player.getLevel();
+    Monster randomMon = MonsterFactory::randMonster(playerLevel);
+    Monster fixedMon = MonsterFactory::bossMonster();
+    randomMon.showStatus();
+    fixedMon.showStatus();
+    player.addGold(randomMon.getGoldDrop());// จำเป็นต้องเอาใส่โค้ตหลักไม่งั้น Gold ไม่เพื่ม
+    player.addXp(randomMon.getXpDrop());// จำเป็นต้องเอาใส่โค้ตหลักไม่งั้น XP ไม่เพื่ม
+    player.showStatus();
+    int attackChoice;
+    std::cout << "Choose attack: (1) Attack, (2) Skill, (3) Ultimate, (4) Heal\n";
+    std::cin >> attackChoice;
 
-//     R result = battlesys(player, randomMon, attackChoice); // เรียกใช้ battlesys
+    R result = battlesys(player, randomMon, attackChoice); // เรียกใช้ battlesys
 
-//     std::cout << "You dealt " << result.D << " damage!\n";
-//     switch(WR){
-//         case 1:cout<<"player win"; break;
-//         case 2:cout<<"monster win";break;}
-//          cout << "\n--- Player Status After Battle ---\n";
-//     player.showStatus();
-//     cout << "\n--- Visiting a Shop ---\n";
-//     NPC shopNPC = getRandomNPC();
-//     shopNPC.sellItemToPlayer(player);
-//     cout << "\n--- Player Status After Shopping ---\n";
-//     player.showStatus();
+    std::cout << "You dealt " << result.D << " damage!\n";
+    switch(WR){
+        case 1:cout<<"player win"; break;
+        case 2:cout<<"monster win";break;}
+         cout << "\n--- Player Status After Battle ---\n";
+    player.showStatus();
+    cout << "\n--- Visiting a Shop ---\n";
+    NPC shopNPC = getRandomNPC();
+    shopNPC.sellItemToPlayer(player);
+    cout << "\n--- Player Status After Shopping ---\n";
+    player.showStatus();
     
 
-//     return 0;
-// }
+    return 0;
+}
