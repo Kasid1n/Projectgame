@@ -10,6 +10,7 @@ void doASCii(string); //ASCii Art
 void doSlow(string); //Text Delay
 void doSlowF(string);
 void spaceb();//press space bar
+void enter();
 
 HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);//Text setting
 
@@ -61,4 +62,30 @@ void doSlowF(const string &text, int delay){
     inFile.close();
 }
 
-  
+void blank(){
+    for(int i =0;i<24;i++){
+        cout<<endl;
+    }
+} 
+
+void enter() {
+    int pressCount = 0;
+    SetConsoleTextAttribute(h,15);
+    cout << "Press Enter to continue.";
+    while (true) {
+        
+        // ตรวจสอบการกดปุ่ม "Enter"
+        if (GetAsyncKeyState(0x0D) & 0x8000) {
+            pressCount++; 
+
+            if (pressCount == 2) {
+                return;
+            }
+
+            while (GetAsyncKeyState(0x0D) & 0x8000) {
+                Sleep(10);
+            }
+        }
+        Sleep(10);
+    }
+}

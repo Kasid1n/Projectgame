@@ -4,91 +4,21 @@
 #include <cstdlib>
 #include<iomanip>
 #include"test_4person.h"
+#include"Qol.h"
 using namespace std;
 
 //Screen Output
 void sHUD();//Title
-void nHUD();
 void mon();
 void hero();
-void blank();
  //entity show
 void showgaveup(string);
 void showwin();
 void showlose();
 void showAT();
 void showDE();
-void doASCii(string); //ASCii Art
-void doSlow(string); //Text Delay
-void doSlowF(string);
-HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);//Text setting
  
-void enter() {
-    int pressCount = 0;
-    SetConsoleTextAttribute(h,15);
-    cout << "Press Enter to continue.";
-    while (true) {
-        
-        // ตรวจสอบการกดปุ่ม "Enter"
-        if (GetAsyncKeyState(0x0D) & 0x8000) {
-            pressCount++; 
 
-            if (pressCount == 2) {
-                return;
-            }
-
-            while (GetAsyncKeyState(0x0D) & 0x8000) {
-                Sleep(10);
-            }
-        }
-        Sleep(10);
-    }
-}
-
-void doASCii(string x){
-    string line="";
-    ifstream inFile;
-    inFile.open(x);
-    if(inFile.is_open())
-    {
-        while(getline(inFile,line)){
-            cout<<line<<endl;
-        }
-    }
-    else
-    cout<<"File failed to load";
-    inFile.close();
-}
-void doSlow(const string &text, int delay) {
-    for (char c : text) {
-        cout << c << flush;
-        Sleep(delay);  // Delay in milliseconds
-    }
-    cout<<endl;
-}
-void doSlowF(const string &text, int delay){
-    string line="";
-    ifstream inFile;
-    inFile.open(text);
-    if(inFile.is_open())
-    {
-        while(getline(inFile,line)){
-            
-            Sleep(10);  // Reduce CPU usage  
-            for (char c : line) {
-                if (GetAsyncKeyState(VK_LCONTROL) & 0x8000) {  // Ctrl to Skip
-                    continue; 
-                }
-                cout << c << flush;
-                Sleep(delay);  // Delay in milliseconds
-            }
-            cout<<endl;
-        }
-    }
-    else
-    cout<<"File failed to load";
-    inFile.close();
-}
 
 void sHUD(){
     SetConsoleTextAttribute(h,4);//Text Color Red
@@ -122,12 +52,7 @@ void hero(Player &A){
     cout<< A.name << " | HP : "<< A.hp << "/" << A.hpmax <<"\n";
     cout<<"=====================================================\n";
 }
-
-void blank(){
-    for(int i =0;i<24;i++){
-        cout<<endl;
-    }
-}  
+  
 
 
 /*void showgaveup(string x){
@@ -163,7 +88,6 @@ void showlose (){
 
 
 void showAT(Player &A, Monster &B){
-    blank();
     SetConsoleTextAttribute(h,15);//Green
     cout << "╔════════════════════════════════════════════════════════════════════════════╗\n";
     cout << "║                             TURN TO ATTACK                                 ║\n";
@@ -222,7 +146,6 @@ void showAT(Player &A, Monster &B){
 }
 
 void showDE(Player &A, Monster &B){
-    blank();
     SetConsoleTextAttribute(h,15);
     cout << "╔════════════════════════════════════════════════════════════════════════════╗\n";
     cout << "║                             TURN TO DEFENSE                                ║\n";
