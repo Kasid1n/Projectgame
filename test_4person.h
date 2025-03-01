@@ -242,6 +242,15 @@ public:
         static Monster fixedMonster("Dragonlord", 22, 222, 22, 22, 22, 222, 222);
         return fixedMonster;
     }
+    static Monster bossMonster() {
+        int randomValue = rand() % 10; // สุ่มค่า 0-9
+
+        if (randomValue < 6) { // ถ้าค่าที่สุ่มได้น้อยกว่า 6 (0,1,2,3,4,5)
+            return bossMonster1(); // 60% ที่จะได้ ApocalypseSoulsBoss
+        } else { // ถ้าค่าที่สุ่มได้เป็น 6,7,8,9
+            return bossMonster2(); // 40% ที่จะได้ Dragonlord
+        }
+    }
 };
 
 int AttackChoice() {/*อันนี้ช้อยของเพลเยอร์*/
@@ -576,7 +585,7 @@ class NPC {
 //     player.addXp(100); 
 //     int playerLevel = player.getLevel();
 //     Monster randomMon = MonsterFactory::randMonster(playerLevel);
-//     Monster fixedMon = MonsterFactory::bossMonster1();
+//     Monster fixedMon = MonsterFactory::bossMonster();
 //     randomMon.showStatus();
 //     fixedMon.showStatus();
 //     player.addGold(randomMon.getGoldDrop());// จำเป็นต้องเอาใส่โค้ตหลักไม่งั้น Gold ไม่เพื่ม
