@@ -602,27 +602,27 @@ class NPC {
         return NPC(npcNames[randomIndex]);
     }
 
-int main() {
-    int WR=0;
-    srand(time(0));
-    string playerName;
-    cout << "Enter player name: ";
-    getline(cin, playerName); //ตั้งชื่อ
-    Player player(playerName, 100, 20, 10, 5);
-    player.showStatus();
-    player.addXp(200); 
-    int playerLevel = player.getLevel();
-    Monster randomMon = MonsterFactory::randMonster(playerLevel);
-    Monster fixedMon = MonsterFactory::bossMonster1();
-    randomMon.showStatus();
-    fixedMon.showStatus();
-    player.addGold(randomMon.getGoldDrop());// จำเป็นต้องเอาใส่โค้ตหลักไม่งั้น Gold ไม่เพื่ม
-    player.addXp(randomMon.getXpDrop());// จำเป็นต้องเอาใส่โค้ตหลักไม่งั้น XP ไม่เพื่ม
-    player.showStatus();
-    battle(player, randomMon);
-    switch(WR){
-        case 1:cout<<"player win"; break;
-        case 2:cout<<"monster win";break;}
+// int main() {
+//     int WR=0;
+//     srand(time(0));
+//     string playerName;
+//     cout << "Enter player name: ";
+//     getline(cin, playerName); //ตั้งชื่อ
+//     Player player(playerName, 100, 20, 10, 5);
+//     player.showStatus();
+//     player.addXp(200); 
+//     int playerLevel = player.getLevel();
+//     Monster randomMon = MonsterFactory::randMonster(playerLevel);
+//     Monster fixedMon = MonsterFactory::bossMonster1();
+//     randomMon.showStatus();
+//     fixedMon.showStatus();
+//     player.addGold(randomMon.getGoldDrop());// จำเป็นต้องเอาใส่โค้ตหลักไม่งั้น Gold ไม่เพื่ม
+//     player.addXp(randomMon.getXpDrop());// จำเป็นต้องเอาใส่โค้ตหลักไม่งั้น XP ไม่เพื่ม
+//     player.showStatus();
+//     battle(player, randomMon);
+//     switch(WR){
+//         case 1:cout<<"player win"; break;
+//         case 2:cout<<"monster win";break;}
 
-    return 0;
-}
+//     return 0;
+// }
