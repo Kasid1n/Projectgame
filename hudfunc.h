@@ -687,12 +687,12 @@ void event(int &i){//turn
     else if(r>60 && r<=70){
       box();
     }
-    else if(r>70 && r<=80){//จบเกม
+    else if(r>70 && r<=100){//จบเกม
       treasure();
     }
-    else if(r>80 && r<=100){
-      boss();
-    }
+    // else if(r>80 && r<=100){
+    //   boss();
+    // }
     
 }
 
@@ -729,8 +729,6 @@ doASCii("ascii_folder/Grail.txt");
 
 bar();
 doSlow("You found what you came here for!",50);
-cout<<"\nPress Spacebar to continue.";
-spaceb();
 doASCii("ascii_folder/WIN.txt");
 }
 
