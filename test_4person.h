@@ -9,7 +9,19 @@ struct R {
     int D,d,h;
 };
 R t;
-//ของแชมป์
+class Equipment {
+    int hpmax;
+    int atk;
+    int def;
+    int magic;
+public:
+    Equipment(int h, int a, int d, int m) : hpmax(h), atk(a), def(d), magic(m) {}
+
+    vector<int> getStat() {
+        return {hpmax, atk, def, magic};
+    }
+};
+
 class Stats {
 public:
     int hp;
@@ -17,7 +29,8 @@ public:
     int attack;
     int defense;
     int magic;
-    
+    vector<Equipment*> equipmentList; // รายการอุปกรณ์
+
     Stats(int hpmax, int attack, int defense, int magic)
         : hpmax(hpmax), attack(attack), defense(defense), magic(magic) {
         hp = hpmax;
@@ -26,14 +39,16 @@ public:
     void start() {
         hp = hpmax;
     }
-//ค่าสถานะ
+
+    // แสดงค่าค่าสถานะ
     void showStats() const {
         cout << "HP: " << hp << "/" << hpmax << endl;
         cout << "Attack: " << attack << endl;
         cout << "Defense: " << defense << endl;
         cout << "Magic: " << magic << endl;
     }
-//เพื่มค่าสถานะ
+
+    // เพิ่มค่าสถานะ
     void increaseStat(int choice) {
         switch (choice) {
             case 1: hpmax += 10; hp = hpmax; break;
@@ -43,17 +58,48 @@ public:
             default: cout << "Invalid choice!" << endl; break;
         }
     }
+
+    // ใส่อุปกรณ์
+    void equip(Equipment* eq) {
+        if (equipmentList.size() >= 3) {
+            cout << "Cannot equip more than 3 items." << endl;
+            return;
+        }
+        equipmentList.push_back(eq);
+        vector<int> stat = eq->getStat();
+        hpmax += stat[0];
+        attack += stat[1];
+        defense += stat[2];
+        magic += stat[3];
+
+        if (hp > hpmax) hp = hpmax; // ปรับ HP ไม่ให้เกิน
+    }
+
+    // ถอดอุปกรณ์
+    void unequip(int index) {
+        if (index < 0 || index >= equipmentList.size()) {
+            cout << "Invalid equipment index." << endl;
+            return;
+        }
+
+        vector<int> stat = equipmentList[index]->getStat();
+        hpmax -= stat[0];
+        attack -= stat[1];
+        defense -= stat[2];
+        magic -= stat[3];
+
+        equipmentList.erase(equipmentList.begin() + index);
+
+        if (hp > hpmax) hp = hpmax; // ปรับ HP ไม่ให้เกิน
+    }
+
+    // นับจำนวนอุปกรณ์ที่สวมใส่
+    int getEquipmentCount() {
+        return equipmentList.size();
+    }
 };
 
-class Equipment {
-    int hpmax;
-    int atk;
-    int def;
-    int magic;
-public:
-    Equipment(int h, int a, int d, int m);
-    vector<int> getStat();
-};
+
 
 class Player {
 public:
@@ -284,12 +330,8 @@ R battlesys(Player &A, Monster &B, int attack) {/*เพราะมอนกั
 
     if (countered==true) {/*รีเทินดาเมทของอันติ*/
         A.hp -= dmg;
-        if (A.hp<0)
-        { A.hp=0;}
     } else {/*โดนดาเมทธรรมดา*/
         B.hp -= dmg;
-        if (B.hp<0)
-        { B.hp=0;}
     }
     /*cout << A.name << " did " << dmg << " damage\n";
     cout << B.name << " lost " << dmg << " HP\n";
@@ -365,13 +407,8 @@ R battlesys(Monster &A, Player &B, int defense) {/*มอนกันคนต�
 
     if (countered==true) {
         A.hp -= dmg;
-        if (A.hp<0)
-        { A.hp=0;}
-        
     } else {
         B.hp -= dmg;
-        if (B.hp<0)
-        { B.hp=0;}
     }
    /* cout << A.name << " did " << dmg << " damage\n";
     cout << B.name << " lost " << dmg << " HP\n";
@@ -386,92 +423,6 @@ R battlesys(Monster &A, Player &B, int defense) {/*มอนกันคนต�
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //ของมิค
 
-Equipment::Equipment(int h, int a, int d, int m) {
-    hpmax = h;
-    atk = a;
-    def = d;
-    magic = m;
-}
-
-vector<int> Equipment::getStat() {
-    vector<int> stats = {hpmax, atk, def, magic};
-    return stats;
-}
-
-class Statseq {
-    int hp;
-    int hpmax;
-    int attack;
-    int defense; 
-    int magic;
-    vector<Equipment*> equipmentList;
-
-public:
-    Statseq(int h, int a, int d, int m);
-    void start(); 
-    void equip(Equipment* eq); 
-    void unequip(int index); 
-    void printStats(); 
-    int getEquipmentCount();
-};
-int Statseq::getEquipmentCount() {
-    return equipmentList.size();
-}
-Statseq::Statseq(int h, int a, int d, int m) {
-    hpmax = h;
-    hp = h; // Initialize hp to max at the start
-    attack = a;
-    defense = d;
-    magic = m;
-}
-
-void Statseq::start() {
-    hp = hpmax; 
-}
-
-void Statseq::equip(Equipment* eq) {
-    if (equipmentList.size() >= 3) {
-        cout << "Cannot equip more than 3 items." << endl;
-        return;
-    }
-
-    equipmentList.push_back(eq);
-    vector<int> stat = eq->getStat();
-    hpmax += stat[0];
-    attack += stat[1];
-    defense += stat[2];
-    magic += stat[3];
-
-    if (hp > hpmax) {
-        hp = hpmax; 
-    }
-}
-
-void Statseq::unequip(int index) {
-    if (index < 0 || index >= equipmentList.size()) {
-        cout << "Invalid equipment index." << endl;
-        return;
-    }
- 
-    vector<int> stat = equipmentList[index]->getStat();
-    hpmax -= stat[0];
-    attack -= stat[1];
-    defense -= stat[2];
-    magic -= stat[3];
-
-    equipmentList.erase(equipmentList.begin() + index);
-
-    if (hp > hpmax) {
-        hp = hpmax; 
-    }
-}
-
-void Statseq::printStats() {
-    cout << "HP: " << hp << "/" << hpmax << endl;
-    cout << "Attack: " << attack << endl;
-    cout << "Defense: " << defense << endl;
-    cout << "Magic: " << magic << endl;
-}
 
 //guitar
 
@@ -559,35 +510,48 @@ class NPC {
         }
     }
     
-    void NPC::sellItemToPlayer(Player &player) { // ขายของให้
-        int choice;
-        while (true) {
-            shop();
-            cout << "Your Gold: " << player.getGold() << endl;
-            cout << "Enter item number (0 to exit): ";
-    
-            if (!(cin >> choice)) { // ตรวจสอบการป้อนข้อมูล
-                cin.clear(); // ป้อนไม่ถูก clear
-                cin.ignore(1000, '\n'); // ข้ามที่ป้อนผิด
-                cout << "Invalid input! Please enter a number.\n";
-                continue;
-            }
-    
-            if (choice == 0) break;
-    
-            if (choice > 0 && choice <= sellItem.size()) { // เลือก item ที่มี
-                int index = choice - 1;
-                if (player.getGold() >= ItemPrice[index]) { // check gold
-                    player.updateGold(-ItemPrice[index]); // ลบตัง
-                    player.equipItem(ItemStats[index]); // ใส่
-                    cout << "You bought " << sellItem[index] << "!\n";
-                } else {
-                    cout << "Not enough gold!\n";
-                }
-            } else {
-                cout << "Invalid choice!\n";
-            }
+    void NPC::sellItemToPlayer(Player &player) {
+        cout << npcname << " offers the following items for sale:" << endl;
+        for (int i = 0; i < sellItem.size(); i++) {
+            cout << i + 1 << ". " << sellItem[i] << " - Price: " << ItemPrice[i] << " Gold" << endl;
         }
+        
+    
+        int itemChoice;
+        cout << "Enter the number of the item you want to buy (or 0 to exit): ";
+        cin >> itemChoice;
+    
+        if (itemChoice == 0) {
+            cout << "Exiting the shop..." << endl;
+            return;
+        }
+    
+        // ตรวจสอบว่าไอเทมที่เลือกถูกต้อง
+        if (itemChoice < 1 || itemChoice > sellItem.size()) {
+            cout << "Invalid choice!" << endl;
+            return;
+        }
+    
+        // ตรวจสอบว่าเพียงพอทองหรือไม่
+        int itemPrice = ItemPrice[itemChoice - 1];
+        if (player.getGold() < itemPrice) {
+            cout << "You don't have enough gold to buy this item!" << endl;
+            return;
+        }
+    
+        // ลดทองจากผู้เล่น
+        player.updateGold(-itemPrice);
+    
+        // เอาไอเทมที่ซื้อมาเพิ่มเข้าไปใน inventory
+        Equipment purchasedItem = ItemStats[itemChoice - 1];
+        player.equipItem(purchasedItem);
+    
+        // เพิ่ม stat จากไอเทมที่ซื้อ
+        vector<int> itemStats = purchasedItem.getStat();
+        player.stats.hpmax += itemStats[0];
+        player.stats.attack += itemStats[1];
+        player.stats.defense += itemStats[2];
+        player.stats.magic += itemStats[3];
     }
     
     NPC getRandomNPC() {
@@ -601,35 +565,41 @@ class NPC {
         return NPC(npcNames[randomIndex]);
     }
 
-/*int main() {
-    int WR=0;
-    srand(time(0));
-    string playerName;
-    cout << "Enter player name: ";
-    getline(cin, playerName); //ตั้งชื่อ
-    Player player(playerName, 100, 20, 10, 5);
-    player.showStatus();
-    player.addXp(10); 
-    int playerLevel = player.getLevel();
-    Monster randomMon = MonsterFactory::randMonster(playerLevel);
-    Monster fixedMon = MonsterFactory::bossMonster1();
-    randomMon.showStatus();
-    fixedMon.showStatus();
-    player.addGold(randomMon.getGoldDrop());// จำเป็นต้องเอาใส่โค้ตหลักไม่งั้น Gold ไม่เพื่ม
-    player.addXp(randomMon.getXpDrop());// จำเป็นต้องเอาใส่โค้ตหลักไม่งั้น XP ไม่เพื่ม
-    player.showStatus();
-    battle(player, randomMon);
-    switch(WR){
-        case 1:cout<<"player win"; break;
-        case 2:cout<<"monster win";break;}
-         cout << "\n--- Player Status After Battle ---\n";
-    player.showStatus();
-    cout << "\n--- Visiting a Shop ---\n";
-    NPC shopNPC = getRandomNPC();
-    shopNPC.sellItemToPlayer(player);
-    cout << "\n--- Player Status After Shopping ---\n";
-    player.showStatus();
+// int main() {
+//     int WR=0;
+//     srand(time(0));
+//     string playerName;
+//     cout << "Enter player name: ";
+//     getline(cin, playerName); //ตั้งชื่อ
+//     Player player(playerName, 100, 20, 10, 5);
+//     player.showStatus();
+//     player.addXp(100); 
+//     int playerLevel = player.getLevel();
+//     Monster randomMon = MonsterFactory::randMonster(playerLevel);
+//     Monster fixedMon = MonsterFactory::bossMonster1();
+//     randomMon.showStatus();
+//     fixedMon.showStatus();
+//     player.addGold(randomMon.getGoldDrop());// จำเป็นต้องเอาใส่โค้ตหลักไม่งั้น Gold ไม่เพื่ม
+//     player.addXp(randomMon.getXpDrop());// จำเป็นต้องเอาใส่โค้ตหลักไม่งั้น XP ไม่เพื่ม
+//     player.showStatus();
+//     int attackChoice;
+//     std::cout << "Choose attack: (1) Attack, (2) Skill, (3) Ultimate, (4) Heal\n";
+//     std::cin >> attackChoice;
+
+//     R result = battlesys(player, randomMon, attackChoice); // เรียกใช้ battlesys
+
+//     std::cout << "You dealt " << result.D << " damage!\n";
+//     switch(WR){
+//         case 1:cout<<"player win"; break;
+//         case 2:cout<<"monster win";break;}
+//          cout << "\n--- Player Status After Battle ---\n";
+//     player.showStatus();
+//     cout << "\n--- Visiting a Shop ---\n";
+//     NPC shopNPC = getRandomNPC();
+//     shopNPC.sellItemToPlayer(player);
+//     cout << "\n--- Player Status After Shopping ---\n";
+//     player.showStatus();
     
 
-    return 0;
-}*/
+//     return 0;
+// }
