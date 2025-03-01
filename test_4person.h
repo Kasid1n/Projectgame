@@ -537,6 +537,7 @@ class NPC {
         
     
         int itemChoice;
+        cout << "Your Gold: " << player.getGold() << endl;
         cout << "Enter the number of the item you want to buy (or 0 to exit): ";
         cin >> itemChoice;
     
