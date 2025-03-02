@@ -175,17 +175,17 @@ int hpmax=stats.hpmax,hp=stats.hp,attack=stats.attack,defense=stats.defense,magi
             }
         } else {
             // หากไม่มีช่องว่าง ให้ผู้เล่นเลือกช่องที่จะแทนที่
-            cout << "Equipment slots are full. Choose a slot to replace (1-3) or cancel (-1): ";
-            int choice;
-            cin >> choice;
+            int choice = 0;
+            while (choice < 1 || choice > 3) {
+                cout << "Equipment slots are full. Choose a slot to replace (1-3) or cancel (-1): ";
+                cin >> choice;
     
-            // ตรวจสอบการเลือก
-            if (choice == -1) {
-                cout << "Equip action cancelled.\n";
-                return;
-            } else if (choice < 1 || choice > 3) {
-                cout << "Invalid choice!\n";
-                return;
+                if (choice == -1) {
+                    cout << "Equip action cancelled.\n";
+                    return;
+                } else if (choice < 1 || choice > 3) {
+                    cout << "Invalid choice! Please enter a number between 1 and 3.\n";
+                }
             }
     
             // ถอดอุปกรณ์เดิม (ถ้ามี)
@@ -291,20 +291,20 @@ int hpmax=stats.hpmax,hp=stats.hp,attack=stats.attack,defense=stats.defense,magi
         }
     
         // ให้ผู้เล่นเลือกช่องที่ต้องการถอด
-        int choice;
-        cout << "Enter the slot number to unequip (1-3, or -1 to cancel): ";
-        cin >> choice;
+        int choice = 0;
+        while (choice < 1 || choice > 3) {
+            cout << "Enter the slot number to unequip (1-3, or -1 to cancel): ";
+            cin >> choice;
     
-        // ตรวจสอบการเลือก
-        if (choice == -1) {
-            cout << "Unequip cancelled.\n";
-            return;
-        } else if (choice < 1 || choice > 3) {
-            cout << "Invalid slot number!\n";
-            return;
-        } else if (equipmentList[choice - 1] == nullptr) {
-            cout << "This slot is already empty!\n";
-            return;
+            if (choice == -1) {
+                cout << "Unequip cancelled.\n";
+                return;
+            } else if (choice < 1 || choice > 3) {
+                cout << "Invalid slot number! Please enter a number between 1 and 3.\n";
+            } else if (equipmentList[choice - 1] == nullptr) {
+                cout << "This slot is already empty!\n";
+                choice = 0; // วนกลับมาให้เลือกใหม่
+            }
         }
     
         // ถอดอุปกรณ์
@@ -363,17 +363,17 @@ int hpmax=stats.hpmax,hp=stats.hp,attack=stats.attack,defense=stats.defense,magi
         }
     
         // ให้ผู้เล่นเลือกอุปกรณ์จาก Inventory
-        int choice;
-        cout << "Enter the item number to equip (0 to cancel): ";
-        cin >> choice;
+        int choice = 0;
+        while (choice < 1 || choice > inventory.size()) {
+            cout << "Enter the item number to equip (0 to cancel): ";
+            cin >> choice;
     
-        // ตรวจสอบการเลือก
-        if (choice == 0) {
-            cout << "Equip action cancelled.\n";
-            return;
-        } else if (choice < 1 || choice > inventory.size()) {
-            cout << "Invalid choice!\n";
-            return;
+            if (choice == 0) {
+                cout << "Equip action cancelled.\n";
+                return;
+            } else if (choice < 1 || choice > inventory.size()) {
+                cout << "Invalid choice! Please enter a number between 1 and " << inventory.size() << ".\n";
+            }
         }
     
         // เลือกอุปกรณ์จาก Inventory
@@ -417,17 +417,17 @@ int hpmax=stats.hpmax,hp=stats.hp,attack=stats.attack,defense=stats.defense,magi
             }
         } else {
             // หากไม่มีช่องว่าง ให้ผู้เล่นเลือกช่องที่จะแทนที่
-            cout << "Choose a slot to replace (1-3) or cancel (-1): ";
-            int slotChoice;
-            cin >> slotChoice;
+            int slotChoice = 0;
+            while (slotChoice < 1 || slotChoice > 3) {
+                cout << "Choose a slot to replace (1-3) or cancel (-1): ";
+                cin >> slotChoice;
     
-            // ตรวจสอบการเลือกช่อง
-            if (slotChoice == -1) {
-                cout << "Equip action cancelled.\n";
-                return;
-            } else if (slotChoice < 1 || slotChoice > 3) {
-                cout << "Invalid slot choice!\n";
-                return;
+                if (slotChoice == -1) {
+                    cout << "Equip action cancelled.\n";
+                    return;
+                } else if (slotChoice < 1 || slotChoice > 3) {
+                    cout << "Invalid slot choice! Please enter a number between 1 and 3.\n";
+                }
             }
     
             // ถอดอุปกรณ์เดิม (ถ้ามี)
