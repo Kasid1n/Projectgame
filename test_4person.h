@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-#ifndef TEST_4PERSON_H
-#define TEST_4PERSON_H
-=======
 #ifndef TEST_4PERSON.H 
 #define TEST_4PERSON.H 
->>>>>>> 916fa050544a25329bed277a88fc2680b717c9a2
 #include <iostream>
 #include <string>
 #include <ctime>
