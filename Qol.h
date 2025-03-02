@@ -1,5 +1,5 @@
-#ifndef QOL.H
-#define QOL.H
+#ifndef QOL_H
+#define QOL_H
 
 #include<iostream>
 #include<fstream>
