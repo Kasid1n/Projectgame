@@ -74,9 +74,9 @@ void hero(Player &A){
 
 void showwin(){ 
     SetConsoleTextAttribute(h,15);//white
-    cout << endl;
-    doASCii("ascii_folder/WIN");
-    cout << endl;
+    cout << "╔════════════════════════════════════════════════════════════════════════════╗\n";
+    cout << "║                                YOU WIN!                                    ║\n";
+    cout << "╚════════════════════════════════════════════════════════════════════════════╝\n";
     
 }
 
@@ -204,19 +204,59 @@ void showDE(Player &A, Monster &B){
 
 void showbattle(Player &player, Monster &enemy){ //เหลือใครเริ่มก่อน
     int r =rand()%2;
+    enemy.getGoldDrop();
+    enemy.getXpDrop(); 
     if(r==0){
     while (player.hp > 0 && enemy.hp > 0){
         showDE(player,enemy);
-        if (enemy.hp <= 0 || player.hp <= 0) break;
+        if (enemy.hp <= 0 || player.hp <= 0){ 
+            if (enemy.hp <= 0){
+                showwin();
+                cout << "gold +" << enemy.getGoldDrop() << " xp +"<< enemy.getXpDrop()<< endl;
+                player.addGold(enemy.getGoldDrop());
+                player.addXp(enemy.getXpDrop());
+                cout << "your gold = " << player.gold << " your xp = "<< player.xp<< endl;
+                enter();
+            }
+            
+        
+        break;}
         showAT(player,enemy);
-        if (enemy.hp <= 0 || player.hp <= 0) break;
+        if (enemy.hp <= 0 || player.hp <= 0){
+            if (enemy.hp <= 0){
+                showwin();
+                cout << "gold +" << enemy.getGoldDrop() << " xp +"<< enemy.getXpDrop()<< endl;
+                player.addGold(enemy.getGoldDrop());
+                player.addXp(enemy.getXpDrop());
+                cout << "your gold = " << player.gold << " your xp = "<< player.xp<< endl;
+                enter();
+            }
+        break;}
     }}
     else{
         while (player.hp > 0 && enemy.hp > 0){
             showAT(player,enemy);
-            if (enemy.hp <= 0 || player.hp <= 0) break;
+            if (enemy.hp <= 0 || player.hp <= 0){
+                if (enemy.hp <= 0){
+                    showwin();
+                    cout << "gold +" << enemy.getGoldDrop() << " xp +"<< enemy.getXpDrop()<< endl;
+                    player.addGold(enemy.getGoldDrop());
+                    player.addXp(enemy.getXpDrop());
+                    cout << "your gold = " << player.gold << " your xp = "<< player.xp<< endl;
+                    enter();
+                }
+            break;}
             showDE(player,enemy);
-            if (enemy.hp <= 0 || player.hp <= 0) break;
+            if (enemy.hp <= 0 || player.hp <= 0) {
+                if (enemy.hp <= 0){
+                    showwin();
+                    cout << "gold +" << enemy.getGoldDrop() << " xp +"<< enemy.getXpDrop() << endl;
+                    player.addGold(enemy.getGoldDrop());
+                    player.addXp(enemy.getXpDrop());
+                    cout << "your gold = " << player.gold << " your xp = " << player.xp << endl;
+                    enter();
+                }
+            break;}
         }}
 
 }
@@ -249,52 +289,53 @@ void showmon(Monster &B){
     
 }
 
-// int main(){
-//     SetConsoleOutputCP(65001);// Set CMD to UTF-8
-//     system("cls");//Clear Screen
-//     sHUD();
-//     while (true) {
-//         if (GetAsyncKeyState(VK_SPACE) & 0x8000) {  // Check if space bar is pressed
-//             break;
-//         }
-//         Sleep(10);  // Reduce CPU usage
-//     }
-//     //system("cls"); 
-//     //doSlowF("ascii_folder/Story1.txt",120);
-//     cout<<"Press Spacebar to continue.";  
-//     while (true) {
-//         if (GetAsyncKeyState(VK_SPACE) & 0x8000) {  // Check if space bar is pressed
-//             break;
-//         }
-//         Sleep(10);  // Reduce CPU usage
-//     }    
-//     system("cls");
+/*int main(){
+    SetConsoleOutputCP(65001);// Set CMD to UTF-8
+    system("cls");//Clear Screen
+    sHUD();
+    while (true) {
+        if (GetAsyncKeyState(VK_SPACE) & 0x8000) {  // Check if space bar is pressed
+            break;
+        }
+        Sleep(10);  // Reduce CPU usage
+    }
+    //system("cls"); 
+    //doSlowF("ascii_folder/Story1.txt",120);
+    cout<<"Press Spacebar to continue.";  
+    while (true) {
+        if (GetAsyncKeyState(VK_SPACE) & 0x8000) {  // Check if space bar is pressed
+            break;
+        }
+        Sleep(10);  // Reduce CPU usage
+    }    
+    system("cls");
 
-//     //showgaveup ("ascii_folder/Skeleton.txt");
-//     //showwin();
-//     //showlose();
-//     //mon(enemy);
-//     //hero(player);
-//     //showAT(player,enemy);
+    //showgaveup ("ascii_folder/Skeleton.txt");
+    //showwin();
+    //showlose();
+    //mon(enemy);
+    //hero(player);
+    //showAT(player,enemy);
 
-//     while (true){
+    while (true){
     
-//     string playerName;
-//     getline(cin, playerName); //ตั้งชื่อ
-//     Player player(playerName, 100, 20, 10, 5);
-//     Player s("s", 100, 20, 10, 5);
-//     player.showStatus();
-//     player.addXp(10); 
-//     //int playerLevel = player.getLevel();
-//     Monster randomMon = MonsterFactory::randMonster(11);
-//     Monster fixedMon = MonsterFactory::bossMonster1();
-//     randomMon.showStatus();
-//     showmon(randomMon);
-//     showbattle(player,randomMon);
-//     //showbattle(player,fixedMon);
-//     }
-//     //nHUD();   
+    string playerName;
+    getline(cin, playerName); //ตั้งชื่อ
+    Player player(playerName, 100, 20, 10, 5);
+    Player s("s", 100, 20, 10, 5);
+    //player.showStatus();
+    //player.addXp(10); 
+    //int playerLevel = player.getLevel();
+    Monster randomMon = MonsterFactory::randMonster(1);
+    Monster fixedMon = MonsterFactory::bossMonster();
+    //randomMon.showStatus();
+    showmon(randomMon);
+    //showmon(fixedMon);
+    showbattle(player,randomMon);
+    //showbattle(player,fixedMon);
+    }
+    //nHUD();   
     
-// } 
-
+} 
+*/
 
