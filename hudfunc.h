@@ -713,7 +713,7 @@ spaceb();
 
 ////////
 }
-
+ 
 void box(Player &me){
     system("cls");
 doASCii("ascii_folder/Chest.txt");

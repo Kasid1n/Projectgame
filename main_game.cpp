@@ -14,7 +14,7 @@
 using namespace std; 
 
 
-
+ 
 
 int main(){
     //ประกาศ equipment stats hp,atk,def,mag
@@ -78,5 +78,5 @@ int main(){
     blank();
     nHUD(turn,player);
     
-    
+
 } 
