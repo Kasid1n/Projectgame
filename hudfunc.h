@@ -656,7 +656,8 @@ void mon(Player &player){
   cout<<"\nPress Spacebar to continue.";
   spaceb();
   //Code battle
-  Monster randomMon = MonsterFactory::randMonster(11);
+  Monster randomMon = MonsterFactory::randMonster(/*level*/);
+  showmon(randomMon);
   showbattle(player,randomMon);
   ////////
   
@@ -683,7 +684,7 @@ doSlow("You found what you came here for!",50);
 doASCii("ascii_folder/WIN.txt");
 }
 
-void boss(){
+void boss(Player &player){
   system("cls");
 blank();
 bar();
@@ -691,6 +692,8 @@ doSlow("!!!!!",200);
 cout<<"\nPress Spacebar to continue.";
 spaceb();
 //Code Boss
+showmon(/*randboss*/);
+showbattle(player,/*randboss*/);
 
 ////////
 }
