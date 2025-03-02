@@ -553,7 +553,7 @@ public:
 //ค่าสถานะมอน
     int hpmax=stats.hpmax,hp=stats.hp,attack=stats.attack,defense=stats.defense,magic=stats.magic;
     Monster(string monsterName, int monsterLevel, int hpmax, int attack, int defense, int magic, int gold, int xp)
-        : name(monsterName), level(monsterLevel), stats(hpmax, attack, defense, magic), goldDrop(gold * monsterLevel), xpDrop(xp * monsterLevel) {}
+        : name(monsterName), level(monsterLevel), stats(hpmax, attack, defense, magic), goldDrop(gold * monsterLevel /1.2), xpDrop(xp * monsterLevel / 1.5) {}
 
     void showStatus() const {
         cout << "Monster: " << name << " (Level " << level << ")" << endl;
@@ -575,28 +575,28 @@ class MonsterFactory {
 public:
     static Monster randMonster(int level) {
         int randNum = rand() % 100;
-        if (level >= 10 && randNum >= 70) return Monster("Spider", level, 100 + level * 10, 20 + level * 2, 12 + level, 8 + level / 2, 200, 300);
-        if (level >= 7 && randNum >= 40) return Monster("Harpy", level, 80 + level * 8, 15 + level * 2, 10 + level, 6 + level / 2, 100, 150);
-        if (level >= 6 && randNum >= 20) return Monster("Hound", level, 60 + level * 6, 10 + level * 2, 8 + level, 4 + level / 2, 50, 80);
-        if (level >= 5 && randNum >= 10) return Monster("Warrior-Skeleton", level, 60 + level * 6, 10 + level * 2, 8 + level, 4 + level / 2, 50, 80);
-        return Monster("Skeleton", level, 1 + level * 5, 1 + level * 1, 6 + level, 1 + level / 1, 1000, 1);
+        if (level >= 4 && randNum >= 70) return Monster("Warrior-Skeleton", level, 80 + level * 1.5, 18 + level * 1.5, 17 + level * 1.6, 8 + level * 1, 70, 60);
+        if (level >= 3 && randNum >= 40) return Monster("Harpy", level, 40 + level * 1.2, 15 + level * 1.3, 2 + level, 6 + level * 1.5, 50, 40);
+        if (level >= 2 && randNum >= 20) return Monster("Hound", level, 60 + level * 1, 15 + level * 1.1, 8 + level * 1.1, 7 + level * 1.1, 35, 30);
+        if (level >= 2 && randNum >= 10) return Monster("Spider", level, 40 + level * 0.5, 13 + level, 5 + level, 3 + level , 25, 20);
+        return Monster("Skeleton", level, 50 + level * 0.75, 10 + level * 0.75, 0 + level * 0.75, 5 + level * 0.75, 20, 15);
     }
 //ส่วนของบอสที่เอาไว้จบเกม
     static Monster bossMonster1() {
-        static Monster fixedMonster("ApocalypseSoulsBoss", 11, 111, 11, 11, 11, 111, 111);
+        static Monster fixedMonster("ApocalypseSoulsBoss", 10, 200, 5, 0, 50, 1000, 1000);
         return fixedMonster;
     }
     static Monster bossMonster2() {
-        static Monster fixedMonster("Dragonlord", 22, 222, 22, 22, 22, 222, 222);
+        static Monster fixedMonster("Dragonlord", 12, 120, 45, 35, 35, 1000, 1000);
         return fixedMonster;
     }
-    static Monster bossMonster() {
+    static Monster bossMonster() {  
         int randomValue = rand() % 10; // สุ่มค่า 0-9
 
-        if (randomValue < 6) { // ถ้าค่าที่สุ่มได้น้อยกว่า 6 (0,1,2,3,4,5)
-            return bossMonster1(); // 60% ที่จะได้ ApocalypseSoulsBoss
-        } else { // ถ้าค่าที่สุ่มได้เป็น 6,7,8,9
-            return bossMonster2(); // 40% ที่จะได้ Dragonlord
+        if (randomValue < 5) { // ถ้าค่าที่สุ่มได้น้อยกว่า 6 (0,1,2,3,4,5)
+            return bossMonster1(); // 50% ที่จะได้ ApocalypseSoulsBoss
+        } else { // ถ้าค่าที่สุ่มได้เป็น 5,6,7,8,9
+            return bossMonster2(); // 50% ที่จะได้ Dragonlord
         }
     }
 };
@@ -1058,10 +1058,4 @@ class NPC {
     //     player.showStatus();
 
     // }
-int main(){
-    string playerName;
-        cout << "Enter player name: ";
-        getline(cin, playerName); // Set player name
-        Player player(playerName, 100, 20, 10, 5);
-        player.showStatus();
-}
+
