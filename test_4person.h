@@ -351,6 +351,7 @@ int hpmax=stats.hpmax,hp=stats.hp,attack=stats.attack,defense=stats.defense,magi
         }
     
         // แสดงรายการอุปกรณ์ใน Inventory
+        cout << "\n--- Inventory ---\n";
         for (size_t i = 0; i < inventory.size(); i++) {
             cout << i + 1 << ". " << inventory[i].getItemName() << "\n";
             cout << "   Attack+: " << inventory[i].getStat()[1] << " ";
@@ -501,10 +502,10 @@ int hpmax=stats.hpmax,hp=stats.hp,attack=stats.attack,defense=stats.defense,magi
     }
 //แสดงสถานะ
     void showStatus() const {
-        cout << " HP : " << stats.hp << "/" << stats.hpmax << "    Level : " << level << "    Gold : " << gold << "\n";
+        cout << " HP : " << stats.hp << "/" << stats.hpmax << "    Level : " << level << "    Gold : " << gold ";
     }
     int getLevel() const {
-        return level;   
+        return level;
     }
     
 //ระบบการเพื่มlevel
