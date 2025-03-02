@@ -18,7 +18,7 @@ class Equipment {
 public:
     Equipment(int h, int a, int d, int m) : hpmax(h), atk(a), def(d), magic(m) {}
 
-    vector<int> getStat() {
+    vector<int> getStat() const{
         return {hpmax, atk, def, magic};
     }
     string name; // ชื่อของไอเทม
@@ -85,7 +85,7 @@ public:
     Stats stats;
     int gold;
     vector<Equipment> inventory;
-    vector<Equipment*> equipmentList;
+    vector<Equipment*> equipmentList = {nullptr, nullptr, nullptr};
     int getEquipmentCount() const {
         return equipmentList.size();
     }
@@ -107,35 +107,7 @@ int hpmax=stats.hpmax,hp=stats.hp,attack=stats.attack,defense=stats.defense,magi
         gold += amount;
     }
 
-    void equipItem(Equipment item) {
-        if (equipmentList.empty()) {
-            equipmentList.push_back(new Equipment(item));
-        } else {
-            if (inventory.size() >= 3) {
-                cout << "Inventory is full. Choose an item to discard (0-2) or cancel (-1): ";
-                int choice;
-                cin >> choice;
-                if (choice >= 0 && choice < inventory.size()) {
-                    inventory.erase(inventory.begin() + choice);
-                } else if (choice == -1) {
-                    cout << "Cancelled equip action." << endl;
-                    return;
-                } else {
-                    cout << "Invalid choice." << endl;
-                    return;
-                }
-            }
-            inventory.push_back(*equipmentList[0]);
-            equipmentList[0] = &item;
-        }
-        vector<int> itemStats = item.getStat();
-        stats.hpmax += itemStats[0];
-        stats.attack += itemStats[1];
-        stats.defense += itemStats[2];
-        stats.magic += itemStats[3];
-        if (stats.hp > stats.hpmax) stats.hp = stats.hpmax;
-        cout << "Equipped: " << item.getItemName() << "\n";
-    }
+    
     void showInventory() {
         cout << "\n--- Inventory ---\n";
         if (inventory.empty()) {
@@ -149,14 +121,88 @@ int hpmax=stats.hpmax,hp=stats.hp,attack=stats.attack,defense=stats.defense,magi
 
     void showEquipment() {
         cout << "\n--- Equipped Items ---\n";
-        if (equipmentList.empty()) {
-            cout << "No equipped items.\n";
-        } else {
-            for (size_t i = 0; i < equipmentList.size(); i++) {
+        for (size_t i = 0; i < equipmentList.size(); i++) {
+            if (equipmentList[i] != nullptr) { 
                 cout << i + 1 << ". " << equipmentList[i]->getItemName() << "\n";
+            } else {
+                cout << i + 1 << ". (Empty Slot)\n";
             }
         }
     }
+    
+    void equipItem(const Equipment& item) {
+        cout << "DEBUG: Equipment list size before equip: " << equipmentList.size() << endl;
+    
+        // หากช่องอุปกรณ์เต็ม ให้ผู้เล่นเลือกช่องที่จะแทนที่
+        if (equipmentList.size() >= 3) {
+            cout << "Equipment slots are full. Choose an item to replace (0-2) or cancel (-1): ";
+            int choice;
+            cin >> choice;
+    
+            // ตรวจสอบการเลือก
+            if (choice == -1) {
+                cout << "Equip action cancelled.\n";
+                return;
+            } else if (choice < 0 || choice >= equipmentList.size()) {
+                cout << "Invalid choice!\n";
+                return;
+            }
+    
+            // ถอดอุปกรณ์เดิม (ถ้ามี)
+            if (equipmentList[choice] != nullptr) {
+                // ลบค่าสถานะของอุปกรณ์เดิม
+                vector<int> oldStats = equipmentList[choice]->getStat();
+                stats.hpmax -= oldStats[0];
+                stats.attack -= oldStats[1];
+                stats.defense -= oldStats[2];
+                stats.magic -= oldStats[3];
+    
+                // เพิ่มอุปกรณ์เดิมกลับเข้า Inventory
+                inventory.push_back(*equipmentList[choice]);
+    
+                // ลบอุปกรณ์เดิม
+                delete equipmentList[choice];
+            }
+    
+            // สวมใส่อุปกรณ์ใหม่
+            equipmentList[choice] = new Equipment(item);
+    
+            // เพิ่มค่าสถานะจากอุปกรณ์ใหม่
+            vector<int> newStats = item.getStat();
+            stats.hpmax += newStats[0];
+            stats.attack += newStats[1];
+            stats.defense += newStats[2];
+            stats.magic += newStats[3];
+    
+            // ตรวจสอบ HP ไม่เกินค่าสูงสุด
+            if (stats.hp > stats.hpmax) stats.hp = stats.hpmax;
+    
+            cout << "Equipped: " << item.getItemName() << " in slot " << choice << "\n";
+        } else {
+            // หากช่องอุปกรณ์ยังไม่เต็ม ให้สวมใส่อุปกรณ์ในช่องว่าง
+            for (int i = 0; i < 3; i++) {
+                if (equipmentList[i] == nullptr) {
+                    equipmentList[i] = new Equipment(item);
+    
+                    // เพิ่มค่าสถานะจากอุปกรณ์ใหม่
+                    vector<int> newStats = item.getStat();
+                    stats.hpmax += newStats[0];
+                    stats.attack += newStats[1];
+                    stats.defense += newStats[2];
+                    stats.magic += newStats[3];
+    
+                    // ตรวจสอบ HP ไม่เกินค่าสูงสุด
+                    if (stats.hp > stats.hpmax) stats.hp = stats.hpmax;
+    
+                    cout << "Equipped: " << item.getItemName() << " in slot " << i << "\n";
+                    break;
+                }
+            }
+        }
+    
+        cout << "DEBUG: Equipment list size after equip: " << equipmentList.size() << endl;
+    }
+    
 
     void equip(Equipment* item) {
         bool found = false;
@@ -192,36 +238,61 @@ int hpmax=stats.hpmax,hp=stats.hp,attack=stats.attack,defense=stats.defense,magi
     
 
     // ฟังก์ชันในการถอดอุปกรณ์
-    void unequip(int index) {
-        if (index >= 0 && index < equipmentList.size()) {
-            Equipment* eq = equipmentList[index];
-            vector<int> stat = eq->getStat();
-            stats.hpmax -= stat[0];
-            stats.attack -= stat[1];
-            stats.defense -= stat[2];
-            stats.magic -= stat[3];
-            if (inventory.size() >= 3) {
-                cout << "Inventory is full. Choose an item to discard (0-2) or cancel (-1): ";
-                int choice;
-                cin >> choice;
-                if (choice >= 0 && choice < inventory.size()) {
-                    inventory.erase(inventory.begin() + choice);
-                } else if (choice == -1) {
-                    cout << "Cancelled unequip action." << endl;
-                    return;
-                } else {
-                    cout << "Invalid choice." << endl;
-                    return;
-                }
+    void unequip() {
+        // แสดงรายการอุปกรณ์ที่สวมใส่อยู่
+        cout << "\n--- Equipped Items ---\n";
+        for (size_t i = 0; i < equipmentList.size(); i++) {
+            if (equipmentList[i] != nullptr) {
+                cout << i << ". " << equipmentList[i]->getItemName() << "\n";
+            } else {
+                cout << i << ". (Empty Slot)\n";
             }
-            inventory.push_back(*eq);
-            equipmentList.erase(equipmentList.begin() + index);
-            if (stats.hp > stats.hpmax) stats.hp = stats.hpmax;
-            cout << "Item unequipped." << endl;
-        } else {
-            cout << "Invalid index!" << endl;
         }
+    
+        // ให้ผู้เล่นเลือกช่องที่ต้องการถอด
+        int choice;
+        cout << "Enter the slot number to unequip (0-2, or -1 to cancel): ";
+        cin >> choice;
+    
+        // ตรวจสอบการเลือก
+        if (choice == -1) {
+            cout << "Unequip cancelled.\n";
+            return;
+        } else if (choice < 0 || choice >= equipmentList.size()) {
+            cout << "Invalid slot number!\n";
+            return;
+        } else if (equipmentList[choice] == nullptr) {
+            cout << "This slot is already empty!\n";
+            return;
+        }
+    
+        // ถอดอุปกรณ์
+        Equipment* eq = equipmentList[choice];
+    
+        // คืนค่าสถานะของผู้เล่น
+        vector<int> stat = eq->getStat();
+        stats.hpmax -= stat[0];
+        stats.attack -= stat[1];
+        stats.defense -= stat[2];
+        stats.magic -= stat[3];
+    
+        if (stats.hp > stats.hpmax) stats.hp = stats.hpmax;
+    
+        // เพิ่มอุปกรณ์ที่ถอดออกกลับเข้าไปใน Inventory
+        inventory.push_back(*eq);
+    
+        // ลบอุปกรณ์ออกจากช่องที่เลือก
+        delete equipmentList[choice];
+        equipmentList[choice] = nullptr;
+    
+        // เพิ่มโค้ดใหม่: บันทึกประวัติการถอดอุปกรณ์
+        cout << "Unequipped " << eq->getItemName() << " from slot " << choice << ".\n";
+        cout << "DEBUG: Added " << eq->getItemName() << " to inventory.\n";
     }
+    
+
+    
+    
 //ระบบเพื่ม XP
     void addXp(int xpGained) {
         xp += xpGained;
@@ -663,10 +734,10 @@ class NPC {
                         cout << "You used Defense Potion! Defense increased by " << defBoost << "!\n";
                     } 
                     else {
-                        player.equipItem(ItemStats[index]);
+                        // Create a new Equipment object with the correct name and stats
+                        Equipment newItem(sellItem[index], ItemStats[index].getStat()[0], ItemStats[index].getStat()[1], ItemStats[index].getStat()[2], ItemStats[index].getStat()[3]);
+                        player.equipItem(newItem);
                         cout << "You bought " << sellItem[index] << "!\n";
-                        vector<int> stat = ItemStats[index].getStat();
-                        if (player.stats.hp > player.stats.hpmax) player.stats.hp = player.stats.hpmax;
                     }
                     hasShopped = true;
                     return;
@@ -691,11 +762,11 @@ class NPC {
     }
 
     int main() { 
-        int WR=0;
+        int WR = 0;
         srand(time(0));
         string playerName;
         cout << "Enter player name: ";
-        getline(cin, playerName); //ตั้งชื่อ
+        getline(cin, playerName); // Set player name
         Player player(playerName, 100, 20, 10, 5);
         player.showStatus();
         player.addXp(0); 
@@ -704,42 +775,69 @@ class NPC {
         Monster fixedMon = MonsterFactory::bossMonster();
         randomMon.showStatus();
         fixedMon.showStatus();
-        player.addGold(randomMon.getGoldDrop()); // จำเป็นต้องเอาใส่โค้ตหลักไม่งั้น Gold ไม่เพื่ม
-        player.addXp(randomMon.getXpDrop()); // จำเป็นต้องเอาใส่โค้ตหลักไม่งั้น XP ไม่เพื่ม
+        player.addGold(randomMon.getGoldDrop()); // Add gold
+        player.addXp(randomMon.getXpDrop()); // Add XP
         player.showStatus();
         int attackChoice;
         std::cout << "Choose attack: (1) Attack, (2) Skill, (3) Ultimate, (4) Heal\n";
         std::cin >> attackChoice;
-        
-        R result = battlesys(player, randomMon, attackChoice); // เรียกใช้ battlesys
-        
+    
+        R result = battlesys(player, randomMon, attackChoice); // Call battlesys
+    
         std::cout << "You dealt " << result.D << " damage!\n";
-        switch(WR){
+        switch (WR) {
             case 1: cout << "player win"; break;
             case 2: cout << "monster win"; break;
         }
         cout << "\n--- Player Status After Battle ---\n";
         player.showStatus();
+        cout << "DEBUG: Equipment list size before buying: " << player.equipmentList.size() << "\n";
+        player.showEquipment();
+    
         cout << "\n--- Visiting a Shop ---\n";
         NPC shopNPC = getRandomNPC();
         shopNPC.sellItemToPlayer(player);
+    
         cout << "\n--- Player Status After Shopping ---\n";
         player.showStatus();
-        // ทดสอบระบบ inventory และ equip/unequip
-        cout << "Inventory size: " << player.inventory.size() << "\n";
-        cout << "Equipment list size: " << player.equipmentList.size() << "\n";
-        cout << "\n--- Testing Inventory and Equipment ---\n";
-        Equipment testItem("Test Sword", 0, 15, 5, 0);
-        player.equipItem(testItem);
+        cout << "DEBUG: Equipment list size before shop: " << player.equipmentList.size() << "\n";
+        for (size_t i = 0; i < player.equipmentList.size(); i++) {
+            if (player.equipmentList[i] != nullptr) {
+                cout << "DEBUG: Slot " << i + 1 << ": " << player.equipmentList[i]->getItemName() << "\n";
+            } else {
+                cout << "DEBUG: Slot " << i + 1 << ": (Empty Slot)\n";
+            }
+        }
+    
+        // Debug message to confirm the program reaches the test section
+        cout << "\n--- Reached Test Section ---\n";
+    
+        // Create a test item dynamically
+        Equipment* testItem = new Equipment("Test Sword", 0, 15, 5, 0);
+    
+        // Test equipping the item
+        cout << "\nEquipping Test Sword...\n";
+        player.equipItem(*testItem);
         player.showInventory();
         player.showEquipment();
         player.showStatus();
-
+    
+        cout << "Inventory size: " << player.inventory.size() << "\n";
+        cout << "Equipment list size: " << player.equipmentList.size() << "\n";
+    
+        // Test unequipping the item
         cout << "\nUnequipping Test Sword...\n";
-        player.unequip(0);
+        player.unequip();
         player.showInventory();
         player.showEquipment();
         player.showStatus();
+    
         cout << "Inventory size: " << player.inventory.size() << "\n";
         cout << "Equipment list size: " << player.equipmentList.size() << "\n";
+    
+        // Delete the test item
+        delete testItem;
+    
+        cout << "\n--- End of Program ---\n";
+        return 0;
     }
