@@ -9,7 +9,8 @@ using namespace std;
 
 #include"test_4person.h"
 #include"Qol.h"
-
+#include"HUDtest3.h"
+#include"HUDtest2.h"
  
 //Screen Output
 void sHUD();//Title
@@ -671,9 +672,9 @@ void mon(Player &player){
   cout<<"\nPress Spacebar to continue.";
   spaceb();
   //Code battle
-//   Monster randomMon = MonsterFactory::randMonster(player.level);
-//   showmon(randomMon);
-//   showbattle(player,randomMon);
+  Monster randomMon = MonsterFactory::randMonster(player.level);
+  showmon(randomMon);
+  showbattle(player,randomMon);
   ////////
   
 }
@@ -685,8 +686,8 @@ bar();
 doSlow("You found a merchant.",50);
 cout<<"\nPress Spacebar to continue.";
 spaceb();
-// NPC shopNPC = getRandomNPC();  // สุ่ม NPC
-// showshop(player, shopNPC);     // แสดงร้านค้าและจัดการการซื้อขาย
+NPC shopNPC = getRandomNPC();  // สุ่ม NPC
+showshop(player, shopNPC);     // แสดงร้านค้าและจัดการการซื้อขาย
 }
 
 void treasure(){
@@ -707,9 +708,9 @@ doSlow("!!!!!",200);
 cout<<"\nPress Spacebar to continue.";
 spaceb();
 //Code Boss
-// Monster boss = MonsterFactory::bossMonster();
-// showmon(boss);
-// showbattle(player,boss);
+Monster boss = MonsterFactory::bossMonster();
+showmon(boss);
+showbattle(player,boss);
 
 ////////
 }

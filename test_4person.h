@@ -1,5 +1,5 @@
-#ifndef TEST_4PERSON.H
-#define TEST_4PERSON.H
+#ifndef TEST_4PERSON_H
+#define TEST_4PERSON_H
 #include <iostream>
 #include <string>
 #include <ctime>
@@ -1060,4 +1060,4 @@ class NPC {
     //     player.showStatus();
 
     // }
-#endif // TEST4_H
+#endif TEST4_H

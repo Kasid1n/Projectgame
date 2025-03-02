@@ -1,3 +1,6 @@
+#ifndef HUDTEST2.H
+#define HUDTEST2.H
+
 #include<iostream>
 #include<fstream>
 #include<windows.h>
@@ -288,6 +291,8 @@ void showmon(Monster &B){
     system("cls");
     
 }
+
+#endif//hudtest2
 
 /*int main(){
     SetConsoleOutputCP(65001);// Set CMD to UTF-8
