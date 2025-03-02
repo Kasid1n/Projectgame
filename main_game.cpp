@@ -8,7 +8,6 @@
 #include<iomanip>
 //Library
 
-#include "test_4person.h"
 #include"hudfunc.h"
 //Function
 
@@ -77,6 +76,7 @@ int main(){
     spaceb(); 
     system("cls");
     blank();
-    nHUD(turn);
+    nHUD(turn,player);
+    
     
 } 

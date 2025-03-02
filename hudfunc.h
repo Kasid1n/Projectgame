@@ -11,7 +11,7 @@ using namespace std;
 #include"Qol.h"
 #include"HUDtest2.h" 
 #include"HUDtest3.h"
-
+ 
 //Screen Output
 void sHUD();//Title
 void nHUD(int &,Player);//Choice Hud, Main hud
