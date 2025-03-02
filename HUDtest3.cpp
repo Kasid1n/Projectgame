@@ -26,7 +26,7 @@ void showNPC(NPC shopNPC){
     //system("cls");
 }
 
-void showshop(Player player,NPC shopNPC){
+void showshop(Player &player,NPC shopNPC){
     /*sellItemToPlayer code*/
     if(shopNPC.hasShopped == true){cout << "You have already purchased.";}
     int choice;
