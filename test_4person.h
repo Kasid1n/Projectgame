@@ -575,7 +575,7 @@ class MonsterFactory {
 public:
     static Monster randMonster(int level) {
         int randNum = rand() % 100;
-        if (level >= 4 && randNum >= 70) return Monster("Warrior-Skeleton", level, 80 + level * 2, 18 + level * 1.5, 15 + level * 1.5, 8 + level * 1, 70, 60);
+        if (level >= 4 && randNum >= 70) return Monster("Warrior-Skeleton", level, 80 + level * 1.5, 18 + level * 1.5, 17 + level * 1.5, 8 + level * 1, 70, 60);
         if (level >= 3 && randNum >= 40) return Monster("Harpy", level, 40 + level * 1.2, 15 + level * 1.3, 2 + level, 6 + level * 1.5, 50, 40);
         if (level >= 2 && randNum >= 20) return Monster("Hound", level, 60 + level * 1, 15 + level * 1.1, 8 + level * 1.1, 7 + level * 1.1, 35, 30);
         if (level >= 2 && randNum >= 10) return Monster("Spider", level, 40 + level * 0.5, 13 + level, 5 + level, 3 + level , 25, 20);
