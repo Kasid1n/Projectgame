@@ -9,7 +9,6 @@ using namespace std;
 
 
 
-void showNPC();
 
 void showNPC(NPC shopNPC){
     cout << "╔════════════════════════════════════════════════════════════════════════════╗\n";
