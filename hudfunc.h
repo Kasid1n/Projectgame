@@ -9,7 +9,9 @@ using namespace std;
 
 #include"test_4person.h"
 #include"Qol.h"
- 
+#include"HUDtest2.h" 
+#include"HUDtest3.h"
+
 //Screen Output
 void sHUD();//Title
 void nHUD(int &,Player);//Choice Hud, Main hud
@@ -619,20 +621,20 @@ void event(int &i,Player me){//turn
   }
   else if(i>=11){// เพิ้มโอกาสเจอบอส
     if(r<=40){
-      mon();
+      mon(me);
     }
     else if(r>40 && r<=60){
-      shop();
+      shop(me);
     }
     else if(r>60 && r<=70){
-      box();
+      box(me);
     }
-    else if(r>70 && r<=100){//จบเกม
+    else if(r>70 && r<=85){//จบเกม
       treasure();
     }
-    // else if(r>80 && r<=100){
-    //   boss();
-    // }
+     else if(r>85 && r<=100){
+       boss(me);
+    }
     
 }
 
