@@ -248,52 +248,52 @@ void showmon(Monster &B){
     
 }
 
-int main(){
-    SetConsoleOutputCP(65001);// Set CMD to UTF-8
-    system("cls");//Clear Screen
-    sHUD();
-    while (true) {
-        if (GetAsyncKeyState(VK_SPACE) & 0x8000) {  // Check if space bar is pressed
-            break;
-        }
-        Sleep(10);  // Reduce CPU usage
-    }
-    //system("cls"); 
-    //doSlowF("ascii_folder/Story1.txt",120);
-    cout<<"Press Spacebar to continue.";  
-    while (true) {
-        if (GetAsyncKeyState(VK_SPACE) & 0x8000) {  // Check if space bar is pressed
-            break;
-        }
-        Sleep(10);  // Reduce CPU usage
-    }    
-    system("cls");
+// int main(){
+//     SetConsoleOutputCP(65001);// Set CMD to UTF-8
+//     system("cls");//Clear Screen
+//     sHUD();
+//     while (true) {
+//         if (GetAsyncKeyState(VK_SPACE) & 0x8000) {  // Check if space bar is pressed
+//             break;
+//         }
+//         Sleep(10);  // Reduce CPU usage
+//     }
+//     //system("cls"); 
+//     //doSlowF("ascii_folder/Story1.txt",120);
+//     cout<<"Press Spacebar to continue.";  
+//     while (true) {
+//         if (GetAsyncKeyState(VK_SPACE) & 0x8000) {  // Check if space bar is pressed
+//             break;
+//         }
+//         Sleep(10);  // Reduce CPU usage
+//     }    
+//     system("cls");
 
-    //showgaveup ("ascii_folder/Skeleton.txt");
-    //showwin();
-    //showlose();
-    //mon(enemy);
-    //hero(player);
-    //showAT(player,enemy);
+//     //showgaveup ("ascii_folder/Skeleton.txt");
+//     //showwin();
+//     //showlose();
+//     //mon(enemy);
+//     //hero(player);
+//     //showAT(player,enemy);
 
-    while (true){
+//     while (true){
     
-    string playerName;
-    getline(cin, playerName); //ตั้งชื่อ
-    Player player(playerName, 100, 20, 10, 5);
-    Player s("s", 100, 20, 10, 5);
-    player.showStatus();
-    player.addXp(10); 
-    //int playerLevel = player.getLevel();
-    Monster randomMon = MonsterFactory::randMonster(11);
-    Monster fixedMon = MonsterFactory::bossMonster1();
-    randomMon.showStatus();
-    showmon(randomMon);
-    showbattle(player,randomMon);
-    //showbattle(player,fixedMon);
-    }
-    //nHUD();   
+//     string playerName;
+//     getline(cin, playerName); //ตั้งชื่อ
+//     Player player(playerName, 100, 20, 10, 5);
+//     Player s("s", 100, 20, 10, 5);
+//     player.showStatus();
+//     player.addXp(10); 
+//     //int playerLevel = player.getLevel();
+//     Monster randomMon = MonsterFactory::randMonster(11);
+//     Monster fixedMon = MonsterFactory::bossMonster1();
+//     randomMon.showStatus();
+//     showmon(randomMon);
+//     showbattle(player,randomMon);
+//     //showbattle(player,fixedMon);
+//     }
+//     //nHUD();   
     
-} 
+// } 
 
 
