@@ -656,7 +656,7 @@ void mon(Player &player){
   cout<<"\nPress Spacebar to continue.";
   spaceb();
   //Code battle
-  Monster randomMon = MonsterFactory::randMonster(/*level*/);
+  Monster randomMon = MonsterFactory::randMonster(player.level);
   showmon(randomMon);
   showbattle(player,randomMon);
   ////////
