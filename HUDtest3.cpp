@@ -74,7 +74,9 @@ void showshop(Player player,NPC shopNPC){
                     // Create a new Equipment object with the correct name and stats
                     Equipment newItem(shopNPC.sellItem[index], shopNPC.ItemStats[index].getStat()[0], shopNPC.ItemStats[index].getStat()[1], shopNPC.ItemStats[index].getStat()[2], shopNPC.ItemStats[index].getStat()[3]);
                     player.equipItem(newItem);
+                    system("cls");                                                               //////// ลบได้ๆ
                     cout << "You bought " << shopNPC.sellItem[index] << "!\n";
+                    doASCii("ascii_folder/" + shopNPC.sellItem[index] + ".txt");                ////////  ถ้าไม่ใช่แบบที่คิด ลบได้ๆ
                     enter();
                     system("cls");
                 }

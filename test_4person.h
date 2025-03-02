@@ -837,7 +837,7 @@ class NPC {
         }
         else if (npcname == "B") {
             // รายการของไอเทมที่ B สามารถขาย
-            vector<string> possibleItems = {"Shield", "Better Shield","Armor"};
+            vector<string> possibleItems = {"Shield", "Better_Shield","Armor"};
             int numItems = rand() % 3 + 1;  // ขาย 1 ถึง 3 ไอเทม
     
             for (int i = 0; i < numItems; i++) {
