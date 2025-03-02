@@ -7,23 +7,23 @@
 #include<vector>
 using namespace std;
 
-
-
+#include"test_4person.h"
+#include"Qol.h"
+ 
 //Screen Output
 void sHUD();//Title
-void nHUD(int &);//Choice Hud, Main hud
+void nHUD(int &,Player);//Choice Hud, Main hud
 
 
-void showeap(int);//gear show
-
+void showeap(int,Player &);//gear show
 
 
 void mon(Player &);//event mon
-void shop();//event shop
-void box();//event chest
+void shop(Player &);//event shop
+void box(Player &);//event chest
 void treasure();//event win
-void boss();//event boss
-void event(int &);
+void boss(Player &);//event boss
+void event(int &,Player);
 
 string hero;//player name
 int startweap;//select start weapon
@@ -31,8 +31,7 @@ vector<int> gear(3);//inventory
 
 
 
-
-void showeap(int s){
+void showeap(int s,Player &x){
     system("cls");
     SetConsoleTextAttribute(h,7);
     char choice;
@@ -492,7 +491,7 @@ void sHUD(){
     doASCii(filetxt);
 }
 
-void nHUD(int &t){//main system
+void nHUD(int &t,Player me){//main system
     SetConsoleTextAttribute(h,7);//White
     cout<<"=====================================================================================\n";
     cout<<hero<<setw(15)<<"| HP : 1/1"<<setw(15)<<"Level : 1 "<<setw(15)<<"Gold : 500"<<setw(15)<<"Turn : "<<t+1<<endl; 
@@ -579,51 +578,42 @@ void nHUD(int &t){//main system
     }  
 }
  
-void bar(){
-    cout<<"=====================================================================================\n";
-}
-
-void blank(){
-    for(int i =0;i<24;i++){
-        cout<<endl;
-    }
-}
 
 /////////////////////////////////event
 
 
 
-void event(int &i){//turn
+void event(int &i,Player me){//turn
    int r = rand()%100+1;
 
   if(i<6) {// 10 ตาแรกจะไม่เจอบอส
     if(r<=60){
-      mon();
+      mon(me);
     }
     else if(r>60 && r<=80){
-      shop();
+      shop(me);
     }
     else if(r>80 && r<=100){
-      box();
+      box(me);
     }
     
   }
 
   else if(i>=6&&i<11){// ผ่านไปสิบตามีโอกาสเจอบอส
         if(r<=50){
-          mon();
+          mon(me);
         }
         else if(r>50 && r<=70){
-          shop();
+          shop(me);
         }
         else if(r>70 && r<=80){
-          box();
+          box(me);
         }
         else if(r>80 && r<=90){//จบเกม
           treasure();
         }
         else if(r>90 && r<=100){
-          boss();
+          boss(me);
         }
         
   }
@@ -663,7 +653,7 @@ void mon(Player &player){
   
 }
 
-void shop(){
+void shop(Player &player){
   system("cls");
 blank();
 bar();
