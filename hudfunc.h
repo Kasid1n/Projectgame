@@ -692,8 +692,9 @@ doSlow("!!!!!",200);
 cout<<"\nPress Spacebar to continue.";
 spaceb();
 //Code Boss
-showmon(/*randboss*/);
-showbattle(player,/*randboss*/);
+Monster boss = MonsterFactory::bossMonster();
+showmon(boss);
+showbattle(player,boss);
 
 ////////
 }
