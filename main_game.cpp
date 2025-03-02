@@ -8,7 +8,7 @@
 #include<iomanip>
 //Library
 
-#include "Equipment.h"
+#include "test_4person.h"
 #include"hudfunc.h"
 //Function
 
@@ -18,10 +18,17 @@ using namespace std;
 
 
 int main(){
-    Equipment sword(0, 10, 0, 5);
-    Equipment shield(0, 0, 10, 0);
-    Equipment axe(0, 15, 0, 0);
-    Equipment bow(0, 10, 0, 5);
+    //ประกาศ equipment stats hp,atk,def,mag
+    Equipment* axe = new Equipment("axe", 5, 15, 5, 0);
+    Equipment* bow = new Equipment("bow", 2, 20, 0, 0);
+    Equipment* sword = new Equipment("sword", 0, 10, 0, 5);
+    Equipment* shield = new Equipment("shield", 10, 0, 20, 0);
+    Equipment* baxe = new Equipment("baxe", 10, 20, 5, 5);
+    Equipment* bsword = new Equipment("bsword", 5, 20, 10, 20);
+    Equipment* bshield = new Equipment("bshield", 20, 5, 30, 5);
+    Equipment* armor = new Equipment("armor", 30, 0, 10, 0);
+    Equipment* necklace = new Equipment("necklace", 10, 0, 0, 20);
+
 
     int turn=0;//turn count
 
@@ -37,26 +44,24 @@ int main(){
     system("cls");
     doSlow("Your name is...",50);
     getline(cin, hero);
-    Stats hero(100,20,10,5);
-    //Player player(hero,100, 20, 10, 5);
-    //Statseq hero(100,20,10,5);
+    Player player(hero,100, 20, 10, 5);
     doSlow("There's a weapon beside you... It is...",50); 
     cout<<"\n[1] Axe"<<setw(10)<<"[2] Bow"<<setw(15)<<"[3] Sword\n>";
     while(true){   
     cin>>startweap;
     switch(startweap){
         case 1:
-        hero.equip(&axe);
+        player.equipItem(*axe);
         gear.at(0)=1;//gearid of axe
 
         break;
         case 2:
-        hero.equip(&bow);
+        player.equipItem(*bow);
         gear.at(0)=2;//id bow
         
         break;
         case 3:
-        hero.equip(&sword);
+        player.equipItem(*sword);
         gear.at(0)=3;//id sword
          
         break;

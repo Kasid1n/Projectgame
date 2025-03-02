@@ -17,6 +17,7 @@ void showwin();
 void showlose();
 void showAT();
 void showDE();
+void showmon();
  
 
 
@@ -219,6 +220,34 @@ void showbattle(Player &player, Monster &enemy){ //เหลือใครเ�
 
 }
 
+void showmon(Monster &B){
+    SetConsoleTextAttribute(h,15);
+    cout << "╔════════════════════════════════════════════════════════════════════════════╗\n";
+    cout << "║                         !!!  FOUND MONSTER  !!!                            ║\n";
+    cout << "╚════════════════════════════════════════════════════════════════════════════╝\n";
+    SetConsoleTextAttribute(h,4);
+    if(B.name=="Spider"){doASCii("ascii_folder/Spider.txt");}
+    if(B.name=="Harpy"){doASCii("ascii_folder/Harpy.txt");}
+    if(B.name=="Hound"){doASCii("ascii_folder/Hound.txt");}    
+    if(B.name=="Warrior-Skeleton"){doASCii("ascii_folder/Warrior-Skeleton.txt");} 
+    if(B.name=="Skeleton"){doASCii("ascii_folder/Skeleton.txt");}
+
+    if(B.name=="ApocalypseSoulsBoss"){
+        SetConsoleTextAttribute(h,14);
+        doASCii("ascii_folder/ApocalypseSoulsBoss.txt");}
+    if(B.name=="Dragonlord"){SetConsoleTextAttribute(h,14);
+        doASCii("ascii_folder/DragonBoss.txt");}
+    SetConsoleTextAttribute(h,15);
+    cout << "═════════════════════════════════════════════════════════════════════════════\n";
+    SetConsoleTextAttribute(h,4);
+    cout << "                             " <<B.name << endl;
+    SetConsoleTextAttribute(h,15);
+    cout << "═════════════════════════════════════════════════════════════════════════════\n";
+    enter();
+    system("cls");
+    
+}
+
 int main(){
     SetConsoleOutputCP(65001);// Set CMD to UTF-8
     system("cls");//Clear Screen
@@ -259,8 +288,10 @@ int main(){
     Monster randomMon = MonsterFactory::randMonster(11);
     Monster fixedMon = MonsterFactory::bossMonster2();
     randomMon.showStatus();
-    //showbattle(player,randomMon);
-    showbattle(player,fixedMon);
+    
+    //showbattle(player,fixedMon);
+    showmon(randomMon);
+    showbattle(player,randomMon);
     }
     //nHUD();   
     
