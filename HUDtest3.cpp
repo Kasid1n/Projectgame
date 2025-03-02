@@ -43,6 +43,8 @@ void showshop(Player player,NPC shopNPC){
         }
         if (choice == 0) break;
         if (choice > 0 && choice <= shopNPC.sellItem.size()) {
+            system("cls");
+            showNPC(shopNPC);
             int index = choice - 1;
             if (player.getGold() >= shopNPC.ItemPrice[index]) {
                 player.updateGold(-shopNPC.ItemPrice[index]);
@@ -68,6 +70,7 @@ void showshop(Player player,NPC shopNPC){
                     system("cls");
                 } 
                 else {
+                    cout << shopNPC.sellItem[index]<<endl;
                     // Create a new Equipment object with the correct name and stats
                     Equipment newItem(shopNPC.sellItem[index], shopNPC.ItemStats[index].getStat()[0], shopNPC.ItemStats[index].getStat()[1], shopNPC.ItemStats[index].getStat()[2], shopNPC.ItemStats[index].getStat()[3]);
                     player.equipItem(newItem);
@@ -99,6 +102,8 @@ int main(){
     NPC shopNPC = getRandomNPC();
     //showNPC(player);
     showshop(player,shopNPC);
+    player.showInventory();
+    player.showEquipment();
     
     
 }
