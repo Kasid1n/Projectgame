@@ -1,5 +1,4 @@
-#ifndef HUBTEST3.H
-#define HUBTEST3.H
+
 #include<iostream>
 #include<fstream>
 #include<windows.h>
@@ -8,7 +7,7 @@
 #include"test_4person.h"
 #include"Qol.h"
 using namespace std;
-
+ 
 
 
 
@@ -110,4 +109,3 @@ void showgold(Player A){
     
     
 // }
-#endif // TEST4_H

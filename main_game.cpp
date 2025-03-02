@@ -8,9 +8,8 @@
 #include<iomanip>
 //Library
 
-#include"Qol.h"
-#include"HUDtest3.h"
 #include"hudfunc.h"
+
 //Function
 
 using namespace std; 

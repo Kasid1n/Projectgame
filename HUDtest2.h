@@ -1,15 +1,15 @@
-#ifndef HUDTEST2.H
-#define HUDTEST2.H
-
+#ifndef HUDTEST2_H
+#define HUDTEST2_H
 #include<iostream>
 #include<fstream>
 #include<windows.h>
 #include <cstdlib>
 #include<iomanip>
 
+#include"test_4person.h"
 #include"Qol.h"
 using namespace std;
-#include"HUDtest3.h"
+
 
 //Screen Output
 void sHUD();//Title
@@ -119,7 +119,7 @@ void showAT(Player &A, Monster &B){
     }
     
     t = battlesys(A, B, playerAttackChoice);//float return pvp
-    
+     
     system("cls");
     SetConsoleTextAttribute(h,15);
     cout << "╔════════════════════════════════════════════════════════════════════════════╗\n";
@@ -292,7 +292,7 @@ void showmon(Monster &B){
     
 }
 
-#endif//hudtest2
+#endif 
 
 /*int main(){
     SetConsoleOutputCP(65001);// Set CMD to UTF-8
