@@ -1,3 +1,6 @@
+#ifndef QOL.H
+#define QOL.H
+
 #include<iostream>
 #include<fstream>
 #include<windows.h>
@@ -91,5 +94,8 @@ void enter() {
 }
 
 void bar(){
+
     cout<<"=====================================================================================\n";
 }
+
+#endif //QOL.H
