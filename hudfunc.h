@@ -7,8 +7,8 @@
 #include<vector>
 using namespace std;
 
-
-#include"HUDtest2.h" 
+#include"test_4person.h"
+#include"Qol.h"
 
  
 //Screen Output
@@ -671,23 +671,23 @@ void mon(Player &player){
   cout<<"\nPress Spacebar to continue.";
   spaceb();
   //Code battle
-  Monster randomMon = MonsterFactory::randMonster(player.level);
-  showmon(randomMon);
-  showbattle(player,randomMon);
+//   Monster randomMon = MonsterFactory::randMonster(player.level);
+//   showmon(randomMon);
+//   showbattle(player,randomMon);
   ////////
   
 }
  
-// void shop(Player &player){
-//   system("cls");
-// blank();
-// bar();
-// doSlow("You found a merchant.",50);
-// cout<<"\nPress Spacebar to continue.";
-// spaceb();
+void shop(Player &player){
+  system("cls");
+blank();
+bar();
+doSlow("You found a merchant.",50);
+cout<<"\nPress Spacebar to continue.";
+spaceb();
 // NPC shopNPC = getRandomNPC();  // สุ่ม NPC
 // showshop(player, shopNPC);     // แสดงร้านค้าและจัดการการซื้อขาย
-// }
+}
 
 void treasure(){
   system("cls");
@@ -707,14 +707,14 @@ doSlow("!!!!!",200);
 cout<<"\nPress Spacebar to continue.";
 spaceb();
 //Code Boss
-Monster boss = MonsterFactory::bossMonster();
-showmon(boss);
-showbattle(player,boss);
+// Monster boss = MonsterFactory::bossMonster();
+// showmon(boss);
+// showbattle(player,boss);
 
 ////////
 }
 
-void box(){
+void box(Player &me){
     system("cls");
 doASCii("ascii_folder/Chest.txt");
 bar();
