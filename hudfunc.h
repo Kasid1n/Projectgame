@@ -654,16 +654,16 @@ void mon(Player &player){
   
 }
  
-void shop(Player &player){
-  system("cls");
-blank();
-bar();
-doSlow("You found a merchant.",50);
-cout<<"\nPress Spacebar to continue.";
-spaceb();
-NPC shopNPC = getRandomNPC();  // สุ่ม NPC
-showshop(player, shopNPC);     // แสดงร้านค้าและจัดการการซื้อขาย
-}
+// void shop(Player &player){
+//   system("cls");
+// blank();
+// bar();
+// doSlow("You found a merchant.",50);
+// cout<<"\nPress Spacebar to continue.";
+// spaceb();
+// NPC shopNPC = getRandomNPC();  // สุ่ม NPC
+// showshop(player, shopNPC);     // แสดงร้านค้าและจัดการการซื้อขาย
+// }
 
 void treasure(){
   system("cls");
