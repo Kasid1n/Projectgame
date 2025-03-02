@@ -7,10 +7,9 @@
 #include<vector>
 using namespace std;
 
-#include"test_4person.h"
-#include"Qol.h"
+
 #include"HUDtest2.h" 
-#include"HUDtest3.h"
+
  
 //Screen Output
 void sHUD();//Title
@@ -33,7 +32,7 @@ vector<int> gear(3);//inventory
 
 
 
-void showeap(int s,Player &x){
+void showeap(int s,Player &me){
     system("cls");
     SetConsoleTextAttribute(h,7);
     char choice;
@@ -57,7 +56,7 @@ void showeap(int s,Player &x){
                 spaceb();
                 system("cls");
                 blank();
-                nHUD(s);
+                nHUD(s,me);
                 break;
             case 2:
                 system("cls");
@@ -70,7 +69,7 @@ void showeap(int s,Player &x){
                 spaceb();
                 system("cls");
                 blank();
-                nHUD(s);
+                nHUD(s,me);
                 break;
             case 3:
                 system("cls");
@@ -83,7 +82,7 @@ void showeap(int s,Player &x){
                 spaceb();
                 system("cls");
                 blank();
-                nHUD(s);
+                nHUD(s,me);
                 break;
             case 4:
                 system("cls");
@@ -96,7 +95,7 @@ void showeap(int s,Player &x){
                 spaceb();
                 system("cls");
                 blank();
-                nHUD(s);
+                nHUD(s,me);
                 break;
             case 5:
                 system("cls");
@@ -109,7 +108,7 @@ void showeap(int s,Player &x){
                 spaceb();
                 system("cls");
                 blank();
-                nHUD(s);
+                nHUD(s,me);
                 break;
 
             case 6:
@@ -123,7 +122,7 @@ void showeap(int s,Player &x){
                 spaceb();
                 system("cls");
                 blank();
-                nHUD(s);
+                nHUD(s,me);
                 break;
 
             case 7:
@@ -137,7 +136,7 @@ void showeap(int s,Player &x){
                 spaceb();
                 system("cls");
                 blank();
-                nHUD(s);
+                nHUD(s,me);
                 break;
 
             case 8:
@@ -151,7 +150,7 @@ void showeap(int s,Player &x){
                 spaceb();
                 system("cls");
                 blank();
-                nHUD(s);
+                nHUD(s,me);
                 break;
 
             case 9:
@@ -165,7 +164,7 @@ void showeap(int s,Player &x){
                 spaceb();
                 system("cls");
                 blank();
-                nHUD(s);
+                nHUD(s,me);
                 break;
             default:
             system("cls");
@@ -176,7 +175,7 @@ void showeap(int s,Player &x){
                 spaceb();
                 system("cls");
                 blank();
-                nHUD(s);
+                nHUD(s,me);
                 break;
 
         }
@@ -195,7 +194,7 @@ void showeap(int s,Player &x){
             spaceb();
             system("cls");
             blank();
-            nHUD(s);
+            nHUD(s,me);
             break;
         case 2: 
             system("cls");
@@ -208,7 +207,7 @@ void showeap(int s,Player &x){
             spaceb();
             system("cls");
             blank();
-            nHUD(s);
+            nHUD(s,me);
             break;
         case 3:
             system("cls");
@@ -221,7 +220,7 @@ void showeap(int s,Player &x){
             spaceb();
             system("cls");
             blank();
-            nHUD(s);
+            nHUD(s,me);
             break;
         case 4:
             system("cls");
@@ -234,7 +233,7 @@ void showeap(int s,Player &x){
             spaceb();
             system("cls");
             blank();
-            nHUD(s);
+            nHUD(s,me);
             break;
         case 5:
             system("cls");
@@ -247,7 +246,7 @@ void showeap(int s,Player &x){
             spaceb();
             system("cls");
             blank();
-            nHUD(s);
+            nHUD(s,me);
             break;
 
         case 6:
@@ -261,7 +260,7 @@ void showeap(int s,Player &x){
             spaceb();
             system("cls");
             blank();
-            nHUD(s);
+            nHUD(s,me);
             break;
 
         case 7:
@@ -275,7 +274,7 @@ void showeap(int s,Player &x){
             spaceb();
             system("cls");
             blank();
-            nHUD(s);
+            nHUD(s,me);
             break;
 
         case 8:
@@ -289,7 +288,7 @@ void showeap(int s,Player &x){
             spaceb();
             system("cls");
             blank();
-            nHUD(s);
+            nHUD(s,me);
             break;
 
         case 9:
@@ -303,7 +302,7 @@ void showeap(int s,Player &x){
             spaceb();
             system("cls");
             blank();
-            nHUD(s);
+            nHUD(s,me);
             break;
         default:
             system("cls");
@@ -314,7 +313,7 @@ void showeap(int s,Player &x){
                 spaceb();
                 system("cls");
                 blank();
-                nHUD(s);
+                nHUD(s,me);
                 break;
         }  
 
@@ -333,7 +332,7 @@ void showeap(int s,Player &x){
             spaceb();
             system("cls");
             blank();
-            nHUD(s);
+            nHUD(s,me);
             break;
         case 2:
             system("cls");
@@ -346,7 +345,7 @@ void showeap(int s,Player &x){
             spaceb();
             system("cls");
             blank();
-            nHUD(s);
+            nHUD(s,me);
             break;
         case 3:
             system("cls");
@@ -359,7 +358,7 @@ void showeap(int s,Player &x){
             spaceb();
             system("cls");
             blank();
-            nHUD(s);
+            nHUD(s,me);
             break;
         case 4:
             system("cls");
@@ -372,7 +371,7 @@ void showeap(int s,Player &x){
             spaceb();
             system("cls");
             blank();
-            nHUD(s);
+            nHUD(s,me);
             break;
         case 5:
             system("cls");
@@ -385,7 +384,7 @@ void showeap(int s,Player &x){
             spaceb();
             system("cls");
             blank();
-            nHUD(s);
+            nHUD(s,me);
             break;
 
         case 6:
@@ -399,7 +398,7 @@ void showeap(int s,Player &x){
             spaceb();
             system("cls");
             blank();
-            nHUD(s);
+            nHUD(s,me);
             break;
 
         case 7:
@@ -413,7 +412,7 @@ void showeap(int s,Player &x){
             spaceb();
             system("cls");
             blank();
-            nHUD(s);
+            nHUD(s,me);
             break;
 
         case 8:
@@ -427,7 +426,7 @@ void showeap(int s,Player &x){
             spaceb();
             system("cls");
             blank();
-            nHUD(s);
+            nHUD(s,me);
             break;
 
         case 9:
@@ -441,7 +440,7 @@ void showeap(int s,Player &x){
             spaceb();
             system("cls");
             blank();
-            nHUD(s);
+            nHUD(s,me);
             break;
         default:
             system("cls");
@@ -452,7 +451,7 @@ void showeap(int s,Player &x){
                 spaceb();
                 system("cls");
                 blank();
-                nHUD(s);
+                nHUD(s,me);
                 break;
 
         }
@@ -461,13 +460,13 @@ void showeap(int s,Player &x){
         case 'e':
         system("cls");
         blank();
-        nHUD(s);
+        nHUD(s,me);
         break;
 
         case 'E':
         system("cls");
         blank();
-        nHUD(s);
+        nHUD(s,me);
         break;
 
         default:
@@ -523,12 +522,12 @@ void nHUD(int &t,Player me){//main system
             Sleep(10);  // Reduce CPU usage
         }
         //code event here
-        event(t);
+        event(t,me);
         //
         system("cls");
         blank();
         t++;
-        nHUD(t);
+        nHUD(t,me);
         }
         else {
         SetConsoleTextAttribute(h,8);
@@ -544,12 +543,12 @@ void nHUD(int &t,Player me){//main system
             Sleep(10);  // Reduce CPU usage
         }
         //code event here
-        event(t);
+        event(t,me);
         //
         system("cls");
         blank();
         t++;
-        nHUD(t);
+        nHUD(t,me);
         }
         break;
         case '2'://Rest
@@ -566,14 +565,14 @@ void nHUD(int &t,Player me){//main system
             Sleep(10);  // Reduce CPU usage
         }
         //code event here
-        event(t);
+        event(t,me);
         //
         system("cls");
         blank();
-        nHUD(t);
+        nHUD(t,me);
         break;
         case '3':
-        showeap(t);
+        showeap(t,me);
         default:
             cout<<"Choose.\n"; 
     }
@@ -639,7 +638,7 @@ void event(int &i,Player me){//turn
 }
 
 }
- 
+  
 void mon(Player &player){
   system("cls");
   blank();
@@ -654,7 +653,7 @@ void mon(Player &player){
   ////////
   
 }
-
+ 
 void shop(Player &player){
   system("cls");
 blank();
