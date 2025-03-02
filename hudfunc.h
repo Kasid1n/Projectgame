@@ -462,12 +462,24 @@ void showeap(int s,Player &me){
         blank();
         nHUD(s,me);
         break;
-
+        
         case 'E':
         system("cls");
         blank();
         nHUD(s,me);
         break;
+        case 'r':
+        system("cls");
+        blank();
+        bar();
+        me.showInventory();
+        cout<<"Press Spacebar to go back.";
+        spaceb();
+        system("cls");
+        blank();
+        nHUD(s,me);
+        break;
+        
 
         default:
         cout<<"You only have 3 slot of Equipment.\n";
