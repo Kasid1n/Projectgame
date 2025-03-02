@@ -891,10 +891,10 @@ class NPC {
     }
     
     void NPC::sellItemToPlayer(Player &player) {
-        if (hasShopped) {
-            cout << "You have already purchased from " << npcname << ". You can't buy more this time!" << endl;
-            return;
-        }
+        // if (hasShopped) {
+        //     cout << "You have already purchased from " << npcname << ". You can't buy more this time!" << endl;
+        //     return;
+        // }
         int choice;
         while (true) {
             shop();
