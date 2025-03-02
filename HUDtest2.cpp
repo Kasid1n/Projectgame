@@ -286,12 +286,11 @@ int main(){
     player.addXp(10); 
     //int playerLevel = player.getLevel();
     Monster randomMon = MonsterFactory::randMonster(11);
-    Monster fixedMon = MonsterFactory::bossMonster2();
+    Monster fixedMon = MonsterFactory::bossMonster1();
     randomMon.showStatus();
-    
-    //showbattle(player,fixedMon);
     showmon(randomMon);
     showbattle(player,randomMon);
+    //showbattle(player,fixedMon);
     }
     //nHUD();   
     
