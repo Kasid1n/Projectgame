@@ -109,7 +109,6 @@ int hpmax=stats.hpmax,hp=stats.hp,attack=stats.attack,defense=stats.defense,magi
 
     
     void showInventory() {
-        cout << "\n--- Inventory ---\n";
         if (inventory.empty()) {
             cout << "Inventory is empty.\n";
         } else {
@@ -124,7 +123,6 @@ int hpmax=stats.hpmax,hp=stats.hp,attack=stats.attack,defense=stats.defense,magi
     }
 
     void showEquipment() {
-        cout << "\n--- Equipped Items ---\n";
         for (size_t i = 0; i < equipmentList.size(); i++) {
             if (equipmentList[i] != nullptr) {
                 cout << i + 1 << ". " << equipmentList[i]->getItemName() << "\n";
@@ -353,6 +351,7 @@ int hpmax=stats.hpmax,hp=stats.hp,attack=stats.attack,defense=stats.defense,magi
         }
     
         // แสดงรายการอุปกรณ์ใน Inventory
+        cout << "\n--- Inventory ---\n";
         for (size_t i = 0; i < inventory.size(); i++) {
             cout << i + 1 << ". " << inventory[i].getItemName() << "\n";
             cout << "   Attack+: " << inventory[i].getStat()[1] << " ";
@@ -503,11 +502,7 @@ int hpmax=stats.hpmax,hp=stats.hp,attack=stats.attack,defense=stats.defense,magi
     }
 //แสดงสถานะ
     void showStatus() const {
-        cout << name << " is level " << level << endl;
-        cout << "XP: " << xp << "/" << xptolevelup << endl;
-        cout << "Stat Points: " << statPoints << endl;
-        cout << "Gold: " << gold << endl;
-        stats.showStats();
+        cout << " HP : " << stats.hp << "/" << stats.hpmax << "    Level : " << level << "    Gold : " << gold;
     }
     int getLevel() const {
         return level;
@@ -953,114 +948,120 @@ class NPC {
         return NPC(npcNames[randomIndex]);
     }
 
-    int main() { 
-        int WR = 0;
-        srand(time(0));
-        string playerName;
+    // int main() { 
+    //     int WR = 0;
+    //     srand(time(0));
+    //     string playerName;
+    //     cout << "Enter player name: ";
+    //     getline(cin, playerName); // Set player name
+    //     Player player(playerName, 100, 20, 10, 5);
+    //     player.showStatus();
+    //     player.addXp(0); 
+    //     int playerLevel = player.getLevel();
+    //     Monster randomMon = MonsterFactory::randMonster(playerLevel);
+    //     Monster fixedMon = MonsterFactory::bossMonster();
+    //     randomMon.showStatus();
+    //     fixedMon.showStatus();
+    //     player.addGold(randomMon.getGoldDrop()); // Add gold
+    //     player.addXp(randomMon.getXpDrop()); // Add XP
+    //     player.showStatus();
+    //     int attackChoice;
+    //     std::cout << "Choose attack: (1) Attack, (2) Skill, (3) Ultimate, (4) Heal\n";
+    //     std::cin >> attackChoice;
+    
+    //     R result = battlesys(player, randomMon, attackChoice); // Call battlesys
+    
+    //     std::cout << "You dealt " << result.D << " damage!\n";
+    //     switch (WR) {
+    //         case 1: cout << "player win"; break;
+    //         case 2: cout << "monster win"; break;
+    //     }
+    //     cout << "\n--- Player Status After Battle ---\n";
+    //     player.showStatus();
+    //     cout << "DEBUG: Equipment list size before buying: " << player.equipmentList.size() << "\n";
+    //     player.showEquipment();
+    
+    //     cout << "\n--- Visiting a Shop ---\n";
+    //     NPC shopNPC = getRandomNPC();
+    //     shopNPC.sellItemToPlayer(player);
+    
+    //     cout << "\n--- Player Status After Shopping ---\n";
+    //     player.showStatus();
+    //     cout << "DEBUG: Equipment list size before shop: " << player.equipmentList.size() << "\n";
+    //     for (size_t i = 0; i < player.equipmentList.size(); i++) {
+    //         if (player.equipmentList[i] != nullptr) {
+    //             cout << "DEBUG: Slot " << i + 1 << ": " << player.equipmentList[i]->getItemName() << "\n";
+    //         } else {
+    //             cout << "DEBUG: Slot " << i + 1 << ": (Empty Slot)\n";
+    //         }
+    //     }
+    
+    //     // Debug message to confirm the program reaches the test section
+    //     cout << "\n--- Reached Test Section ---\n";
+    
+    //     // Create a test item dynamically
+    //     Equipment* testsword = new Equipment("Test Sword", 0, 15, 5, 0);
+    //     Equipment* testarmor = new Equipment("Test armor", 0, 0, 20, 0);
+    //     Equipment* testnackless = new Equipment("Test armor", 0, 0, 0, 20);
+    
+    //     // Test equipping the item
+    //     cout << "\nEquipping Test Sword...\n";
+    //     player.equipItem(*testsword);
+    //     player.showInventory();
+    //     player.showEquipment();
+    //     player.showStatus();
+    
+    //     cout << "\nEquipping Test armor...\n";
+    //     player.equipItem(*testarmor);
+    //     player.showInventory();
+    //     player.showEquipment();
+    //     player.showStatus();
+    
+    //     cout << "\nEquipping Test nakeless...\n";
+    //     player.equipItem(*testnackless);
+    //     player.showInventory();
+    //     player.showEquipment();
+    //     player.showStatus();
+    
+    //     cout << "Inventory size: " << player.inventory.size() << "\n";
+    //     cout << "Equipment list size: " << player.equipmentList.size() << "\n";
+    
+    //     // Test unequipping the item
+    //     cout << "\nUnequipping Test Sword...\n";
+    //     player.unequip();
+    //     player.showInventory();
+    //     player.showEquipment();
+    //     player.showStatus();
+    
+    //     cout << "Inventory size: " << player.inventory.size() << "\n";
+    //     cout << "Equipment list size: " << player.equipmentList.size() << "\n";
+    
+    //     // เพิ่มไอเทมเข้า Inventory โดยตรง
+    //     cout << "\n--- Adding Items to Inventory ---\n";
+    //     Equipment newItem1("Iron Sword", 0, 10, 0, 0);
+    //     Equipment newItem2("Steel Shield", 0, 0, 15, 0);
+    //     Equipment newItem3("Magic Ring", 0, 0, 0, 10);
+    
+    //     player.inventory.push_back(newItem1);
+    //     player.inventory.push_back(newItem2);
+    //     player.inventory.push_back(newItem3);
+    
+    //     cout << "Added 3 new items to inventory.\n";
+    //     player.showInventory();
+    
+    //     cout << "\n--- Testing Equip from Inventory ---\n";
+    //     player.equipFromInventory();
+    
+    //     // แสดงสถานะหลังสวมใส่อุปกรณ์
+    //     player.showInventory();
+    //     player.showEquipment();
+    //     player.showStatus();
+
+    // }
+int main(){
+    string playerName;
         cout << "Enter player name: ";
         getline(cin, playerName); // Set player name
         Player player(playerName, 100, 20, 10, 5);
         player.showStatus();
-        player.addXp(0); 
-        int playerLevel = player.getLevel();
-        Monster randomMon = MonsterFactory::randMonster(playerLevel);
-        Monster fixedMon = MonsterFactory::bossMonster();
-        randomMon.showStatus();
-        fixedMon.showStatus();
-        player.addGold(randomMon.getGoldDrop()); // Add gold
-        player.addXp(randomMon.getXpDrop()); // Add XP
-        player.showStatus();
-        int attackChoice;
-        std::cout << "Choose attack: (1) Attack, (2) Skill, (3) Ultimate, (4) Heal\n";
-        std::cin >> attackChoice;
-    
-        R result = battlesys(player, randomMon, attackChoice); // Call battlesys
-    
-        std::cout << "You dealt " << result.D << " damage!\n";
-        switch (WR) {
-            case 1: cout << "player win"; break;
-            case 2: cout << "monster win"; break;
-        }
-        cout << "\n--- Player Status After Battle ---\n";
-        player.showStatus();
-        cout << "DEBUG: Equipment list size before buying: " << player.equipmentList.size() << "\n";
-        player.showEquipment();
-    
-        cout << "\n--- Visiting a Shop ---\n";
-        NPC shopNPC = getRandomNPC();
-        shopNPC.sellItemToPlayer(player);
-    
-        cout << "\n--- Player Status After Shopping ---\n";
-        player.showStatus();
-        cout << "DEBUG: Equipment list size before shop: " << player.equipmentList.size() << "\n";
-        for (size_t i = 0; i < player.equipmentList.size(); i++) {
-            if (player.equipmentList[i] != nullptr) {
-                cout << "DEBUG: Slot " << i + 1 << ": " << player.equipmentList[i]->getItemName() << "\n";
-            } else {
-                cout << "DEBUG: Slot " << i + 1 << ": (Empty Slot)\n";
-            }
-        }
-    
-        // Debug message to confirm the program reaches the test section
-        cout << "\n--- Reached Test Section ---\n";
-    
-        // Create a test item dynamically
-        Equipment* testsword = new Equipment("Test Sword", 0, 15, 5, 0);
-        Equipment* testarmor = new Equipment("Test armor", 0, 0, 20, 0);
-        Equipment* testnackless = new Equipment("Test armor", 0, 0, 0, 20);
-    
-        // Test equipping the item
-        cout << "\nEquipping Test Sword...\n";
-        player.equipItem(*testsword);
-        player.showInventory();
-        player.showEquipment();
-        player.showStatus();
-    
-        cout << "\nEquipping Test armor...\n";
-        player.equipItem(*testarmor);
-        player.showInventory();
-        player.showEquipment();
-        player.showStatus();
-    
-        cout << "\nEquipping Test nakeless...\n";
-        player.equipItem(*testnackless);
-        player.showInventory();
-        player.showEquipment();
-        player.showStatus();
-    
-        cout << "Inventory size: " << player.inventory.size() << "\n";
-        cout << "Equipment list size: " << player.equipmentList.size() << "\n";
-    
-        // Test unequipping the item
-        cout << "\nUnequipping Test Sword...\n";
-        player.unequip();
-        player.showInventory();
-        player.showEquipment();
-        player.showStatus();
-    
-        cout << "Inventory size: " << player.inventory.size() << "\n";
-        cout << "Equipment list size: " << player.equipmentList.size() << "\n";
-    
-        // เพิ่มไอเทมเข้า Inventory โดยตรง
-        cout << "\n--- Adding Items to Inventory ---\n";
-        Equipment newItem1("Iron Sword", 0, 10, 0, 0);
-        Equipment newItem2("Steel Shield", 0, 0, 15, 0);
-        Equipment newItem3("Magic Ring", 0, 0, 0, 10);
-    
-        player.inventory.push_back(newItem1);
-        player.inventory.push_back(newItem2);
-        player.inventory.push_back(newItem3);
-    
-        cout << "Added 3 new items to inventory.\n";
-        player.showInventory();
-    
-        cout << "\n--- Testing Equip from Inventory ---\n";
-        player.equipFromInventory();
-    
-        // แสดงสถานะหลังสวมใส่อุปกรณ์
-        player.showInventory();
-        player.showEquipment();
-        player.showStatus();
-
-    }
-
+}
