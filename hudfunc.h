@@ -9,7 +9,7 @@ using namespace std;
 
 #include"test_4person.h"
 #include"Qol.h"
-
+ 
 //Screen Output
 void sHUD();//Title
 void nHUD(int &,Player);//Choice Hud, Main hud
