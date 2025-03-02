@@ -479,6 +479,18 @@ void showeap(int s,Player &me){
         blank();
         nHUD(s,me);
         break;
+
+        case 'R':
+        system("cls");
+        blank();
+        bar();
+        me.showInventory();
+        cout<<"Press Spacebar to go back.";
+        spaceb();
+        system("cls");
+        blank();
+        nHUD(s,me);
+        break;
         
 
         default:
