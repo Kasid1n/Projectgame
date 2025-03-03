@@ -43,8 +43,8 @@ int main(){
     }
     system("cls");
     doSlow("Your name is...",50);
-    getline(cin, hero);
-    Player player(hero,100, 20, 10, 5);
+    getline(cin, yname);
+    Player player(yname,100, 20, 10, 5);
     doSlow("There's a weapon beside you... It is...",50); 
     cout<<"\n[1] Axe"<<setw(10)<<"[2] Bow"<<setw(15)<<"[3] Sword\n>";
     while(true){   
