@@ -98,4 +98,13 @@ void bar(){
     cout<<"=====================================================================================\n";
 }
 
+
+void spaceb(){
+    while (true) {
+            if (GetAsyncKeyState(VK_SPACE) & 0x8000) {  // Check if space bar is pressed
+                break;
+            }
+            Sleep(10);  // Reduce CPU usage
+    }
+}
 #endif //QOL.H
