@@ -7,6 +7,8 @@
 #include <vector>
 using namespace std;
 
+#include"hudfunc.h"
+
 struct R {
     int D,d,h;
 };
@@ -555,7 +557,7 @@ public:
 //ค่าสถานะมอน
     int hpmax=stats.hpmax,hp=stats.hp,attack=stats.attack,defense=stats.defense,magic=stats.magic;
     Monster(string monsterName, int monsterLevel, int hpmax, int attack, int defense, int magic, int gold, int xp)
-        : name(monsterName), level(monsterLevel), stats(hpmax, attack, defense, magic), goldDrop(gold * monsterLevel /1.2), xpDrop(xp * monsterLevel / 1.5) {}
+        : name(monsterName), level(monsterLevel), stats(hpmax, attack, defense, magic), goldDrop(gold * monsterLevel /1.2), xpDrop(xp * monsterLevel *4) {}
 
     void showStatus() const {
         cout << "Monster: " << name << " (Level " << level << ")" << endl;
