@@ -45,7 +45,7 @@ void showeap(int s,Player &me){
     while (true){
         cin>> choice;
     switch(choice){
-        case '1':
+        case '1': 
         switch(gear.at(0)){
             case 1:
                 system("cls");
