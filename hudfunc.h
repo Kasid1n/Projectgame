@@ -513,7 +513,7 @@ void sHUD(){
 void nHUD(int &t,Player me){//main system
     SetConsoleTextAttribute(h,7);//White
     cout<<"=====================================================================================\n";
-    cout<<hero<<setw(15)<<"| "; me.showStatus(); cout<<"Turn : "<<t+1<<endl; 
+    cout<<hero<<setw(15)<<"| "; me.showStatus(); cout<<"     Turn : "<<t+1<<endl; 
     cout<<"=====================================================================================\n";
     doSlow("You decide to :\n",50);
     cout<<"[1] Moving Forward"<<setw(15)<<"[2] Rest"<<setw(30)<<"[3] Check your equipment\n>";
@@ -679,8 +679,9 @@ bar();
 doSlow("You found a merchant.",50);
 cout<<"\nPress Spacebar to continue.";
 spaceb();
-// NPC shopNPC = getRandomNPC();  // สุ่ม NPC
-// showshop(player, shopNPC);     // แสดงร้านค้าและจัดการการซื้อขาย
+system("cls");
+NPC shopNPC = getRandomNPC();  // สุ่ม NPC
+showshop(player, shopNPC);     // แสดงร้านค้าและจัดการการซื้อขาย
 }
 
 void treasure(){
