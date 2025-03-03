@@ -83,7 +83,8 @@ void showlose (){
     SetConsoleTextAttribute(h,15);//white
     cout << endl;
     doASCii("ascii_folder/LOSE");
-    cout << endl;
+    enter();
+    system("cls");
     
 }
 
@@ -201,7 +202,8 @@ void showDE(Player &A, Monster &B){
     system("cls");
 }
 
-void showbattle(Player &player, Monster &enemy){ //เหลือใครเริ่มก่อน
+int showbattle(Player &player, Monster &enemy){ //เหลือใครเริ่มก่อน
+    int win=0;
     int r =rand()%2;
     enemy.getGoldDrop();
     enemy.getXpDrop(); 
@@ -217,8 +219,9 @@ void showbattle(Player &player, Monster &enemy){ //เหลือใครเ�
                 cout << "your gold = " << player.gold << " your xp = "<< player.xp<< endl;
                 enter();
                 system("cls");
+                win=1;
             }
-            
+            else{showlose();}
         
         break;}
         showAT(player,enemy);
@@ -231,7 +234,9 @@ void showbattle(Player &player, Monster &enemy){ //เหลือใครเ�
                 cout << "your gold = " << player.gold << " your xp = "<< player.xp<< endl;
                 enter();
                 system("cls");
+                win=1; 
             }
+            else{showlose();}
         break;}
     }}
     else{
@@ -246,7 +251,9 @@ void showbattle(Player &player, Monster &enemy){ //เหลือใครเ�
                     cout << "your gold = " << player.gold << " your xp = "<< player.xp<< endl;
                     enter();
                     system("cls");
+                    win=1;
                 }
+                else{showlose();}
             break;}
             showDE(player,enemy);
             if (enemy.hp <= 0 || player.hp <= 0) {
@@ -258,7 +265,9 @@ void showbattle(Player &player, Monster &enemy){ //เหลือใครเ�
                     cout << "your gold = " << player.gold << " your xp = " << player.xp << endl;
                     enter();
                     system("cls");
+                    win=1;
                 }
+                else{showlose();}
             break;}
         }}
 
