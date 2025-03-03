@@ -2,7 +2,7 @@
 
 #include"test_4person.h"
 #include"Qol.h"
-#include"HUDtest2.h"
+#include"HUDtest3.h"
 
 
 //Screen Output
@@ -33,7 +33,7 @@ void showeap(int s,Player &me){
     blank();
     bar();
     cout<<"Which one...\n";
-    cout<<"[1]  [2]  [3]  [E] Quit. \n>";
+    cout<<"[1]  [2]  [3]  [E] Quit [R] Inventory \n>";
     while (true){
         cin>> choice;
     switch(choice){
