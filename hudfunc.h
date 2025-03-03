@@ -15,7 +15,7 @@ using namespace std;
 
 //Screen Output
 void sHUD();//Title 
-void nHUD(int &,Player);//Choice Hud, Main hud
+void nHUD(int &,Player &);//Choice Hud, Main hud
 
 
 void showeap(int,Player &);//gear show
@@ -26,7 +26,7 @@ void shop(Player &);//event shop
 void box(Player &);//event chest
 void treasure();//event win
 void boss(Player &);//event boss
-void event(int &,Player);
+void event(int &,Player &);
 
 string yname;//player name
 int startweap;//select start weapon
@@ -41,7 +41,7 @@ void showeap(int s,Player &me){
     blank();
     bar();
     cout<<"Which one...\n";
-    cout<<"[1]  [2]  [3]  [E] Quit [R] Inventory \n>";
+    cout<<"[1]  [2]  [3]  [E] Quit [R] Inventory [T] Status\n>";
     while (true){
         cin>> choice;
     switch(choice){
@@ -53,7 +53,10 @@ void showeap(int s,Player &me){
                 doASCii("ascii_folder/Axe.txt");
                 SetConsoleTextAttribute(h,7);
                 bar();
-                cout<<"Axe | HPmax +0 Atk +15 Def +0 Mag +0";
+                cout<<"Axe | ";cout << "   Attack+: " << me.equipmentList[0]->getStat()[1] << " ";
+                cout << "Defense+: " << me.equipmentList[0]->getStat()[2] << " ";
+                cout << "Heal+: " << me.equipmentList[0]->getStat()[0] << " ";
+                cout << "Magic+: " << me.equipmentList[0]->getStat()[3];
                 cout<<"\nPress Spacebar to go back.";
                 spaceb();
                 system("cls");
@@ -66,7 +69,10 @@ void showeap(int s,Player &me){
                 doASCii("ascii_folder/Bow.txt");
                 SetConsoleTextAttribute(h,7);
                 bar();
-                cout<<"Bow | Stat";
+                cout<<"Bow | "; cout << "   Attack+: " << me.equipmentList[0]->getStat()[1] << " ";
+                cout << "Defense+: " << me.equipmentList[0]->getStat()[2] << " ";
+                cout << "Heal+: " << me.equipmentList[0]->getStat()[0] << " ";
+                cout << "Magic+: " << me.equipmentList[0]->getStat()[3];
                 cout<<"\nPress Spacebar to go back.";
                 spaceb();
                 system("cls");
@@ -79,7 +85,10 @@ void showeap(int s,Player &me){
                 doASCii("ascii_folder/Sword.txt");
                 SetConsoleTextAttribute(h,7);
                 bar();
-                cout<<"Sword | Stat";
+                cout<<"Sword | ";cout << "   Attack+: " << me.equipmentList[0]->getStat()[1] << " ";
+                cout << "Defense+: " << me.equipmentList[0]->getStat()[2] << " ";
+                cout << "Heal+: " << me.equipmentList[0]->getStat()[0] << " ";
+                cout << "Magic+: " << me.equipmentList[0]->getStat()[3];
                 cout<<"\nPress Spacebar to go back.";
                 spaceb();
                 system("cls");
@@ -92,7 +101,10 @@ void showeap(int s,Player &me){
                 doASCii("ascii_folder/Shield.txt");
                 SetConsoleTextAttribute(h,7);
                 bar();
-                cout<<"Shield | Stat";
+                cout<<"Shield | ";cout << "   Attack+: " << me.equipmentList[0]->getStat()[1] << " ";
+                cout << "Defense+: " << me.equipmentList[0]->getStat()[2] << " ";
+                cout << "Heal+: " << me.equipmentList[0]->getStat()[0] << " ";
+                cout << "Magic+: " << me.equipmentList[0]->getStat()[3];
                 cout<<"\nPress Spacebar to go back.";
                 spaceb();
                 system("cls");
@@ -105,7 +117,10 @@ void showeap(int s,Player &me){
                 doASCii("ascii_folder/BetterAxe.txt");
                 SetConsoleTextAttribute(h,7);
                 bar();
-                cout<<"Waraxe | Stat";
+                cout<<"Waraxe | ";cout << "   Attack+: " << me.equipmentList[0]->getStat()[1] << " ";
+                cout << "Defense+: " << me.equipmentList[0]->getStat()[2] << " ";
+                cout << "Heal+: " << me.equipmentList[0]->getStat()[0] << " ";
+                cout << "Magic+: " << me.equipmentList[0]->getStat()[3];
                 cout<<"\nPress Spacebar to go back.";
                 spaceb();
                 system("cls");
@@ -119,7 +134,10 @@ void showeap(int s,Player &me){
                 doASCii("ascii_folder/BetterSword.txt");
                 SetConsoleTextAttribute(h,7);
                 bar();
-                cout<<"Da Sword | Stat";
+                cout<<"Da Sword | ";cout << "   Attack+: " << me.equipmentList[0]->getStat()[1] << " ";
+                cout << "Defense+: " << me.equipmentList[0]->getStat()[2] << " ";
+                cout << "Heal+: " << me.equipmentList[0]->getStat()[0] << " ";
+                cout << "Magic+: " << me.equipmentList[0]->getStat()[3];
                 cout<<"\nPress Spacebar to go back.";
                 spaceb();
                 system("cls");
@@ -133,7 +151,10 @@ void showeap(int s,Player &me){
                 doASCii("ascii_folder/BetterShield.txt");
                 SetConsoleTextAttribute(h,7);
                 bar();
-                cout<<"Saint'Wall | Stat";
+                cout<<"Saint'Wall | ";cout << "   Attack+: " << me.equipmentList[0]->getStat()[1] << " ";
+                cout << "Defense+: " << me.equipmentList[0]->getStat()[2] << " ";
+                cout << "Heal+: " << me.equipmentList[0]->getStat()[0] << " ";
+                cout << "Magic+: " << me.equipmentList[0]->getStat()[3];
                 cout<<"\nPress Spacebar to go back.";
                 spaceb();
                 system("cls");
@@ -147,7 +168,10 @@ void showeap(int s,Player &me){
                 doASCii("ascii_folder/Armor.txt");
                 SetConsoleTextAttribute(h,7);
                 bar();
-                cout<<"Armor | Stat";
+                cout<<"Armor | ";cout << "   Attack+: " << me.equipmentList[0]->getStat()[1] << " ";
+                cout << "Defense+: " << me.equipmentList[0]->getStat()[2] << " ";
+                cout << "Heal+: " << me.equipmentList[0]->getStat()[0] << " ";
+                cout << "Magic+: " << me.equipmentList[0]->getStat()[3];
                 cout<<"\nPress Spacebar to go back.";
                 spaceb();
                 system("cls");
@@ -161,7 +185,10 @@ void showeap(int s,Player &me){
                 doASCii("ascii_folder/Necklace.txt");
                 SetConsoleTextAttribute(h,7); 
                 bar();
-                cout<<"Necklace | Stat";
+                cout<<"Necklace | ";cout << "   Attack+: " << me.equipmentList[0]->getStat()[1] << " ";
+                cout << "Defense+: " << me.equipmentList[0]->getStat()[2] << " ";
+                cout << "Heal+: " << me.equipmentList[0]->getStat()[0] << " ";
+                cout << "Magic+: " << me.equipmentList[0]->getStat()[3];
                 cout<<"\nPress Spacebar to go back.";
                 spaceb();
                 system("cls");
@@ -191,7 +218,10 @@ void showeap(int s,Player &me){
             doASCii("ascii_folder/Axe.txt");
             SetConsoleTextAttribute(h,7);
             bar();
-            cout<<"Axe | Stat";
+            cout<<"Axe | ";cout << "   Attack+: " << me.equipmentList[1]->getStat()[1] << " ";
+            cout << "Defense+: " << me.equipmentList[1]->getStat()[2] << " ";
+            cout << "Heal+: " << me.equipmentList[1]->getStat()[0] << " ";
+            cout << "Magic+: " << me.equipmentList[1]->getStat()[3];
             cout<<"\nPress Spacebar to go back.";
             spaceb();
             system("cls");
@@ -204,7 +234,10 @@ void showeap(int s,Player &me){
             doASCii("ascii_folder/Bow.txt");
             SetConsoleTextAttribute(h,7);
             bar();
-            cout<<"Bow | Stat";
+            cout<<"Bow | ";cout << "   Attack+: " << me.equipmentList[1]->getStat()[1] << " ";
+            cout << "Defense+: " << me.equipmentList[1]->getStat()[2] << " ";
+            cout << "Heal+: " << me.equipmentList[1]->getStat()[0] << " ";
+            cout << "Magic+: " << me.equipmentList[1]->getStat()[3];
             cout<<"\nPress Spacebar to go back.";
             spaceb();
             system("cls");
@@ -217,7 +250,10 @@ void showeap(int s,Player &me){
             doASCii("ascii_folder/Sword.txt");
             SetConsoleTextAttribute(h,7);
             bar();
-            cout<<"Sword | Stat";
+            cout<<"Sword | ";cout << "   Attack+: " << me.equipmentList[1]->getStat()[1] << " ";
+            cout << "Defense+: " << me.equipmentList[1]->getStat()[2] << " ";
+            cout << "Heal+: " << me.equipmentList[1]->getStat()[0] << " ";
+            cout << "Magic+: " << me.equipmentList[1]->getStat()[3];
             cout<<"\nPress Spacebar to go back.";
             spaceb();
             system("cls");
@@ -230,7 +266,10 @@ void showeap(int s,Player &me){
             doASCii("ascii_folder/Shield.txt");
             SetConsoleTextAttribute(h,7);
             bar();
-            cout<<"Shield | Stat";
+            cout<<"Shield | ";cout << "   Attack+: " << me.equipmentList[1]->getStat()[1] << " ";
+            cout << "Defense+: " << me.equipmentList[1]->getStat()[2] << " ";
+            cout << "Heal+: " << me.equipmentList[1]->getStat()[0] << " ";
+            cout << "Magic+: " << me.equipmentList[1]->getStat()[3];
             cout<<"\nPress Spacebar to go back.";
             spaceb();
             system("cls");
@@ -243,7 +282,10 @@ void showeap(int s,Player &me){
             doASCii("ascii_folder/BetterAxe.txt");
             SetConsoleTextAttribute(h,7);
             bar();
-            cout<<"Waraxe | Stat";
+            cout<<"Waraxe | ";cout << "   Attack+: " << me.equipmentList[1]->getStat()[1] << " ";
+            cout << "Defense+: " << me.equipmentList[1]->getStat()[2] << " ";
+            cout << "Heal+: " << me.equipmentList[1]->getStat()[0] << " ";
+            cout << "Magic+: " << me.equipmentList[1]->getStat()[3];
             cout<<"\nPress Spacebar to go back.";
             spaceb();
             system("cls");
@@ -257,7 +299,10 @@ void showeap(int s,Player &me){
             doASCii("ascii_folder/BetterSword.txt");
             SetConsoleTextAttribute(h,7);
             bar();
-            cout<<"Da Sword | Stat";
+            cout<<"Da Sword | ";cout << "   Attack+: " << me.equipmentList[1]->getStat()[1] << " ";
+            cout << "Defense+: " << me.equipmentList[1]->getStat()[2] << " ";
+            cout << "Heal+: " << me.equipmentList[1]->getStat()[0] << " ";
+            cout << "Magic+: " << me.equipmentList[1]->getStat()[3];
             cout<<"\nPress Spacebar to go back.";
             spaceb();
             system("cls");
@@ -271,7 +316,10 @@ void showeap(int s,Player &me){
             doASCii("ascii_folder/BetterShield.txt");
             SetConsoleTextAttribute(h,7);
             bar();
-            cout<<"Saint'Wall | Stat";
+            cout<<"Saint'Wall | ";cout << "   Attack+: " << me.equipmentList[1]->getStat()[1] << " ";
+            cout << "Defense+: " << me.equipmentList[1]->getStat()[2] << " ";
+            cout << "Heal+: " << me.equipmentList[1]->getStat()[0] << " ";
+            cout << "Magic+: " << me.equipmentList[1]->getStat()[3];
             cout<<"\nPress Spacebar to go back.";
             spaceb();
             system("cls");
@@ -285,7 +333,10 @@ void showeap(int s,Player &me){
             doASCii("ascii_folder/Armor.txt");
             SetConsoleTextAttribute(h,7);
             bar();
-            cout<<"Armor | Stat";
+            cout<<"Armor | ";cout << "   Attack+: " << me.equipmentList[1]->getStat()[1] << " ";
+            cout << "Defense+: " << me.equipmentList[1]->getStat()[2] << " ";
+            cout << "Heal+: " << me.equipmentList[1]->getStat()[0] << " ";
+            cout << "Magic+: " << me.equipmentList[1]->getStat()[3];
             cout<<"\nPress Spacebar to go back.";
             spaceb();
             system("cls");
@@ -299,7 +350,10 @@ void showeap(int s,Player &me){
             doASCii("ascii_folder/Necklace.txt");
             SetConsoleTextAttribute(h,7); 
             bar();
-            cout<<"Necklace | Stat";
+            cout<<"Necklace | ";cout << "   Attack+: " << me.equipmentList[1]->getStat()[1] << " ";
+            cout << "Defense+: " << me.equipmentList[1]->getStat()[2] << " ";
+            cout << "Heal+: " << me.equipmentList[1]->getStat()[0] << " ";
+            cout << "Magic+: " << me.equipmentList[1]->getStat()[3];
             cout<<"\nPress Spacebar to go back.";
             spaceb();
             system("cls");
@@ -329,7 +383,10 @@ void showeap(int s,Player &me){
             doASCii("ascii_folder/Axe.txt");
             SetConsoleTextAttribute(h,7);
             bar();
-            cout<<"Axe | Stat";
+            cout<<"Axe | ";cout << "   Attack+: " << me.equipmentList[2]->getStat()[1] << " ";
+            cout << "Defense+: " << me.equipmentList[2]->getStat()[2] << " ";
+            cout << "Heal+: " << me.equipmentList[2]->getStat()[0] << " ";
+            cout << "Magic+: " << me.equipmentList[2]->getStat()[3];
             cout<<"\nPress Spacebar to go back.";
             spaceb();
             system("cls");
@@ -342,7 +399,10 @@ void showeap(int s,Player &me){
             doASCii("ascii_folder/Bow.txt");
             SetConsoleTextAttribute(h,7);
             bar();
-            cout<<"Bow | Stat";
+            cout<<"Bow | ";cout << "   Attack+: " << me.equipmentList[2]->getStat()[1] << " ";
+            cout << "Defense+: " << me.equipmentList[2]->getStat()[2] << " ";
+            cout << "Heal+: " << me.equipmentList[2]->getStat()[0] << " ";
+            cout << "Magic+: " << me.equipmentList[2]->getStat()[3];
             cout<<"\nPress Spacebar to go back.";
             spaceb();
             system("cls");
@@ -355,7 +415,10 @@ void showeap(int s,Player &me){
             doASCii("ascii_folder/Sword.txt");
             SetConsoleTextAttribute(h,7);
             bar();
-            cout<<"Sword | Stat";
+            cout<<"Sword | ";cout << "   Attack+: " << me.equipmentList[2]->getStat()[1] << " ";
+            cout << "Defense+: " << me.equipmentList[2]->getStat()[2] << " ";
+            cout << "Heal+: " << me.equipmentList[2]->getStat()[0] << " ";
+            cout << "Magic+: " << me.equipmentList[2]->getStat()[3];
             cout<<"\nPress Spacebar to go back.";
             spaceb();
             system("cls");
@@ -368,7 +431,10 @@ void showeap(int s,Player &me){
             doASCii("ascii_folder/Shield.txt");
             SetConsoleTextAttribute(h,7);
             bar();
-            cout<<"Shield | Stat";
+            cout<<"Shield | ";cout << "   Attack+: " << me.equipmentList[2]->getStat()[1] << " ";
+            cout << "Defense+: " << me.equipmentList[2]->getStat()[2] << " ";
+            cout << "Heal+: " << me.equipmentList[2]->getStat()[0] << " ";
+            cout << "Magic+: " << me.equipmentList[2]->getStat()[3];
             cout<<"\nPress Spacebar to go back.";
             spaceb();
             system("cls");
@@ -381,7 +447,10 @@ void showeap(int s,Player &me){
             doASCii("ascii_folder/BetterAxe.txt");
             SetConsoleTextAttribute(h,7);
             bar();
-            cout<<"Waraxe | Stat";
+            cout<<"Waraxe | ";cout << "   Attack+: " << me.equipmentList[2]->getStat()[1] << " ";
+            cout << "Defense+: " << me.equipmentList[2]->getStat()[2] << " ";
+            cout << "Heal+: " << me.equipmentList[2]->getStat()[0] << " ";
+            cout << "Magic+: " << me.equipmentList[2]->getStat()[3];
             cout<<"\nPress Spacebar to go back.";
             spaceb();
             system("cls");
@@ -395,7 +464,10 @@ void showeap(int s,Player &me){
             doASCii("ascii_folder/BetterSword.txt");
             SetConsoleTextAttribute(h,7);
             bar();
-            cout<<"Da Sword | Stat";
+            cout<<"Da Sword | ";cout << "   Attack+: " << me.equipmentList[2]->getStat()[1] << " ";
+            cout << "Defense+: " << me.equipmentList[2]->getStat()[2] << " ";
+            cout << "Heal+: " << me.equipmentList[2]->getStat()[0] << " ";
+            cout << "Magic+: " << me.equipmentList[2]->getStat()[3];
             cout<<"\nPress Spacebar to go back.";
             spaceb();
             system("cls");
@@ -409,7 +481,10 @@ void showeap(int s,Player &me){
             doASCii("ascii_folder/BetterShield.txt");
             SetConsoleTextAttribute(h,7);
             bar();
-            cout<<"Saint'Wall | Stat";
+            cout<<"Saint'Wall | ";cout << "   Attack+: " << me.equipmentList[2]->getStat()[1] << " ";
+            cout << "Defense+: " << me.equipmentList[2]->getStat()[2] << " ";
+            cout << "Heal+: " << me.equipmentList[2]->getStat()[0] << " ";
+            cout << "Magic+: " << me.equipmentList[2]->getStat()[3];
             cout<<"\nPress Spacebar to go back.";
             spaceb();
             system("cls");
@@ -423,21 +498,27 @@ void showeap(int s,Player &me){
             doASCii("ascii_folder/Armor.txt");
             SetConsoleTextAttribute(h,7);
             bar();
-            cout<<"Armor | Stat";
+            cout<<"Armor | ";cout << "   Attack+: " << me.equipmentList[2]->getStat()[1] << " ";
+            cout << "Defense+: " << me.equipmentList[2]->getStat()[2] << " ";
+            cout << "Heal+: " << me.equipmentList[2]->getStat()[0] << " ";
+            cout << "Magic+: " << me.equipmentList[2]->getStat()[3];
             cout<<"\nPress Spacebar to go back.";
             spaceb();
             system("cls");
             blank();
             nHUD(s,me);
             break;
-
+ 
         case 9:
             system("cls");
             SetConsoleTextAttribute(h,2);
             doASCii("ascii_folder/Necklace.txt");
             SetConsoleTextAttribute(h,7); 
             bar();
-            cout<<"Necklace | Stat";
+            cout<<"Necklace | ";cout << "   Attack+: " << me.equipmentList[2]->getStat()[1] << " ";
+            cout << "Defense+: " << me.equipmentList[2]->getStat()[2] << " ";
+            cout << "Heal+: " << me.equipmentList[2]->getStat()[0] << " ";
+            cout << "Magic+: " << me.equipmentList[2]->getStat()[3];
             cout<<"\nPress Spacebar to go back.";
             spaceb();
             system("cls");
@@ -493,6 +574,30 @@ void showeap(int s,Player &me){
         blank();
         nHUD(s,me);
         break;
+
+        case 't':
+        system("cls");
+        blank();
+        bar();
+        cout<< "HP: "<<me.stats.hpmax<<" "<<"Atk: "<<me.stats.attack<<" "<<"Def:"<<me.stats.defense<<" "<<"Mag:"<<me.stats.magic;
+        cout<<"\nPress Spacebar to go back.";
+        spaceb();
+        system("cls");
+        blank();
+        nHUD(s,me);
+        break;
+        
+        case 'T':
+        system("cls");
+        blank();
+        bar();
+        cout<< "HP: "<<me.stats.hpmax<<" "<<"Atk: "<<me.stats.attack<<" "<<"Def:"<<me.stats.defense<<" "<<"Mag:"<<me.stats.magic;
+        cout<<"\nPress Spacebar to go back.";
+        spaceb();
+        system("cls");
+        blank();
+        nHUD(s,me);
+        break;
         
 
         default:
@@ -518,11 +623,12 @@ void sHUD(){
     doASCii(filetxt);
 }
 
-void nHUD(int &t,Player me){//main system
+void nHUD(int &t,Player &me){//main system
     cin.clear();
     SetConsoleTextAttribute(h,7);//White
     cout<<"=====================================================================================\n";
-    cout<<yname<<setw(15)<<"| "; me.showStatus(); cout<<"     Turn : "<<t+1<<endl; 
+    cout<<yname<<setw(15)<<"| "" HP: " << me.stats.hp << "/" << me.stats.hpmax << "    Level: " << me.level << "    Gold: " << me.gold << "   "
+    "Turn: " <<t+1<<endl;
     cout<<"=====================================================================================\n";
     doSlow("You decide to :\n",50);
     cout<<"[1] Moving Forward"<<setw(15)<<"[2] Rest"<<setw(30)<<"[3] Check your equipment\n>";
@@ -578,11 +684,17 @@ void nHUD(int &t,Player me){//main system
         nHUD(t,me);
         }
         break;
-        case '2'://Rest
+        case '2':{//Rest
+        int h= me.level*30;
+            if(me.hp + h > me.stats.hpmax) {h = me.stats.hpmax - me.hp;}
+            else
+	        me.hp += h;    
+        
         system("cls");
         blank();
         cout<<"=====================================================================================\n";
-        doSlow("You lay against the wall for a few minute... You healed for : " ,50);
+        doSlow("You lay against the wall for a few minute... You healed for : ",50);
+        cout<<h;
         cout<<"\nPress Spacebar to continue.";
         
         while (true) {
@@ -597,12 +709,12 @@ void nHUD(int &t,Player me){//main system
         system("cls");
         blank();
         nHUD(t,me);
-        break;
+        break;}
         case '3':
         showeap(t,me);
         default:
             cout<<"Choose.\n"; 
-    }
+        }
     }  
 }
  
@@ -610,7 +722,7 @@ void nHUD(int &t,Player me){//main system
 
 
 
-void event(int &i,Player me){//turn
+void event(int &i,Player &me){//turn
    int r = rand()%100+1;
 
   if(i<6) {// 10 ตาแรกจะไม่เจอบอส

@@ -7,6 +7,8 @@
 #include <vector>
 using namespace std;
 
+#include"hudfunc.h"
+
 struct R {
     int D,d,h;
 };
@@ -555,7 +557,7 @@ public:
 //ค่าสถานะมอน
     int hpmax=stats.hpmax,hp=stats.hp,attack=stats.attack,defense=stats.defense,magic=stats.magic;
     Monster(string monsterName, int monsterLevel, int hpmax, int attack, int defense, int magic, int gold, int xp)
-        : name(monsterName), level(monsterLevel), stats(hpmax, attack, defense, magic), goldDrop(gold * monsterLevel /1.2), xpDrop(xp * monsterLevel / 1.5) {}
+        : name(monsterName), level(monsterLevel), stats(hpmax, attack, defense, magic), goldDrop(gold * monsterLevel /1.2), xpDrop(xp * monsterLevel *4) {}
 
     void showStatus() const {
         cout << "Monster: " << name << " (Level " << level << ")" << endl;
@@ -812,7 +814,7 @@ class NPC {
     
         if (npcname == "A") {
             // รายการของไอเทมที่ A สามารถขาย
-            vector<string> possibleItems = {"Axe", "SuperAxe", "Sword"};
+            vector<string> possibleItems = {"BetterSword", "SuperAxe", "Sword"};
             int numItems = rand() % 3 + 1;  // ขาย 1 ถึง 3 ไอเทม
     
             for (int i = 0; i < numItems; i++) {
@@ -822,7 +824,7 @@ class NPC {
                 ItemPrice.push_back(price);
     
                 // กำหนด stat ของ item
-                if (possibleItems[randIndex] == "Axe") {
+                if (possibleItems[randIndex] == "BetterSword") {
                     ItemStats.push_back(Equipment(0, rand()%5 +10, 0, 0));
                 } else if (possibleItems[randIndex] == "SuperAxe") {
                     ItemStats.push_back(Equipment(0, rand()%8 +10, 0, 0));
