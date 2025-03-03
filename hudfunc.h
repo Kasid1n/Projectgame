@@ -3,6 +3,7 @@
 #include"test_4person.h"
 #include"Qol.h"
 #include"HUDtest3.h"
+#include"HUDtest2.h"
 
 
 //Screen Output
@@ -20,7 +21,7 @@ void treasure();//event win
 void boss(Player &);//event boss
 void event(int &,Player);
 
-string hero;//player name
+string yname;//player name
 int startweap;//select start weapon
 vector<int> gear(3);//inventory
 
@@ -513,7 +514,7 @@ void sHUD(){
 void nHUD(int &t,Player me){//main system
     SetConsoleTextAttribute(h,7);//White
     cout<<"=====================================================================================\n";
-    cout<<hero<<setw(15)<<"| "; me.showStatus(); cout<<"     Turn : "<<t+1<<endl; 
+    cout<<yname<<setw(15)<<"| "; me.showStatus(); cout<<"     Turn : "<<t+1<<endl; 
     cout<<"=====================================================================================\n";
     doSlow("You decide to :\n",50);
     cout<<"[1] Moving Forward"<<setw(15)<<"[2] Rest"<<setw(30)<<"[3] Check your equipment\n>";
@@ -597,7 +598,6 @@ void nHUD(int &t,Player me){//main system
     }  
 }
  
- 
 /////////////////////////////////event
 
 
@@ -664,10 +664,11 @@ void mon(Player &player){
   doSlow("You encounter a monster!",50);
   cout<<"\nPress Spacebar to continue.";
   spaceb();
+  system("cls");
   //Code battle
-//   Monster randomMon = MonsterFactory::randMonster(player.level);
-//   showmon(randomMon);
-//   showbattle(player,randomMon);
+  Monster randomMon = MonsterFactory::randMonster(player.level);
+  showmon(randomMon);
+  showbattle(player,randomMon);
   ////////
   
 }
@@ -688,10 +689,8 @@ void treasure(){
   system("cls");
   SetConsoleTextAttribute(h,14);
 doASCii("ascii_folder/Grail.txt");
-
 bar();
 doSlow("You found what you came here for!",50);
-doASCii("ascii_folder/WIN.txt");
 }
 
 void boss(Player &player){
@@ -702,9 +701,9 @@ doSlow("!!!!!",200);
 cout<<"\nPress Spacebar to continue.";
 spaceb();
 //Code Boss
-// Monster boss = MonsterFactory::bossMonster();
-// showmon(boss);
-// showbattle(player,boss);
+Monster boss = MonsterFactory::bossMonster();
+showmon(boss);
+showbattle(player,boss);
 
 ////////
 }

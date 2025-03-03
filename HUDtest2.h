@@ -12,7 +12,6 @@ using namespace std;
 
 
 //Screen Output
-void sHUD();//Title
 void mon();
 void hero();
  //entity show
@@ -25,11 +24,7 @@ void showmon();
  
 
 
-void sHUD(){
-    SetConsoleTextAttribute(h,4);//Text Color Red
-    string filetxt="ascii_folder/text.txt";//Game Title
-    doASCii(filetxt);
-}
+
 
 void mon(Monster &B){
     SetConsoleTextAttribute(h,4);
