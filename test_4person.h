@@ -1060,4 +1060,4 @@ class NPC {
     //     player.showStatus();
 
     // }
-#endif // TEST4_H
+#endif 

@@ -9,6 +9,7 @@
 //Library
 
 #include"hudfunc.h"
+
 //Function
 
 using namespace std; 
@@ -21,12 +22,12 @@ int main(){
     Equipment* axe = new Equipment("axe", 5, 15, 5, 0);
     Equipment* bow = new Equipment("bow", 2, 20, 0, 0);
     Equipment* sword = new Equipment("sword", 0, 10, 0, 5);
-    Equipment* shield = new Equipment("shield", 10, 0, 20, 0);
-    Equipment* baxe = new Equipment("baxe", 10, 20, 5, 5);
-    Equipment* bsword = new Equipment("bsword", 5, 20, 10, 20);
-    Equipment* bshield = new Equipment("bshield", 20, 5, 30, 5);
-    Equipment* armor = new Equipment("armor", 30, 0, 10, 0);
-    Equipment* necklace = new Equipment("necklace", 10, 0, 0, 20);
+    // Equipment* shield = new Equipment("shield", 10, 0, 20, 0);
+    // Equipment* baxe = new Equipment("baxe", 10, 20, 5, 5);
+    // Equipment* bsword = new Equipment("bsword", 5, 20, 10, 20);
+    // Equipment* bshield = new Equipment("bshield", 20, 5, 30, 5);
+    // Equipment* armor = new Equipment("armor", 30, 0, 10, 0);
+    // Equipment* necklace = new Equipment("necklace", 10, 0, 0, 20);
 
 
     int turn=0;//turn count

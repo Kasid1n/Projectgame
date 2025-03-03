@@ -8,15 +8,13 @@
 #include<ctime>
 #include<vector>
 using namespace std;
-
 #include"test_4person.h"
 #include"Qol.h"
 #include"HUDtest3.h"
-// #include"HUDtest2.h"
+#include"HUDtest2.h"
 
- 
 //Screen Output
-void sHUD();//Title
+void sHUD();//Title 
 void nHUD(int &,Player);//Choice Hud, Main hud
 
 
@@ -43,7 +41,7 @@ void showeap(int s,Player &me){
     blank();
     bar();
     cout<<"Which one...\n";
-    cout<<"[1]  [2]  [3]  [E] Quit. \n>";
+    cout<<"[1]  [2]  [3]  [E] Quit [R] Inventory \n>";
     while (true){
         cin>> choice;
     switch(choice){
@@ -523,7 +521,7 @@ void sHUD(){
 void nHUD(int &t,Player me){//main system
     SetConsoleTextAttribute(h,7);//White
     cout<<"=====================================================================================\n";
-    cout<<hero<<setw(15)<<"| "; me.showStatus(); cout<<"Turn : "<<t+1<<endl; 
+    cout<<hero<<setw(15)<<"| "; me.showStatus(); cout<<"     Turn : "<<t+1<<endl; 
     cout<<"=====================================================================================\n";
     doSlow("You decide to :\n",50);
     cout<<"[1] Moving Forward"<<setw(15)<<"[2] Rest"<<setw(30)<<"[3] Check your equipment\n>";
@@ -666,7 +664,7 @@ void event(int &i,Player me){//turn
 }
 
 }
-  
+   
 void mon(Player &player){
   system("cls");
   blank();
@@ -689,8 +687,9 @@ bar();
 doSlow("You found a merchant.",50);
 cout<<"\nPress Spacebar to continue.";
 spaceb();
-// NPC shopNPC = getRandomNPC();  // สุ่ม NPC
-// showshop(player, shopNPC);     // แสดงร้านค้าและจัดการการซื้อขาย
+system("cls");
+NPC shopNPC = getRandomNPC();  // สุ่ม NPC
+showshop(player, shopNPC);     // แสดงร้านค้าและจัดการการซื้อขาย
 }
 
 void treasure(){
@@ -734,4 +733,4 @@ spaceb();
 
 
 ////////////////////////////////////////////////////////////////
-#endif // TEST4_H
+#endif // 

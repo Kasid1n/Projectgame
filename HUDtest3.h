@@ -8,7 +8,7 @@
 #include"test_4person.h"
 #include"Qol.h"
 using namespace std;
-
+ 
 
 
 
@@ -96,7 +96,7 @@ void showshop(Player &player,NPC shopNPC){
 void showgold(Player A){
     cout << "Your Gold: " << A.getGold() << endl;
 }
-
+#endif
 
 // int main(){
 //     SetConsoleOutputCP(65001);
@@ -110,4 +110,3 @@ void showgold(Player A){
     
     
 // }
-#endif // TEST4_H
