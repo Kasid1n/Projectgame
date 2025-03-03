@@ -13,7 +13,7 @@ using namespace std;
 #include"Qol.h"
 #include"HUDtest3.h"
 #include"HUDtest2.h"
-
+ 
 void chestItem(Player &me) {
     int rewardType = rand() % 2; 
 
