@@ -519,6 +519,7 @@ void sHUD(){
 }
 
 void nHUD(int &t,Player me){//main system
+    cin.clear();
     SetConsoleTextAttribute(h,7);//White
     cout<<"=====================================================================================\n";
     cout<<yname<<setw(15)<<"| "; me.showStatus(); cout<<"     Turn : "<<t+1<<endl; 
@@ -653,10 +654,10 @@ void event(int &i,Player me){//turn
     else if(r>60 && r<=70){
       box(me);
     }
-    else if(r>70 && r<=85){//จบเกม
+    else if(r>70 && r<=80){//จบเกม
       treasure();
     }
-     else if(r>85 && r<=100){
+     else if(r>80 && r<=100){
        boss(me);
     }
     
@@ -697,7 +698,7 @@ void treasure(){
   SetConsoleTextAttribute(h,14);
 doASCii("ascii_folder/Grail.txt");
 bar();
-doSlow("You found what you came here for!",50);
+doASCii("ascii_folder/WIN.txt");
 }
 
 void boss(Player &player){
@@ -707,11 +708,12 @@ bar();
 doSlow("!!!!!",200);
 cout<<"\nPress Spacebar to continue.";
 spaceb();
+system("cls");
 //Code Boss
 Monster boss = MonsterFactory::bossMonster();
 showmon(boss);
 showbattle(player,boss);
-
+treasure();
 ////////
 }
  
