@@ -50,7 +50,7 @@ void mon(Monster &B){
 void hero(Player &A){
     SetConsoleTextAttribute(h,2);
     cout<<"=====================================================\n";
-    cout<< A.name << " | HP : "<< A.hp << "/" << A.hpmax <<"\n";
+    cout<< A.name << " | HP : "<< A.stats.hp << "/" << A.stats.hpmax <<"\n";
     cout<<"=====================================================\n";
 }
   
@@ -208,9 +208,9 @@ int showbattle(Player &player, Monster &enemy){ //เหลือใครเร
     enemy.getGoldDrop();
     enemy.getXpDrop(); 
     if(r==0){
-    while (player.hp > 0 && enemy.hp > 0){
+    while (player.stats.hp > 0 && enemy.hp > 0){
         showDE(player,enemy);
-        if (enemy.hp <= 0 || player.hp <= 0){ 
+        if (enemy.hp <= 0 || player.stats.hp <= 0){ 
             if (enemy.hp <= 0){
                 showwin();
                 cout << "gold +" << enemy.getGoldDrop() << " xp +"<< enemy.getXpDrop()<< endl;
@@ -225,7 +225,7 @@ int showbattle(Player &player, Monster &enemy){ //เหลือใครเร
         
         break;}
         showAT(player,enemy);
-        if (enemy.hp <= 0 || player.hp <= 0){
+        if (enemy.hp <= 0 || player.stats.hp <= 0){
             if (enemy.hp <= 0){
                 showwin();
                 cout << "gold +" << enemy.getGoldDrop() << " xp +"<< enemy.getXpDrop()<< endl;
@@ -240,9 +240,9 @@ int showbattle(Player &player, Monster &enemy){ //เหลือใครเร
         break;}
     }}
     else{
-        while (player.hp > 0 && enemy.hp > 0){
+        while (player.stats.hp > 0 && enemy.hp > 0){
             showAT(player,enemy);
-            if (enemy.hp <= 0 || player.hp <= 0){
+            if (enemy.hp <= 0 || player.stats.hp <= 0){
                 if (enemy.hp <= 0){
                     showwin();
                     cout << "gold +" << enemy.getGoldDrop() << " xp +"<< enemy.getXpDrop()<< endl;
@@ -256,7 +256,7 @@ int showbattle(Player &player, Monster &enemy){ //เหลือใครเร
                 else{showlose();}
             break;}
             showDE(player,enemy);
-            if (enemy.hp <= 0 || player.hp <= 0) {
+            if (enemy.hp <= 0 || player.stats.hp <= 0) {
                 if (enemy.hp <= 0){
                     showwin();
                     cout << "gold +" << enemy.getGoldDrop() << " xp +"<< enemy.getXpDrop() << endl;
@@ -270,7 +270,7 @@ int showbattle(Player &player, Monster &enemy){ //เหลือใครเร
                 else{showlose();}
             break;}
         }}
-        return win;
+       return win;
 }
 
 void showmon(Monster &B){

@@ -1,5 +1,5 @@
-#ifndef TEST_4PERSON_H 
-#define TEST_4PERSON_H 
+#ifndef TEST4_PERSON_H 
+#define TEST4_PERSON_H 
 #include <iostream>
 #include <string>
 #include <ctime>
@@ -7,7 +7,7 @@
 #include <vector>
 using namespace std;
 
-#include"hudfunc.h"
+// #include"hudfunc.h"
 
 struct R {
     int D,d,h;
@@ -638,7 +638,7 @@ R battlesys(Player &A, Monster &B, int attack) {/*เพราะมอนกั
     switch (attack) {/*ตี*/
         case 1:
             cout << A.name << " attacks!\n"; //upP2
-            dmg = A.attack;
+            dmg = A.stats.attack;
             rdmg = rand() % 31 - 15;
             dmg += dmg * (rdmg / 100);
 
@@ -649,7 +649,7 @@ R battlesys(Player &A, Monster &B, int attack) {/*เพราะมอนกั
             break;
         case 2:
             cout << A.name << " uses skill!\n";
-            dmg = A.magic;
+            dmg = A.stats.magic;
             def = 0;
             temp = rand() % 3 + 1;
             if (temp == 1) dmg = 0;
@@ -661,7 +661,7 @@ R battlesys(Player &A, Monster &B, int attack) {/*เพราะมอนกั
             break;
         case 3:
             cout << A.name << " uses ultimate!\n";
-            dmg = (A.attack + A.magic) * 2;
+            dmg = (A.stats.attack + A.stats.magic) * 2;
 
             if(defense==attack){/*กัน*/
                 countered = true;/*ถ้ากดกัน ตรงกับอันติจะรีเทินดาเมท*/
@@ -669,10 +669,10 @@ R battlesys(Player &A, Monster &B, int attack) {/*เพราะมอนกั
             break;
         case 4:
             temp = rand() % 20 + 1;
-            hp = A.hpmax * ((20 + temp) / 100.0);
+            hp = A.stats.hpmax * ((20 + temp) / 100.0);
             t.h=hp;
-            A.hp += hp;
-            if (A.hp > A.hpmax) A.hp = A.hpmax;
+            A.stats.hp += hp;
+            if (A.stats.hp > A.stats.hpmax) A.hp = A.stats.hpmax;
             cout << A.name << " heals +" << hp << " Hp\n";
             
     }
@@ -691,8 +691,8 @@ R battlesys(Player &A, Monster &B, int attack) {/*เพราะมอนกั
 
     if (countered==true) {/*รีเทินดาเมทของอันติ*/
         A.hp -= dmg;
-        if (A.hp<0)
-        { A.hp=0;}
+        if (A.stats.hp<0)
+        { A.stats.hp=0;}
     } else {/*โดนดาเมทธรรมดา*/
         B.hp -= dmg;
         if (B.hp<0)
@@ -775,9 +775,9 @@ R battlesys(Monster &A, Player &B, int defense) {/*มอนกันคนต�
         if (A.hp<0)
         { A.hp=0;}
     } else {
-        B.hp -= dmg;
-        if (B.hp<0)
-        { B.hp=0;}
+        B.stats.hp -= dmg;
+        if (B.stats.hp<0)
+        { B.stats.hp=0;}
     }
    /* cout << A.name << " did " << dmg << " damage\n";
     cout << B.name << " lost " << dmg << " HP\n";
@@ -951,7 +951,7 @@ class NPC {
         int randomIndex = rand() % npcNames.size(); // สุ่ม NPC ตามอัตราส่วน
         return NPC(npcNames[randomIndex]);
     }
-#endif
+#endif 
     // int main() { 
     //     int WR = 0;
     //     srand(time(0));
@@ -960,7 +960,7 @@ class NPC {
     //     getline(cin, playerName); // Set player name
     //     Player player(playerName, 100, 20, 10, 5);
     //     player.showStatus();
-    //     player.addXp(0); 
+    //     player.addXp(150); 
     //     int playerLevel = player.getLevel();
     //     Monster randomMon = MonsterFactory::randMonster(playerLevel);
     //     Monster fixedMon = MonsterFactory::bossMonster();
