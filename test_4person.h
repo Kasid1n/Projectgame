@@ -949,7 +949,7 @@ class NPC {
         int randomIndex = rand() % npcNames.size(); // สุ่ม NPC ตามอัตราส่วน
         return NPC(npcNames[randomIndex]);
     }
-
+#endif
     // int main() { 
     //     int WR = 0;
     //     srand(time(0));
@@ -1060,4 +1060,4 @@ class NPC {
     //     player.showStatus();
 
     // }
-#endif 
+
