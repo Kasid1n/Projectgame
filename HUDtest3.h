@@ -34,7 +34,7 @@ void showshop(Player &player,NPC shopNPC){
     while (true) {
         showNPC(shopNPC);
         shopNPC.shop();
-       //cout << "Your Gold: " << player.getGold() << endl;
+        cout << "Your Gold: " << player.getGold() << endl;
         cout << "Enter item number (0 to exit): ";
         if (!(cin >> choice)) {
             cin.clear();
