@@ -342,9 +342,9 @@ void nHUD(int &t,Player &me){//main system
         break;
         case '2':{//Rest
         int h= me.level*30;
-            if(me.hp + h > me.stats.hpmax) {h = me.stats.hpmax - me.hp;}
+            if(me.stats.hp + h > me.stats.hpmax) {h = me.stats.hpmax - me.stats.hp;}
             else
-	        me.hp += h;    
+	        me.stats.hp += h;    
         
         system("cls");
         blank();
@@ -493,6 +493,24 @@ if (showbattle(player,boss)==1)
 ////////
 }
  
+
+void chestItem(Player &me) {
+    int rewardType = rand() % 2; 
+
+    if (rewardType == 0) { //gold
+        int goldAmount = rand() % 10 + 10;  
+        me.gold += goldAmount;
+        cout << "You received " << goldAmount << " Gold!\n";
+    } else { // XP
+        int xpAmount = rand() % 101 + 100 ; 
+        me.xp += xpAmount;
+        if(me.xp >= me.xptolevelup) {
+            me.level ++ ;
+        }
+        cout << "You received " << xpAmount << " XP!\n";
+    } 
+    
+}
 void box(Player &me){
     system("cls");
 doASCii("ascii_folder/Chest.txt");
@@ -501,7 +519,7 @@ doSlow("You found a chest!",50);
 cout<<"\nPress Spacebar to continue.";
 spaceb();
 //Code chest
-
+chestItem(me);
 //
 }
 
