@@ -85,9 +85,14 @@ void showshop(Player &player,NPC shopNPC){
                 return;
             } else {
                 cout << "Not enough gold!\n";
+                enter();
+                system("cls");
+             
             }
         } else {
             cout << "Invalid choice!\n";
+            enter();
+            system("cls");
         }
     }
 
