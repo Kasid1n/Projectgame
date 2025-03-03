@@ -270,7 +270,7 @@ int showbattle(Player &player, Monster &enemy){ //เหลือใครเร
                 else{showlose();}
             break;}
         }}
-
+        return win;
 }
 
 void showmon(Monster &B){
