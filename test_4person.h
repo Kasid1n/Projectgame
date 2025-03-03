@@ -1,5 +1,5 @@
-#ifndef TEST_4PERSON.H 
-#define TEST_4PERSON.H 
+#ifndef TEST_4PERSON_H 
+#define TEST_4PERSON_H 
 #include <iostream>
 #include <string>
 #include <ctime>
@@ -504,7 +504,7 @@ int hpmax=stats.hpmax,hp=stats.hp,attack=stats.attack,defense=stats.defense,magi
     }
 //แสดงสถานะ
     void showStatus() const {
-        cout << " HP : " << stats.hp << "/" << stats.hpmax << "    Level : " << level << "    Gold : " << gold;
+        cout << " HP : " << stats.hp << "/" << stats.hpmax << "    Level : " << level << "    Gold : " << gold << "   ";
     }
     int getLevel() const {
         return level;

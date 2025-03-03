@@ -1,5 +1,5 @@
-#ifndef HUBTEST3.H 
-#define HUBTEST3.H 
+#ifndef HUBTEST3_H 
+#define HUBTEST3_H 
 #include<iostream>
 #include<fstream>
 #include<windows.h>
@@ -98,7 +98,7 @@ void showgold(Player A){
 }
 
 
-// // int main(){
+// int main(){
 //     SetConsoleOutputCP(65001);
 //     Player player("s", 100, 20, 10, 5);
 //     player.addGold(100);

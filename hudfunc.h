@@ -1,3 +1,5 @@
+#ifndef HUBFUNC_H 
+#define HUBFUNC_H 
 #include<iostream>
 #include<fstream>
 #include<windows.h>
@@ -9,6 +11,8 @@ using namespace std;
 
 #include"test_4person.h"
 #include"Qol.h"
+#include"HUDtest3.h"
+// #include"HUDtest2.h"
 
  
 //Screen Output
@@ -730,3 +734,4 @@ spaceb();
 
 
 ////////////////////////////////////////////////////////////////
+#endif // TEST4_H

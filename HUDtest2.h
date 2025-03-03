@@ -1,3 +1,5 @@
+#ifndef HUBTEST2_H 
+#define HUBTEST2_H 
 #include<iostream>
 #include<fstream>
 #include<windows.h>
@@ -339,3 +341,4 @@ void showmon(Monster &B){
 } 
 */
 
+#endif
