@@ -380,56 +380,56 @@ void nHUD(int &t,Player &me){//main system
 
 void event(int &i,Player &me){//turn
    int r = rand()%100+1;
-
-  if(i<6) {// 10 ตาแรกจะไม่เจอบอส
-    if(r<=60){
-      mon(me);
-    }
-    else if(r>60 && r<=80){
-      shop(me);
-    }
-    else if(r>80 && r<=100){
-      box(me);
-    }
+boss(me);
+//   if(i<6) {// 10 ตาแรกจะไม่เจอบอส
+//     if(r<=60){
+//       mon(me);
+//     }
+//     else if(r>60 && r<=80){
+//       shop(me);
+//     }
+//     else if(r>80 && r<=100){
+//       box(me);
+//     }
     
-  }
+//   }
 
-  else if(i>=6&&i<11){// ผ่านไปสิบตามีโอกาสเจอบอส
-        if(r<=50){
-          mon(me);
-        }
-        else if(r>50 && r<=70){
-          shop(me);
-        }
-        else if(r>70 && r<=80){
-          box(me);
-        }
-        else if(r>80 && r<=90){//จบเกม
-          treasure();
-        }
-        else if(r>90 && r<=100){
-          boss(me);
-        }
+//   else if(i>=6&&i<11){// ผ่านไปสิบตามีโอกาสเจอบอส
+//         if(r<=50){
+//           mon(me);
+//         }
+//         else if(r>50 && r<=70){
+//           shop(me);
+//         }
+//         else if(r>70 && r<=80){
+//           box(me);
+//         }
+//         else if(r>80 && r<=90){//จบเกม
+//           treasure();
+//         }
+//         else if(r>90 && r<=100){
+//           boss(me);
+//         }
         
-  }
-  else if(i>=11){// เพิ้มโอกาสเจอบอส
-    if(r<=40){
-      mon(me);
-    }
-    else if(r>40 && r<=60){
-      shop(me);
-    }
-    else if(r>60 && r<=70){
-      box(me);
-    }
-    else if(r>70 && r<=80){//จบเกม
-     treasure();
-    }
-     else if(r>80 && r<=100){
-      boss(me);
-    }
+//   }
+//   else if(i>=11){// เพิ้มโอกาสเจอบอส
+//     if(r<=40){
+//       mon(me);
+//     }
+//     else if(r>40 && r<=60){
+//       shop(me);
+//     }
+//     else if(r>60 && r<=70){
+//       box(me);
+//     }
+//     else if(r>70 && r<=80){//จบเกม
+//      treasure();
+//     }
+//      else if(r>80 && r<=100){
+//       boss(me);
+//     }
     
-}
+// }
 
 }
    
@@ -465,7 +465,7 @@ void treasure(){
   system("cls");
   SetConsoleTextAttribute(h,14);
 doASCii("ascii_folder/Grail.txt");
-doSlow("        You have found what you are looking for!!!",50);
+doSlow("                    You have found what you are looking for!!!",50);
 cout << endl;
 doASCii("ascii_folder/WIN.txt");
 enter();
@@ -483,9 +483,10 @@ system("cls");
 //Code Boss
 Monster boss = MonsterFactory::bossMonster();
 showmon(boss);
+int a = showbattle(player,boss);
 showbattle(player,boss);
-if (showbattle(player,boss)==1)
-{
+if (a==1)
+{   enter();
     treasure(); 
 }
 

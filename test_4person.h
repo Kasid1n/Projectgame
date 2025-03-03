@@ -587,11 +587,11 @@ public:
     }
 //ส่วนของบอสที่เอาไว้จบเกม
     static Monster bossMonster1() {
-        static Monster fixedMonster("ApocalypseSoulsBoss", 10, 200, 5, 0, 50, 1000, 1000);
+        static Monster fixedMonster("ApocalypseSoulsBoss", 10, 20, 5, 0, 50, 1000, 0);
         return fixedMonster;
     }
     static Monster bossMonster2() {
-        static Monster fixedMonster("Dragonlord", 12, 120, 45, 35, 35, 1000, 1000);
+        static Monster fixedMonster("Dragonlord", 12, 20, 45, 35, 35, 1000, 0);
         return fixedMonster;
     }
     static Monster bossMonster() {  
