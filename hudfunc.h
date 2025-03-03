@@ -508,7 +508,7 @@ void showeap(int s,Player &me){
             blank();
             nHUD(s,me);
             break;
-
+ 
         case 9:
             system("cls");
             SetConsoleTextAttribute(h,2);
