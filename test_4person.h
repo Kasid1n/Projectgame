@@ -707,7 +707,7 @@ R battlesys(Player &A, Monster &B, int attack) {/*เพราะมอนกั
 
 R battlesys(Monster &A, Player &B, int defense) {/*มอนกันคนตี*/ /*ด้านในเหมือนด้านบน แค่สลับinputเฉยๆ*/
     cout <<endl;
-    int attack = rand() % 4 + 1;
+    int attack = rand() % 3 + 1;
     
     //cout << A.name << " Hp: " << A.hp << endl;
     //cout << B.name << " Hp: " << B.hp << endl;
@@ -747,12 +747,12 @@ R battlesys(Monster &A, Player &B, int defense) {/*มอนกันคนต�
                 countered = true;
             }
             break;
-        case 4:
+        /*case 4:
             temp = rand() % 20 + 1;
             hp = A.hpmax * ((20 + temp) / 100.0);
             A.hp += hp;
             if (A.hp > A.hpmax) A.hp = A.hpmax;
-           // cout << A.name << " heals +" << hp << " Hp\n";
+           // cout << A.name << " heals +" << hp << " Hp\n";*/
             
     }
     switch (defense) {

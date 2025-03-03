@@ -216,6 +216,7 @@ void showbattle(Player &player, Monster &enemy){ //เหลือใครเ�
                 player.addXp(enemy.getXpDrop());
                 cout << "your gold = " << player.gold << " your xp = "<< player.xp<< endl;
                 enter();
+                system("cls");
             }
             
         
@@ -229,6 +230,7 @@ void showbattle(Player &player, Monster &enemy){ //เหลือใครเ�
                 player.addXp(enemy.getXpDrop());
                 cout << "your gold = " << player.gold << " your xp = "<< player.xp<< endl;
                 enter();
+                system("cls");
             }
         break;}
     }}
@@ -243,6 +245,7 @@ void showbattle(Player &player, Monster &enemy){ //เหลือใครเ�
                     player.addXp(enemy.getXpDrop());
                     cout << "your gold = " << player.gold << " your xp = "<< player.xp<< endl;
                     enter();
+                    system("cls");
                 }
             break;}
             showDE(player,enemy);
@@ -254,6 +257,7 @@ void showbattle(Player &player, Monster &enemy){ //เหลือใครเ�
                     player.addXp(enemy.getXpDrop());
                     cout << "your gold = " << player.gold << " your xp = " << player.xp << endl;
                     enter();
+                    system("cls");
                 }
             break;}
         }}
