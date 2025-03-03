@@ -814,7 +814,7 @@ class NPC {
     
         if (npcname == "A") {
             // รายการของไอเทมที่ A สามารถขาย
-            vector<string> possibleItems = {"Axe", "SuperAxe", "Sword"};
+            vector<string> possibleItems = {"BetterSword", "SuperAxe", "Sword"};
             int numItems = rand() % 3 + 1;  // ขาย 1 ถึง 3 ไอเทม
     
             for (int i = 0; i < numItems; i++) {
@@ -824,7 +824,7 @@ class NPC {
                 ItemPrice.push_back(price);
     
                 // กำหนด stat ของ item
-                if (possibleItems[randIndex] == "Axe") {
+                if (possibleItems[randIndex] == "BetterSword") {
                     ItemStats.push_back(Equipment(0, rand()%5 +10, 0, 0));
                 } else if (possibleItems[randIndex] == "SuperAxe") {
                     ItemStats.push_back(Equipment(0, rand()%8 +10, 0, 0));
