@@ -847,7 +847,7 @@ class NPC {
                 // กำหนดสถิติของไอเทมที่ขาย
                 if (possibleItems[randIndex] == "Shield") {
                     ItemStats.push_back(Equipment(0, 0, rand()%5 +10, 0));
-                } else if (possibleItems[randIndex] == "Better Shield") {
+                } else if (possibleItems[randIndex] == "Better_Shield") {
                     ItemStats.push_back(Equipment(0, 0, rand() % 8 +10, 0));
                 } else if (possibleItems[randIndex] == "Armor") {
                     ItemStats.push_back(Equipment(10, 0, rand()%5 + 10, 0));

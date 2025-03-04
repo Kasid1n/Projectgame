@@ -380,7 +380,7 @@ void nHUD(int &t,Player &me){//main system
 
 void event(int &i,Player &me){//turn
    int r = rand()%100+1;
-  if(i<6) {// 10 ตาแรกจะไม่เจอบอส
+     if(i<6) {// 10 ตาแรกจะไม่เจอบอส
     if(r<=60){
       mon(me);
     }
