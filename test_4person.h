@@ -846,11 +846,11 @@ class NPC {
     
                 // กำหนดสถิติของไอเทมที่ขาย
                 if (possibleItems[randIndex] == "Shield") {
-                    ItemStats.push_back(Equipment(10, 0, rand()%5 +20, 0));
+                    ItemStats.push_back(Equipment(0, 0, rand()%5 +10, 0));
                 } else if (possibleItems[randIndex] == "Better Shield") {
-                    ItemStats.push_back(Equipment(20, 5, rand() %5 +30, 5));
+                    ItemStats.push_back(Equipment(0, 0, rand() % 8 +10, 0));
                 } else if (possibleItems[randIndex] == "Armor") {
-                    ItemStats.push_back(Equipment(30, 0, rand()%5 + 10, 0));
+                    ItemStats.push_back(Equipment(10, 0, rand()%5 + 10, 0));
                 }
             }
         }

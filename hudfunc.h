@@ -96,7 +96,7 @@ void showgear(int slot,Player &me,int t){
     } else if(me.equipmentList[slot]->getItemName()=="SuperAxe"){
         system("cls");
             SetConsoleTextAttribute(h,3);
-            doASCii("ascii_folder/BetterAxe.txt");
+            doASCii("ascii_folder/SuperAxe.txt");
             SetConsoleTextAttribute(h,7);
             bar();
             cout<<"SuperAxe| ";cout << "   Attack+: " << me.equipmentList[slot]->getStat()[1] << " ";
@@ -126,7 +126,7 @@ void showgear(int slot,Player &me,int t){
     } else if(me.equipmentList[slot]->getItemName()=="Better_Shield"){
         system("cls");
             SetConsoleTextAttribute(h,3);
-            doASCii("ascii_folder/BetterShield.txt");
+            doASCii("ascii_folder/Better_Shield.txt");
             SetConsoleTextAttribute(h,7);
             bar();
             cout<<"Saint'Wall | ";cout << "   Attack+: " << me.equipmentList[slot]->getStat()[1] << " ";
