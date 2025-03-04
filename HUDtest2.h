@@ -296,7 +296,7 @@ void showmon(Monster &B){
     cout << "                             " <<B.name << endl;
     SetConsoleTextAttribute(h,15);
     cout << "═════════════════════════════════════════════════════════════════════════════\n";
-    spaceb();
+    enter();
     system("cls");
     
 }

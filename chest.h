@@ -16,17 +16,16 @@ using namespace std;
 void chestItem(Player &me) {
     int rewardType = rand() % 2; 
 
-    if (rewardType == 0) { //gold
-        int goldAmount = rand() % 10 + (50*me.level);  
-        me.gold += goldAmount;
+    if (rewardType == 1) { //gold
+        int goldAmount = rand() % 10 + (50*me.level);
         cout << "You received " << goldAmount << " Gold!\n";
+        me.addGold(goldAmount);
+        
     } else { // XP
-        int xpAmount = rand() % 101 + (500*me.level) ; 
-        me.xp += xpAmount;
-        if(me.xp >= me.xptolevelup) {
-            me.level ++ ;
-        }
+        int xpAmount = rand() % 101 + (500*me.level) ;
         cout << "You received " << xpAmount << " XP!\n";
+        me.addXp(xpAmount);
+        
     } 
     
 }

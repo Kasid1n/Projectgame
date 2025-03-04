@@ -380,56 +380,52 @@ void nHUD(int &t,Player &me){//main system
 
 void event(int &i,Player &me){//turn
    int r = rand()%100+1;
-boss(me);
-//   if(i<6) {// 10 ตาแรกจะไม่เจอบอส
-//     if(r<=60){
-//       mon(me);
-//     }
-//     else if(r>60 && r<=80){
-//       shop(me);
-//     }
-//     else if(r>80 && r<=100){
-//       box(me);
-//     }
+  if(i<6) {// 10 ตาแรกจะไม่เจอบอส
+    if(r<=60){
+      mon(me);
+    }
+    else if(r>60 && r<=80){
+      shop(me);
+    }
+    else if(r>80 && r<=100){
+      box(me);
+    }
     
-//   }
+  }
 
-//   else if(i>=6&&i<11){// ผ่านไปสิบตามีโอกาสเจอบอส
-//         if(r<=50){
-//           mon(me);
-//         }
-//         else if(r>50 && r<=70){
-//           shop(me);
-//         }
-//         else if(r>70 && r<=80){
-//           box(me);
-//         }
-//         else if(r>80 && r<=90){//จบเกม
-//           treasure();
-//         }
-//         else if(r>90 && r<=100){
-//           boss(me);
-//         }
+  else if(i>=6&&i<11){// ผ่านไปสิบตามีโอกาสเจอบอส
+        if(r<=50){
+          mon(me);
+        }
+        else if(r>50 && r<=70){
+          shop(me);
+        }
+        else if(r>70 && r<=80){
+          box(me);
+        }
+        else if(r>80 && r<=90){//จบเกม
+          treasure();
+        }
+        else if(r>90 && r<=100){
+          boss(me);
+        }
         
-//   }
-//   else if(i>=11){// เพิ้มโอกาสเจอบอส
-//     if(r<=40){
-//       mon(me);
-//     }
-//     else if(r>40 && r<=60){
-//       shop(me);
-//     }
-//     else if(r>60 && r<=70){
-//       box(me);
-//     }
-//     else if(r>70 && r<=80){//จบเกม
-//      treasure();
-//     }
-//      else if(r>80 && r<=100){
-//       boss(me);
-//     }
+  }
+  else if(i>=11){// เพิ้มโอกาสเจอบอส
+    if(r<=30){
+      shop(me);
+    }
+    else if(r>30 && r<=50){
+      box(me);
+    }
+    else if(r>50 && r<=70){//จบเกม
+     treasure();
+    }
+     else if(r>70 && r<=100){
+      boss(me);
+    }
     
-// }
+}
 
 }
    
@@ -512,15 +508,16 @@ void chestItem(Player &me) {
     } 
     
 }
+
 void box(Player &me){
     system("cls");
 doASCii("ascii_folder/Chest.txt");
 bar();
 doSlow("You found a chest!",50);
-cout<<"\nPress Spacebar to continue.";
 spaceb();
 //Code chest
 chestItem(me);
+enter();
 //
 }
 
