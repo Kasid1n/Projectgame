@@ -825,9 +825,9 @@ class NPC {
     
                 // กำหนด stat ของ item
                 if (possibleItems[randIndex] == "BetterSword") {
-                    ItemStats.push_back(Equipment(0, rand()%5 +10, 0, 0));
+                    ItemStats.push_back(Equipment(5, rand()%5 +20, 10, 20));
                 } else if (possibleItems[randIndex] == "SuperAxe") {
-                    ItemStats.push_back(Equipment(0, rand()%8 +10, 0, 0));
+                    ItemStats.push_back(Equipment(10, rand()%8 +10, 5, 5));
                 } else if (possibleItems[randIndex] == "Sword") {
                     ItemStats.push_back(Equipment(0, rand()%10 +10, 0, 0));
                 }
@@ -846,11 +846,11 @@ class NPC {
     
                 // กำหนดสถิติของไอเทมที่ขาย
                 if (possibleItems[randIndex] == "Shield") {
-                    ItemStats.push_back(Equipment(0, 0, rand()%5 +10, 0));
+                    ItemStats.push_back(Equipment(10, 0, rand()%5 +20, 0));
                 } else if (possibleItems[randIndex] == "Better Shield") {
-                    ItemStats.push_back(Equipment(0, 0, rand() % 8 +10, 0));
+                    ItemStats.push_back(Equipment(20, 5, rand() %5 +30, 5));
                 } else if (possibleItems[randIndex] == "Armor") {
-                    ItemStats.push_back(Equipment(0, 0, rand()%10 + 10, 0));
+                    ItemStats.push_back(Equipment(30, 0, rand()%5 + 10, 0));
                 }
             }
         }
@@ -871,7 +871,7 @@ class NPC {
                 } else if (secretItems[randIndex] == "Defense Potion"){
                     ItemStats.push_back(Equipment(0, 0, rand()%5 +10, 0));
                 } else {
-                    ItemStats.push_back(Equipment(0, 0, 0, rand()%5 + 10 )) ;
+                    ItemStats.push_back(Equipment(10, 0, 0, rand()%5 + 20 )) ;
                 }
             }
         }
