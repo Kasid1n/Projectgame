@@ -31,18 +31,4 @@ void chestItem(Player &me) {
     } 
     
 }
-void box(Player &me){
-    system("cls");
-doASCii("ascii_folder/Chest.txt");
-bar();
-doSlow("You found a chest!",50);
-cout<<"\nPress Spacebar to continue. \n";
-spaceb();
-
-//Code chest
-    chestItem(me);
-    me.showStatus() ;
-    
- }
-
- #endif //CHEST.H
+#endif// chest
