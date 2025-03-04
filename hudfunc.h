@@ -513,7 +513,7 @@ void box(Player &me){
     system("cls");
 doASCii("ascii_folder/Chest.txt");
 bar();
-doSlow("You found a chest!",50);
+doSlow("You found a chest!\n",50);
 spaceb();
 //Code chest
 chestItem(me);
