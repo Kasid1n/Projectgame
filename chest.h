@@ -17,11 +17,11 @@ void chestItem(Player &me) {
     int rewardType = rand() % 2; 
 
     if (rewardType == 0) { //gold
-        int goldAmount = rand() % 10 + 10;  
+        int goldAmount = rand() % 10 + (50*me.level);  
         me.gold += goldAmount;
         cout << "You received " << goldAmount << " Gold!\n";
     } else { // XP
-        int xpAmount = rand() % 101 + 100 ; 
+        int xpAmount = rand() % 101 + (500*me.level) ; 
         me.xp += xpAmount;
         if(me.xp >= me.xptolevelup) {
             me.level ++ ;
