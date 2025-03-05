@@ -17,7 +17,7 @@ void enter();
 
 HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);//Text setting
 
-
+ 
 void doASCii(string x){
     string line="";
     ifstream inFile;

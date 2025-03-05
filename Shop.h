@@ -123,7 +123,7 @@ NPC::NPC(string name) {
         }
     }
 }
-
+ 
 void NPC::shop() { // ขาย ดูว่าสุ่มได้ npc ตัวไหนขายตามนั้น
     cout << npcname << "'s Shop\n";
     for (size_t i = 0; i < sellItem.size(); i++) {

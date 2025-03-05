@@ -97,7 +97,7 @@ void showshop(Player &player,NPC shopNPC){
     }
 
 }
-
+ 
 void showgold(Player A){
     cout << "Your Gold: " << A.getGold() << endl;
 }
