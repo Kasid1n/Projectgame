@@ -32,7 +32,7 @@ string yname;//player name
 int startweap;//select start weapon
 vector<int> gear(3);//inventory
 
-void showgear(int slot,Player &me,int t){
+void showgear(int slot,Player &me,int t){//โชว์ภาพอาวุธ
     system("cls");
     if(me.equipmentList[slot]->getItemName()=="Axe"){ 
             SetConsoleTextAttribute(h,2);
@@ -182,7 +182,7 @@ void showgear(int slot,Player &me,int t){
 
 }
 
-void showeap(int s,Player &me){
+void showeap(int s,Player &me){//เลือกเมนู equipment
     system("cls");
     SetConsoleTextAttribute(h,7);
     char choice;
@@ -297,7 +297,7 @@ void showeap(int s,Player &me){
 }
 
 
-void sHUD(){
+void sHUD(){//อินโทร
     SetConsoleTextAttribute(h,14);
     string filetxt="ascii_folder/text.txt";//Game Title
     doASCii(filetxt);
@@ -314,7 +314,7 @@ void nHUD(int &t,Player &me){//main system
     cout<<"[1] Moving Forward"<<setw(15)<<"[2] Rest"<<setw(30)<<"[3] Check your equipment\n>";
     char choice;
     
-    int sc = rand()%50;//Different Scenery
+    int sc = rand()%50;//Different Scenery krub
     while(true){ 
         cin>> choice; 
     switch(choice){
