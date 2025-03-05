@@ -78,6 +78,4 @@ int main(){
     system("cls");
     blank();
     nHUD(turn,player);
-    
-
 } 

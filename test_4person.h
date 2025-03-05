@@ -887,7 +887,7 @@ class NPC {
             cout << "Magic+: " << ItemStats[i].getStat()[3] << endl;
         }
     }
-    
+     
     void NPC::sellItemToPlayer(Player &player) {
         // if (hasShopped) {
         //     cout << "You have already purchased from " << npcname << ". You can't buy more this time!" << endl;
