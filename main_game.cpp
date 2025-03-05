@@ -15,7 +15,7 @@
 using namespace std; 
 
 
- 
+
 
 int main(){
     //ประกาศ equipment stats hp,atk,def,mag
@@ -53,7 +53,6 @@ int main(){
         case 1:
         player.equipItem(*axe);
         gear.at(0)=1;//gearid of axe
-
         break;
         case 2:
         player.equipItem(*bow);
@@ -67,6 +66,7 @@ int main(){
         break;
         default:
         cout<<"There's nothing else...";
+        continue;
     }
     break;
     }  
