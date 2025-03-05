@@ -199,10 +199,34 @@ void showeap(int s,Player &me){
         break;
 
         case '2':
+        if (me.equipmentList[1] != nullptr){
             showgear(1,me,s);
+        }
+        else
+        system("cls");
+            blank();
+            bar();
+            cout<<"You don't have equipment in that slot\n";
+            cout<<"\nPress Spacebar to go back.";
+                spaceb();
+                system("cls");
+                blank();
+                nHUD(s,me);
         break;
         case '3':
+        if (me.equipmentList[2] != nullptr){
             showgear(2,me,s);
+        }
+        else
+        system("cls");
+            blank();
+            bar();
+            cout<<"You don't have equipment in that slot\n";
+            cout<<"\nPress Spacebar to go back.";
+                spaceb();
+                system("cls");
+                blank();
+                nHUD(s,me);
         break;
         case 'e':
         system("cls");
