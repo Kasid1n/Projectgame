@@ -507,8 +507,10 @@ int a = showbattle(player,boss);
 showbattle(player,boss);
 if (a==1)
 {   enter();
-    treasure(); 
+    treasure();
+    exit(0); 
 }
+
 
 
 ////////
